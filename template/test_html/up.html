@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>RNAup web server</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <!--refresh-->
+  <link rel="stylesheet" href="http://rna.tbi.univie.ac.at/css/RNA.css" type="text/css">
+  <script src="http://rna.tbi.univie.ac.at/javascript/RNA.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="container">
+<div id="header">
+	<div id="headerleft"><img src = "http://rna.tbi.univie.ac.at/css/RNApics/RNAup.gif" USEMAP="#navi">
+	<map name="navi">
+	  <area shape="rect" coords="0,0,400,54" href="http://rna.tbi.univie.ac.at/cgi-bin/RNAup.cgi">
+        </map>
+        </div>
+	<div id="headerright"><img src = "http://rna.tbi.univie.ac.at/css/RNApics/progress1.gif">
+
+        </div>
+	<div id="headermain">&nbsp;</div>
+	<div class="clear"></div>	
+</div>
+<div id="column2">
+	<div id="column1">
+		<div id="contentleft"></div>
+		<div id="contentright"></div>
+		<div id="contentmain">
+                <table style="width:100%;text-align:right;margin:0px;padding:0px;line-height:0.8em"><tr><td>[<a href="http://rna.tbi.univie.ac.at/">Home</a>|<a href="http://rna.tbi.univie.ac.at/cgi-bin/RNAup.cgi">New job</a>|<a href="http://rna.tbi.univie.ac.at/help.html" target="_blank">Help</a>]</td></tr></table>
+
+		<!-- CONTENT_S -->
+   		<p>The <b>RNAup server</b> will predict RNA-RNA interactions.</p>
+
+<p>Simply paste or upload your sequences below and click <i>Proceed</i>. To get more information on
+the meaning of the options click the <img src="/css/pics/help-icon.gif" style="vertical-align: text-top" alt="help">
+symbols. You can test the server using <a href="javascript:paste('SCREEN', topaste1);javascript:paste('SCREEN2', topaste2);">these sample sequences.</a></p>
+ <!-- ERRORMSG -->
+
+<form method="post" action="/cgi-bin/RNAup.cgi" enctype="multipart/form-data" name="form">
+ <input type="hidden" name="PAGE" value="2">
+
+ <table style="width: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+ <tr><td><label for="SCREEN">Paste or type your <b>first sequence</b> here:</label></td>
+    <td style="width:30%;text-align:right;"><a href="javascript:clear('SCREEN');">[clear]</a></td>
+ </tr>
+
+ </table>
+ <div style="width:100%;margin-left: auto; margin-right: auto;">
+ <textarea rows="2" name="SCREEN" id="SCREEN" style="width:100%"></textarea>
+</div>
+<p><label for="FILE">Or upload a file containing the <b>first sequence</b> in FASTA format:</label> <input type="file" name="FILE" id="FILE" size="25"></p>
+
+ <table style="width:100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+
+ <tr><td><label for="SCREEN2">Paste or type your <b>second sequence</b> here:</label></td>
+    <td style="width:30%;text-align:right;"><a href="javascript:clear('SCREEN2');">[clear]</a></td>
+ </tr>
+ </table>
+ <div style="width:100%;margin-left: auto; margin-right: auto;">
+ <textarea rows="2" name="SCREEN2" id="SCREEN2" style="width:100%"></textarea>
+
+</div>
+<p><label for="FILE2">Or upload a file containing the <b>second sequence</b> in FASTA format:</label> <input type="file" name="FILE2" id="FILE2" size="25"></p>  
+
+<fieldset>
+   <legend><b>&nbsp;Basic options&nbsp;</b></legend>
+   <div style="width:90%;margin-left: auto;margin-right: auto;">
+     <table style="width: 100%; text-align: left; margin-left: auto; margin-right: auto;" border="0" cellpadding="2" cellspacing="2">
+     <tr>
+
+      <td><input name="nocloseGU" id="nocloseGU" type="checkbox"></td>
+      <td><label for="nocloseGU">no GU pairs at the end of helices</label><a href="javascript:void(0);" onclick="Pop('HELPNOCLOSEGU');" style="text-decoration: none;">
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPNOCLOSEGU" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPNOCLOSEGU" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPNOCLOSEGU"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPNOCLOSEGU');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Apart from the canonical AU and GC pairs RNA frequently forms (weaker) GU pairs. Check this box to disallow GU at the end of helices.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+
+   </div></td>
+     </tr>
+     <tr>
+      <td><input name="noLP" id="noLP" checked="checked" type="checkbox"></td>
+      <td><label for="noLP">avoid isolated base pairs</label><a href="javascript:void(0);" onclick="Pop('HELPNOLP');" style="text-decoration: none;">
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPNOLP" class="popup" style="position:absolute;left:0px;">
+
+         <div class ="up"><img usemap="#helpmapHELPNOLP" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPNOLP"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPNOLP');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Predicted structures can contain isolated base pairs (helices of length 1), which may be undesirable. Check this box to avoid such lonely pairs.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div></td>
+     </tr>
+     <tr>
+      <td><input name="u" id="u" value="4" size="1" type="text"></td>
+      <td><label for="u">length of the unstructured region</label><a href="javascript:void(0);" onclick="Pop('HELPU');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPU" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPU" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPU"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPU');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Specifies the length (len) of the region for which the probability of being unpaired is computed.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div></td>
+     </tr>
+
+     <tr>
+      <td><input name="w" id="w" value="25" size="1" type="text"></td>
+      <td><label for="w">maximal length of the region of interaction</label><a href="javascript:void(0);" onclick="Pop('HELPW');" style="text-decoration: none;">
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPW" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPW" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPW"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPW');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Determines the maximal length of the region of interaction, i.e. the maximum number of nucleotides a base-pair can span.</div></div>
+
+         <div class ="bottom"></div>  
+      </div>
+   </div></td>
+     </tr>
+     </table>
+   </div>
+</fieldset>
+
+<p id="advancedtext"><img src="/css/pics/show.png" alt="&gt;"><a href = "javascript:hide('advanced','advancedtext','Show advanced options','Hide advanced options');">Show advanced options</a></p>
+<div id="advanced" style="display:none;">
+   <fieldset>
+
+   <legend><b>&nbsp;Advanced folding options&nbsp;</b></legend>
+   <div style="width:90%;margin-left: auto;margin-right: auto;">
+     <b>Dangling end options</b><a href="javascript:void(0);" onclick="Pop('HELPDANGLING');" style="text-decoration: none;">
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPDANGLING" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPDANGLING" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPDANGLING"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPDANGLING');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Dangling end energies are stabilizing energies assigned to unpaired bases adjacent to a helix in multi-loops and free ends.</div></div>
+
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+     &nbsp;&nbsp;<input type="radio" id="d0" name="dangling" value="d0"> <label for="d0">no dangling end energies</label><br>
+     &nbsp;&nbsp;<input type="radio" id="d2" name="dangling" value="d2" checked="T"> <label for="d2">dangling energies on both sides of a helix in any case</label><br>
+     <br>
+
+     <b>Energy Parameters</b><a href="javascript:void(0);" onclick="Pop('HELPPARAM');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPPARAM" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPPARAM" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPPARAM"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPPARAM');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">Change the energy parameter file used to predict secondary structures.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+     &nbsp;&nbsp;<input type="radio" id="turner" name="param" value="rna" checked="T"> <label for="turner">RNA parameters (Turner model)</label><br>
+
+     &nbsp;&nbsp;<input type="radio" id="andronescu" name="param" value="andronescu"> <label for="andronescu">RNA parameters (Andronescu model)</label><br>
+     &nbsp;&nbsp;<input type="radio" id="dna" name="param" value="dna"> <label for="dna">DNA parameters</label><br>
+     <br>
+     <b>Other Parameters</b><br>
+      &nbsp;&nbsp;<input name="Temp" id="Temp" value="37" size="1" type="text"> <label for="Temp">rescale energy parameters to given temperature (C)</label><a href="javascript:void(0);" onclick="Pop('HELPTEMP');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPTEMP" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPTEMP" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPTEMP"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPTEMP');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">The energy parameters used in the calculation have been measured at 37C. Parameters at other temperatures can be extrapolated, but for temperatures far from 37C results will be increasingly unreliable.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+      &nbsp;&nbsp;<input name="H" id="H" type="checkbox"><label for="H">include probability of being unpaired in hairpin loops</label><a href="javascript:void(0);" onclick="Pop('HELPH');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPH" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPH" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPH"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPH');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">By default only the full probability (sum of all contributions) of being unpaired is considered. Check this box to get the probability of being unpaired within a hairpin loop.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+      &nbsp;&nbsp;<input name="I" id="I" type="checkbox"><label for="I">include probability of being unpaired in interior loops</label><a href="javascript:void(0);" onclick="Pop('HELPI');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPI" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPI" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPI"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPI');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">By default only the full probability (sum of all contributions) of being unpaired is considered. Check this box to get the probability of being unpaired within a interior loop.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+      &nbsp;&nbsp;<input name="E" id="E" type="checkbox"><label for="E">include probability of being unpaired in external loops</label><a href="javascript:void(0);" onclick="Pop('HELPE');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPE" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPE" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPE"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPE');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">By default only the full probability (sum of all contributions) of being unpaired is considered. Check this box to get the probability of being unpaired within a exterior loop.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+      &nbsp;&nbsp;<input name="M" id="M" type="checkbox"><label for="M">include probability of being unpaired in multi-loops</label><a href="javascript:void(0);" onclick="Pop('HELPM');" style="text-decoration: none;">
+
+ <img src="/css/pics/help-icon.gif" style="vertical-align:top" alt="help"></a>
+ <div style="position:relative;">
+      <div id="HELPM" class="popup" style="position:absolute;left:0px;">
+         <div class ="up"><img usemap="#helpmapHELPM" src="http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif" alt=""><map name="helpmapHELPM"><area coords="281,39,298,55" shape="rect" onmouseover='this.style.cursor="pointer"' href="javascript:void(0);" onclick="Pop('HELPM');" alt="close"></map></div>
+         <div class ="middle"><div style="padding:0px 10px;">By default only the full probability (sum of all contributions) of being unpaired is considered. Check this box to get the probability of being unpaired within a multi-loop.</div></div>
+         <div class ="bottom"></div>  
+      </div>
+   </div><br>
+   </div>
+
+  </fieldset>
+  <br>
+</div>
+
+
+<p>Notification via e-mail upon completion of the job (optional):&nbsp;&nbsp;<input size="15" name="EMAIL" id="EMAIL" value="your e-mail"/></p>
+
+ <div style="position:relative; bottom:0; width: 100%;">
+    <table style="width: 90%; text-align: left; margin-left: auto; margin-right: auto;"
+    border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr style="height:3em;">
+
+    <td style="text-align:left;"></td>
+    <td style="text-align:right;">
+    <input value="" name="proceed" type="submit" class="proceed" onmouseover='this.style.cursor="pointer"'>&nbsp;&nbsp;</td>
+    </tr>
+    </tbody>
+    </table>
+  </div> 
+</form>
+
+   		<!-- CONTENT_E --></div>
+
+		<div class="clear"></div>
+	</div>
+</div>
+<div id="footer">
+	<div id="footerleft">&nbsp;</div>
+	<div id="footerright">&nbsp;</div>
+	<div id="footermain">&nbsp;</div>
+	<div class="clear"><a href="http://www.tbi.univie.ac.at" TARGET="_blank">
+     Institute for Theoretical Chemistry</a> | <a href="http://www.univie.ac.at" TARGET="_blank">University of Vienna</a> |
+     <a href="mailto:rna@tbi.univie.ac.at?subject=RNA Web Suite">rna@tbi.univie.ac.at</a></div>	
+
+</div>
+</div>
+</body>
+</html>

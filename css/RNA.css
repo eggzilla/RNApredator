@@ -1,0 +1,266 @@
+/*
+Author:	Andreas Gruber
+Website: http://www.tbi.univie.ac.at
+*/
+
+body {
+
+	margin: 0px;
+	padding:0px; 
+	background:url(http://rna.tbi.univie.ac.at/css/pics/bg.jpg);
+	color:#222222;
+	margin:50px 0 20px 0;
+	font: 78% "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+img {
+	border:0;
+}
+
+#container {
+ 	width:90%;
+	margin:0 auto;
+}
+
+
+#header {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:55px;
+}
+
+#headerleft {
+	float: left;
+	width: 400px;
+	height:55px;
+}
+
+#headermain {
+	background-image:url(http://rna.tbi.univie.ac.at/css/RNApics/header_1px.gif);
+	background-repeat:repeat-x;
+	margin: 0 210px 0 400px;
+	height:55px;
+}
+
+#headerright {
+	float: right;
+	width: 210px;
+	height:55px;
+}
+
+
+#column2 {
+	margin: 0;
+	padding: 0;
+	background-image: url(http://rna.tbi.univie.ac.at/css/RNApics/right.gif);
+	background-position: right;
+	background-repeat: repeat-y;
+	width: 100%;
+	background-color: #FFFFFF;
+	
+}
+
+#column1 {
+	margin: 0px;
+	padding: 0px;
+	background-image: url(http://rna.tbi.univie.ac.at/css/RNApics/left.gif);
+	background-repeat: repeat-y;
+	width: 100%;
+	
+}
+
+#contentleft {
+	width: 20px;
+	float: left;
+}
+
+#contentmain {
+	padding: 10px;
+	min-height:400px;
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: #FFFFFF;
+}
+
+#contentright {
+	padding: 10px;
+	width: 130px;
+	float: right;
+}
+
+#footer {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height:20px;
+}
+
+#footerleft {
+	float: left;
+	width: 20px;
+	background-image:url(http://rna.tbi.univie.ac.at/css/RNApics/footer_part1.gif);
+	background-repeat:no-repeat;
+	height:20px;
+}
+
+#footermain {
+	background-image:url(http://rna.tbi.univie.ac.at/css/RNApics/footer_1px.gif);
+	background-repeat:repeat-x;
+	margin: 0 20px 0 20px;
+	height:20px;
+}
+
+#footerright {
+	float: right;
+	width: 20px;
+	background-repeat:no-repeat;
+	background-image:url(http://rna.tbi.univie.ac.at/css/RNApics/footer_part2.gif);
+	height:20px;
+}
+
+
+.clear {
+	clear: both;
+	display: block;
+	text-align:center;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	font-size:0.9em;
+}
+
+h2 {
+	font-size:1.3em;
+	font-weight:normal;
+	text-decoration:none;
+
+}
+
+h3 {
+	width:100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+input.submit
+{
+	background:url(http://rna.tbi.univie.ac.at/css/RNApics/submit_button.gif) no-repeat;
+	width:99px;
+	height:24px;
+	border: none;
+}
+
+input.submit:focus
+{
+	background:url(http://rna.tbi.univie.ac.at/css/RNApics/submit_button.gif) no-repeat;
+	width:99px;
+	height:24px;
+	border: none;
+}
+
+input.proceed
+{
+	background:url(http://rna.tbi.univie.ac.at/css/pics/proceed_button.gif) no-repeat;
+	width:99px;
+	height:24px;
+	border: none;
+}
+input.proceed:focus
+{
+	background:url(http://rna.tbi.univie.ac.at/css/pics/proceed_button.gif) no-repeat;
+	width:99px;
+	height:24px;
+	border: none;
+}
+
+input.back
+{
+	background:url(http://rna.tbi.univie.ac.at/css/pics/back_button.gif) no-repeat;
+	width:99px;
+	height:23px;
+	border: none;
+}
+
+input.back:focus
+{
+	background:url(http://rna.tbi.univie.ac.at/css/pics/back_button.gif) no-repeat;
+	width:99px;
+	height:23px;
+	border: none;
+}
+
+input:focus, textarea:focus {
+    background: #efefef;
+    color: #000;
+}
+
+#footer a
+{
+	text-decoration: none;
+	color:#111;
+}
+
+.popup
+{
+        top:0em; 
+        width:309px;
+        color:black;
+        z-index:1;
+        visibility:hidden;
+}
+
+.up
+{
+        width:309px;
+        height:59px;
+        padding: 0px 0px 0px 0px;
+        text-align:right;
+        background:url(http://rna.tbi.univie.ac.at/css/pics/bubble_top.gif) no-repeat top;      
+}
+
+.middle
+{
+        width:309px;
+        padding:0px;
+        background:url(http://rna.tbi.univie.ac.at/css/pics/bubble_middle.gif) repeat-y top;
+}
+
+.bottom
+{
+        width:309px;
+        height:24px;
+        background:url(http://rna.tbi.univie.ac.at/css/pics/bubble_bottom.gif) no-repeat top;
+}
+
+fieldset
+{
+        width:100%;
+        padding: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid #BFBAB0;  
+        background-color: #F2EFE9;  
+} 
+
+#contentmain p
+{
+        line-height:1.7em;
+        margin-top:10px;
+        margin-bottom:10px;
+}
+
+#contentmain a
+{
+        text-decoration:none;
+}
+
+tt
+{
+        font-size:130%;
+}
+
+.red
+{
+        color:red;
+}

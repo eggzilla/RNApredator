@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/transitional.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+
+  
+    	<title> RNApredator bacterial sRNA target prediction Webserver - Results - http://www.tbi.univie.ac.at/ </title>
+	<script type="text/javascript" src="example-Dateien/jquery-1.js"></script> 
+	<script type="text/javascript" src="example-Dateien/jquery.js"></script> 	
+	<link rel="stylesheet" href="example-Dateien/jquerytablesortblue.css" type="text/css" media="print, projection, screen">
+	<script type="text/javascript" src="example-Dateien/result.js"></script>
+	 <noscript><p>This page does not decay graceful :-) - Please enable your java-script</p></noscript>        
+  </head><body>
+	<div align="center">
+	<img src="example-Dateien/banner_final.png" alt="Banner">
+	<hr>
+	<table width="100%">
+		<tbody><tr>
+         		<td><a href="http://insulin.tbi.univie.ac.at/introduction.html"><img src="example-Dateien/introduction.png" alt="Introduction" border="0"></a></td>
+			<td><a href="http://insulin.tbi.univie.ac.at/available_genomes.cgi"><img src="example-Dateien/available_genomes.png" alt="Available Genomes" border="0"></a></td>
+         		<td><a href="http://insulin.tbi.univie.ac.at/target_search.cgi"><img src="example-Dateien/target_search.png" alt="Target Search" border="0"></a></td>
+			<td><a href="http://insulin.tbi.univie.ac.at/help.html"><img src="example-Dateien/help.png" alt="help" border="0"></a></td>
+		</tr>
+	</tbody></table>
+	<hr>
+	</div>
+
+<div align="center">
+	<h3 id="stepx_title">= Target prediction =</h3>
+</div>
+<hr>
+<div align="left">
+<h2>Predicted Top Interactions of 8600 Total:</h2>
+</div>
+<div align="left">
+<!--<table class="tablesorter" border="1" cellspacing="1">
+	<tr>
+	<td> -</td><td>Interaction</td><td>Target</td>
+	<tr>
+</table>-->
+<form name="filter1" action="#" method="get">
+<table class="filtertable" cellspacing="3">
+	<tbody><tr>
+		<td>Resources:</td>
+		<td>- all predictions as <a href="http://insulin.tbi.univie.ac.at/html/HMeIW9qDZi/all_predictions.csv">.csv-file</a> or as RNAplex <a href="http://insulin.tbi.univie.ac.at/html/HMeIW9qDZi/prediction.res">.res-file</a> </td>
+		<td></td>
+		<td>   - provided sRNA sequence as <a href="http://insulin.tbi.univie.ac.at/html/HMeIW9qDZi/sRNA.fasta">.fasta-file</a> </td>     
+	</tr><tr>
+           	<td>Filtering:</td>
+		<td>- Show top	
+			
+                        <select name="topselector" id="selectorid" size="1" onchange="select(this)">
+				<option>All</option>
+<option>500</option>
+<option selected="selected">100</option>
+<option>75</option>
+<option>50</option>
+<option>25</option></select>
+			interactions by energy
+                </td>
+		<td></td>
+		<td> - Show only Interactions on mRNA from <input name="from" id="fromid" size="4" onkeyup="filter(this)" type="text"> to <input name="to" id="toid" size="4" onkeyup="filter(this)" type="text"> (0=Translation - Start)  
+		</td>
+        </tr>
+</tbody></table>
+</form>
+<form action="target_search.cgi" method="get">
+<input value="Post-Process" type="submit"> Select interactions below for postprocessing
+<table class="tablesorter" id="myTable" border="1" cellspacing="1">             
+    <thead>
+        <tr>
+	    <th style="width: 1%;">Select</th> 
+            <th class="header" style="width: 6%;">Energy<br> [kJ/mol]</th> 
+            <th class="header" style="width: 6%;">z-Score</th> 
+            <th style="width: 15%;">Interaction<br> [dot-bracket]</th> 
+	    <th class="header" style="width: 5%;">mRNA<br> [Start]</th>
+	    <th class="header" style="width: 5%;">mRNA<br> [End]</th>
+            <th class="header" style="width: 5%;">sRNA</th>
+	    <th class="header" style="width: 25%;">Gene<br> Annotation</th>
+            <th class="header" style="width: 5%;">Locus<br>Tag</th>
+	    <th style="width: 3%;">Strand</th> 
+            <th class="header" style="width: 8%;">Genomic<br> Coordinates</th> 
+            <th class="header" style="width: 7%;">Accession</th>
+	    <th class="header">Replicon</th>	 
+        </tr> 
+    </thead>
+<tbody>
+<tr id="t1"><td><input name="p1" value="000913c2812955-2812240_104-132" type="checkbox"></td><td>-35.19</td><td>-6.67</td><td>(((((((((((((((((((((((((((((&amp;)))))))))))))))))))))))))))))</td><td id="t1-start">-96</td><td id="t1-end">-68</td><td> 1-29</td><td>S ribosylhomocysteine lyase</td><td>b2687</td><td>-</td><td>2812955-2812240</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t2"><td><input name="p2" value="000913c2812955-2812240_97-123" type="checkbox"></td><td>-28.81</td><td>-5.17</td><td>(((((((((((((((((((((((((((&amp;)))))))))))))))))))))))))))</td><td id="t2-start">-103</td><td id="t2-end">-77</td><td> 10-36</td><td>S ribosylhomocysteine lyase</td><td>b2687</td><td>-</td><td>2812955-2812240</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t3"><td><input name="p3" value="000913c2812955-2812240_75-102" type="checkbox"></td><td>-20.92</td><td>-3.32</td><td>((((((((((((((((((((((((((((&amp;))))))))))))))))))))))))))))</td><td id="t3-start">-125</td><td id="t3-end">-98</td><td> 31-58</td><td>S ribosylhomocysteine lyase</td><td>b2687</td><td>-</td><td>2812955-2812240</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t4"><td><input name="p4" value="000913c2812955-2812240_55-81" type="checkbox"></td><td>-20.43</td><td>-3.2</td><td>(((((((((((((((((((((((((((&amp;)))))))))))))))))))))))))))</td><td id="t4-start">-145</td><td id="t4-end">-119</td><td> 52-78</td><td>S ribosylhomocysteine lyase</td><td>b2687</td><td>-</td><td>2812955-2812240</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t5"><td><input name="p5" value="000913c300358-297960_1465-1476" type="checkbox"></td><td>-18.72</td><td>-2.8</td><td>((((((((((((&amp;))))))))))))</td><td id="t5-start">1265</td><td id="t5-end">1276</td><td> 7-18</td><td>PaoABC aldehyde oxidoreductase; Moco containing subunit</td><td>b0284</td><td>-</td><td>300358-297960</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t6"><td><input name="p6" value="000913c2997050-2995714_784-798" type="checkbox"></td><td>-17.67</td><td>-2.55</td><td>(((((((((((((((&amp;)))))))))))))))</td><td id="t6-start">584</td><td id="t6-end">598</td><td> 8-22</td><td>NA</td><td>NA</td><td>-</td><td>2997050-2995714</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t7"><td><input name="p7" value="000913c2425010-2424028_873-888" type="checkbox"></td><td>-17.50</td><td>-2.51</td><td>(((((((((.((((((&amp;)))))))))))))))</td><td id="t7-start">673</td><td id="t7-end">688</td><td> 7-21</td><td>histidine/lysine/arginine/ornithine transporter subunit</td><td>b2309</td><td>-</td><td>2425010-2424028</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t8"><td><input name="p8" value="000913c1560705-1558955_1147-1161" type="checkbox"></td><td>-17.23</td><td>-2.45</td><td>((.((((((((((((&amp;)))))))))))).))</td><td id="t8-start">947</td><td id="t8-end">961</td><td> 7-21</td><td>D ala D a la transporter subunit</td><td>b1487</td><td>-</td><td>1560705-1558955</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t9"><td><input name="p9" value="000913c2424138-2423252_1-16" type="checkbox"></td><td>-16.98</td><td>-2.39</td><td>(((((((((.((((((&amp;)))))))))))))))</td><td id="t9-start">-199</td><td id="t9-end">-184</td><td> 7-21</td><td>histidine/lysine/arginine/ornithine transporter permease subunit</td><td>b2308</td><td>-</td><td>2424138-2423252</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t10"><td><input name="p10" value="000913c4562912-4561945_551-569" type="checkbox"></td><td>-16.88</td><td>-2.37</td><td>(((((.(((((((((((((&amp;))))))))))))))))))</td><td id="t10-start">351</td><td id="t10-end">369</td><td> 7-24</td><td>predicted ATPase; activator of (R) hydroxyglutaryl CoA dehydratase</td><td>b4334</td><td>-</td><td>4562912-4561945</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t11"><td><input name="p11" value="000913197728-200360_2257-2272" type="checkbox"></td><td>-16.87</td><td>-2.36</td><td>((((.(((((((((((&amp;))))))))))).))))</td><td id="t11-start">2057</td><td id="t11-end">2072</td><td> 7-22</td><td>outer membrane protein assembly factor; forms pores; required for OM biogenesis; in BamABCD OM protein complex</td><td>b0177</td><td>+</td><td>197728-200360</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t12"><td><input name="p12" value="0009131619156-1620543_343-356" type="checkbox"></td><td>-16.80</td><td>-2.35</td><td>((((((((.(((((&amp;))))).))))))))</td><td id="t12-start">143</td><td id="t12-end">156</td><td> 8-21</td><td>predicted transporter</td><td>b1534</td><td>+</td><td>1619156-1620543</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t13"><td><input name="p13" value="0009131456878-1458505_188-215" type="checkbox"></td><td>-16.70</td><td>-2.32</td><td>((((((....(.((((((((((((((((&amp;))))))))))))))))).))))))</td><td id="t13-start">-12</td><td id="t13-end">15</td><td> 8-31</td><td>3 hydroxybutyryl CoA dehydrogenase</td><td>b1395</td><td>+</td><td>1456878-1458505</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t14"><td><input name="p14" value="000913c118845-117752_922-933" type="checkbox"></td><td>-16.64</td><td>-2.31</td><td>((((((((((((&amp;))))))))))))</td><td id="t14-start">722</td><td id="t14-end">733</td><td> 7-18</td><td>quinolinate phosphoribosyltransferase</td><td>b0109</td><td>-</td><td>118845-117752</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t15"><td><input name="p15" value="000913c3600309-3599051_921-937" type="checkbox"></td><td>-16.53</td><td>-2.28</td><td>(((((((((((((((((&amp;))))))))).))))))))</td><td id="t15-start">721</td><td id="t15-end">737</td><td> 4-21</td><td>predicted transporter subunit membrane component of ABC superfamily</td><td>b3462</td><td>-</td><td>3600309-3599051</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t16"><td><input name="p16" value="0009134030968-4032619_710-724" type="checkbox"></td><td>-16.46</td><td>-2.27</td><td>(((((((((.(((((&amp;))))))))))))))</td><td id="t16-start">510</td><td id="t16-end">524</td><td> 8-21</td><td>potassium transporter</td><td>b3849</td><td>+</td><td>4030968-4032619</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t17"><td><input name="p17" value="0009134549459-4550843_698-717" type="checkbox"></td><td>-16.21</td><td>-2.21</td><td>(((((.((((((((((((((&amp;)))))))).)))))).)))))</td><td id="t17-start">498</td><td id="t17-end">517</td><td> 4-24</td><td>mannonate hydrolase</td><td>b4322</td><td>+</td><td>4549459-4550843</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t18"><td><input name="p18" value="0009131328872-1331669_579-597" type="checkbox"></td><td>-15.87</td><td>-2.13</td><td>(..((((((((((((((((&amp;)))))).......))))))))))..)</td><td id="t18-start">379</td><td id="t18-end">397</td><td> 7-32</td><td>DNA topoisomerase I; omega subunit</td><td>b1274</td><td>+</td><td>1328872-1331669</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t19"><td><input name="p19" value="000913c3641355-3640403_748-771" type="checkbox"></td><td>-15.81</td><td>-2.11</td><td>(((...((.(((((((((((((((&amp;))))))))))))))).)).)))</td><td id="t19-start">548</td><td id="t19-end">571</td><td> 1-22</td><td>predicted SAM dependent methyltransferase</td><td>b3497</td><td>-</td><td>3641355-3640403</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t20"><td><input name="p20" value="000913613180-617261_1618-1634" type="checkbox"></td><td>-15.73</td><td>-2.1</td><td>(.(((((((((((((((&amp;))))))))))))))).)</td><td id="t20-start">1418</td><td id="t20-end">1434</td><td> 5-21</td><td>enterobactin synthase multienzyme complex component; ATP dependent</td><td>b0586</td><td>+</td><td>613180-617261</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t21"><td><input name="p21" value="000913c2734233-2733053_48-64" type="checkbox"></td><td>-15.72</td><td>-2.09</td><td>((((....(((((((((&amp;)))))))))....))))</td><td id="t21-start">-152</td><td id="t21-end">-136</td><td> 5-21</td><td>23S rRNA pseudouridine synthase; specific to U1911; U1915; and U1917</td><td>b2594</td><td>-</td><td>2734233-2733053</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t22"><td><input name="p22" value="000913c3107377-3105042_790-804" type="checkbox"></td><td>-15.72</td><td>-2.09</td><td>(((((((((((((((&amp;)))))))))))))))</td><td id="t22-start">590</td><td id="t22-end">604</td><td> 8-22</td><td>ornithine decarboxylase; constitutive</td><td>b2965</td><td>-</td><td>3107377-3105042</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t23"><td><input name="p23" value="000913c3099845-3098926_32-43" type="checkbox"></td><td>-15.71</td><td>-2.09</td><td>((((((((((((&amp;))))))))))))</td><td id="t23-start">-168</td><td id="t23-end">-157</td><td> 10-21</td><td>predicted protein</td><td>b2958</td><td>-</td><td>3099845-3098926</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t24"><td><input name="p24" value="000913c2699220-2698640_300-313" type="checkbox"></td><td>-15.66</td><td>-2.08</td><td>(((((((((((.((&amp;)).)))))))))))</td><td id="t24-start">100</td><td id="t24-end">113</td><td> 8-21</td><td>NA</td><td>NA</td><td>-</td><td>2699220-2698640</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t25"><td><input name="p25" value="0009133155472-3156598_355-370" type="checkbox"></td><td>-15.56</td><td>-2.06</td><td>((((((...(((((((&amp;)))))))...))))))</td><td id="t25-start">155</td><td id="t25-end">170</td><td> 6-21</td><td>conserved protein</td><td>b3013</td><td>+</td><td>3155472-3156598</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t26"><td><input name="p26" value="0009134018049-4019889_914-934" type="checkbox"></td><td>-15.52</td><td>-2.05</td><td>(((((((((((((..((((((&amp;)))).))..)))))))))))))</td><td id="t26-start">714</td><td id="t26-end">734</td><td> 8-29</td><td>2 octaprenylphenol hydroxylase</td><td>b3835</td><td>+</td><td>4018049-4019889</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t27"><td><input name="p27" value="000913c189706-188712_228-248" type="checkbox"></td><td>-15.51</td><td>-2.04</td><td>((((......(((((((((((&amp;)))))))))))..))))</td><td id="t27-start">28</td><td id="t27-end">48</td><td> 5-21</td><td>methionine aminopeptidase</td><td>b0168</td><td>-</td><td>189706-188712</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t28"><td><input name="p28" value="000913c650206-649710_396-409" type="checkbox"></td><td>-15.50</td><td>-2.04</td><td>(((((((((.((((&amp;)))).)))))))))</td><td id="t28-start">196</td><td id="t28-end">209</td><td> 8-21</td><td>citrate lyase; acyl carrier (gamma) subunit</td><td>b0617</td><td>-</td><td>650206-649710</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t29"><td><input name="p29" value="000913c723837-720953_891-906" type="checkbox"></td><td>-15.47</td><td>-2.03</td><td>(((((.((((((((((&amp;)))))))))))))))</td><td id="t29-start">691</td><td id="t29-end">706</td><td> 7-21</td><td>fused sensory histidine kinase in two component regulatory system with KdpE signal sensing protein</td><td>b0695</td><td>-</td><td>723837-720953</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t30"><td><input name="p30" value="000913c2732395-2729622_617-633" type="checkbox"></td><td>-15.41</td><td>-2.02</td><td>(((..((((((((((((&amp;)))))))))))))))</td><td id="t30-start">417</td><td id="t30-end">433</td><td> 7-21</td><td>protein disaggregation chaperone</td><td>b2592</td><td>-</td><td>2732395-2729622</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t31"><td><input name="p31" value="000913c1940807-1939675_503-516" type="checkbox"></td><td>-15.37</td><td>-2.01</td><td>((((((((.(((((&amp;))))).))))))))</td><td id="t31-start">303</td><td id="t31-end">316</td><td> 8-21</td><td>zinc transporter subunit periplasmic binding component of ABC superfamily</td><td>b1857</td><td>-</td><td>1940807-1939675</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t32"><td><input name="p32" value="0009132751427-2751968_511-527" type="checkbox"></td><td>-15.32</td><td>-2</td><td>((((((((((..(((((&amp;)))))))))))))))</td><td id="t32-start">311</td><td id="t32-end">327</td><td> 8-22</td><td>lipoprotein component of BamABCDE OM biogenesis complex</td><td>b2617</td><td>+</td><td>2751427-2751968</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t33"><td><input name="p33" value="0009131454254-1455524_859-874" type="checkbox"></td><td>-15.30</td><td>-1.99</td><td>(((((..((((.((((&amp;))))))))..)))))</td><td id="t33-start">659</td><td id="t33-end">674</td><td> 7-21</td><td>Phenylacetyl CoA oxygenase; NAD(P)H oxidoreductase componen</td><td>b1392</td><td>+</td><td>1454254-1455524</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t34"><td><input name="p34" value="000913c3676573-3674313_639-656" type="checkbox"></td><td>-15.27</td><td>-1.99</td><td>((((((((((((..((((&amp;))))..))))))))))))</td><td id="t34-start">439</td><td id="t34-end">456</td><td> 7-24</td><td>Inner membrane protein; AsmA family</td><td>b3524</td><td>-</td><td>3676573-3674313</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t35"><td><input name="p35" value="0009132680685-2682078_237-250" type="checkbox"></td><td>-15.23</td><td>-1.98</td><td>((((((((((((((&amp;))))))))))))))</td><td id="t35-start">37</td><td id="t35-end">50</td><td> 7-20</td><td>predicted DNA binding transcriptional regulator</td><td>b2550</td><td>+</td><td>2680685-2682078</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t36"><td><input name="p36" value="000913c2410816-2410122_322-336" type="checkbox"></td><td>-15.21</td><td>-1.97</td><td>(((.(((((((((((&amp;))))))))))).)))</td><td id="t36-start">122</td><td id="t36-end">136</td><td> 7-21</td><td>conserved protein; UPF0304 family</td><td>b2294</td><td>-</td><td>2410816-2410122</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t37"><td><input name="p37" value="0009131134587-1135485_796-810" type="checkbox"></td><td>-15.14</td><td>-1.96</td><td>(((((((((((((((&amp;)))))))))))))))</td><td id="t37-start">596</td><td id="t37-end">610</td><td> 7-21</td><td>flagellar protein of basal body outer membrane L ring</td><td>b1079</td><td>+</td><td>1134587-1135485</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t38"><td><input name="p38" value="000913c1735514-1734145_1133-1144" type="checkbox"></td><td>-15.14</td><td>-1.96</td><td>((((((((((((&amp;))))))))))))</td><td id="t38-start">933</td><td id="t38-end">944</td><td> 6-17</td><td>predicted transporter</td><td>b1657</td><td>-</td><td>1735514-1734145</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t39"><td><input name="p39" value="000913597737-601080_2416-2429" type="checkbox"></td><td>-15.13</td><td>-1.95</td><td>((((((((((((((&amp;))))))))))))))</td><td id="t39-start">2216</td><td id="t39-end">2229</td><td> 8-21</td><td>copper/silver efflux system; membrane component</td><td>b0575</td><td>+</td><td>597737-601080</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t40"><td><input name="p40" value="000913c3860210-3859196_766-777" type="checkbox"></td><td>-15.12</td><td>-1.95</td><td>((((((((((((&amp;))))))))))))</td><td id="t40-start">566</td><td id="t40-end">577</td><td> 7-18</td><td>NA</td><td>NA</td><td>-</td><td>3860210-3859196</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t41"><td><input name="p41" value="0009132680685-2682078_744-772" type="checkbox"></td><td>-15.10</td><td>-1.95</td><td>((((((.((((((.(((((..(.((((((&amp;)))))).)..)))))))))))))))))</td><td id="t41-start">544</td><td id="t41-end">572</td><td> 7-33</td><td>predicted DNA binding transcriptional regulator</td><td>b2550</td><td>+</td><td>2680685-2682078</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t42"><td><input name="p42" value="000913c2947232-2945779_110-131" type="checkbox"></td><td>-15.04</td><td>-1.93</td><td>((((((((((..((((((((((&amp;)))))))))).))))))))))</td><td id="t42-start">-90</td><td id="t42-end">-69</td><td> 1-21</td><td>N acetylmuramoyl L alanine amidase</td><td>b2817</td><td>-</td><td>2947232-2945779</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t43"><td><input name="p43" value="0009132892018-2892793_680-697" type="checkbox"></td><td>-15.01</td><td>-1.93</td><td>(((((...((((((((((&amp;)))))))))).)))))</td><td id="t43-start">480</td><td id="t43-end">497</td><td> 6-21</td><td>predicted anti terminator regulatory protein</td><td>b2768</td><td>+</td><td>2892018-2892793</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t44"><td><input name="p44" value="0009133972969-3974299_1-11" type="checkbox"></td><td>-14.98</td><td>-1.92</td><td>(((((((((((&amp;)))))))))))</td><td id="t44-start">-199</td><td id="t44-end">-189</td><td> 7-17</td><td>TDP 4 oxo 6 deoxy D glucose transaminase</td><td>b3791</td><td>+</td><td>3972969-3974299</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t45"><td><input name="p45" value="000913c1277041-1275045_1858-1872" type="checkbox"></td><td>-14.95</td><td>-1.91</td><td>(((((((((((((((&amp;)))))).)))))))))</td><td id="t45-start">1658</td><td id="t45-end">1672</td><td> 7-22</td><td>sensory histidine kinase in two component regulatory system with NarL</td><td>b1222</td><td>-</td><td>1277041-1275045</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t46"><td><input name="p46" value="0009132342687-2345172_217-230" type="checkbox"></td><td>-14.95</td><td>-1.91</td><td>((((((((((((((&amp;))))).)))))))))</td><td id="t46-start">17</td><td id="t46-end">30</td><td> 7-21</td><td>ribonucleoside diphosphate reductase 1; alpha subunit</td><td>b2234</td><td>+</td><td>2342687-2345172</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t47"><td><input name="p47" value="000913c1575843-1573271_2324-2334" type="checkbox"></td><td>-14.86</td><td>-1.89</td><td>(((((((((((&amp;)))))))))))</td><td id="t47-start">2124</td><td id="t47-end">2134</td><td> 8-18</td><td>predicted porin protein</td><td>b1495</td><td>-</td><td>1575843-1573271</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t48"><td><input name="p48" value="0009132419530-2420623_836-851" type="checkbox"></td><td>-14.78</td><td>-1.87</td><td>(((((((((.((((((&amp;)))))))))))))))</td><td id="t48-start">636</td><td id="t48-end">651</td><td> 7-21</td><td>conserved protein with NAD(P) binding Rossmann fold domain</td><td>b2304</td><td>+</td><td>2419530-2420623</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t49"><td><input name="p49" value="0009131194146-1195596_1184-1197" type="checkbox"></td><td>-14.77</td><td>-1.87</td><td>((((((((((((((&amp;))))))))))))))</td><td id="t49-start">984</td><td id="t49-end">997</td><td> 8-21</td><td>e14 prophage; isocitrate dehydrogenase; specific for NADP+</td><td>b1136</td><td>+</td><td>1194146-1195596</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t50"><td><input name="p50" value="0009132220007-2221922_836-851" type="checkbox"></td><td>-14.76</td><td>-1.87</td><td>((((((((((((((((&amp;)))))))).))))))))</td><td id="t50-start">636</td><td id="t50-end">651</td><td> 5-21</td><td>D lactate dehydrogenase; FAD binding; NADH independent</td><td>b2133</td><td>+</td><td>2220007-2221922</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t51"><td><input name="p51" value="000913389275-393642_192-203" type="checkbox"></td><td>-14.75</td><td>-1.86</td><td>((((((((((((&amp;))))))))))))</td><td id="t51-start">-8</td><td id="t51-end">3</td><td> 10-21</td><td>NA</td><td>NA</td><td>+</td><td>389275-393642</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t52"><td><input name="p52" value="0009131328872-1331669_1347-1361" type="checkbox"></td><td>-14.73</td><td>-1.86</td><td>(((.(((((((((((&amp;))))))))))).)))</td><td id="t52-start">1147</td><td id="t52-end">1161</td><td> 8-22</td><td>DNA topoisomerase I; omega subunit</td><td>b1274</td><td>+</td><td>1328872-1331669</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t53"><td><input name="p53" value="000913c3219469-3218937_238-248" type="checkbox"></td><td>-14.71</td><td>-1.86</td><td>(((((((((((&amp;)))))))))))</td><td id="t53-start">38</td><td id="t53-end">48</td><td> 5-15</td><td>conserved tRNA binding protein</td><td>b3074</td><td>-</td><td>3219469-3218937</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t54"><td><input name="p54" value="000913c4423014-4422539_378-390" type="checkbox"></td><td>-14.62</td><td>-1.83</td><td>(((((((((((((&amp;))))))))))).))</td><td id="t54-start">178</td><td id="t54-end">190</td><td> 8-21</td><td>predicted protein</td><td>b4199</td><td>-</td><td>4423014-4422539</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t55"><td><input name="p55" value="0009133168306-3169855_442-455" type="checkbox"></td><td>-14.57</td><td>-1.82</td><td>((((((((((((((&amp;))))).)))))))))</td><td id="t55-start">242</td><td id="t55-end">255</td><td> 8-22</td><td>quorum sensing sensory histidine kinase in two component regulatory system with QseB</td><td>b3026</td><td>+</td><td>3168306-3169855</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t56"><td><input name="p56" value="000913c1019476-1018236_182-195" type="checkbox"></td><td>-14.56</td><td>-1.82</td><td>((((((((((((((&amp;)))).))))))))))</td><td id="t56-start">-18</td><td id="t56-end">-5</td><td> 8-22</td><td>outer membrane protein A (3a;II*;G;d)</td><td>b0957</td><td>-</td><td>1019476-1018236</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t57"><td><input name="p57" value="0009133972290-3973164_679-690" type="checkbox"></td><td>-14.54</td><td>-1.82</td><td>((((((((((((&amp;))))))))))))</td><td id="t57-start">479</td><td id="t57-end">490</td><td> 7-18</td><td>TDP fucosamine acetyltransferase</td><td>b3790</td><td>+</td><td>3972290-3973164</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t58"><td><input name="p58" value="000913c3667411-3665814_1242-1255" type="checkbox"></td><td>-14.52</td><td>-1.81</td><td>((((((((((((((&amp;))))))))))))))</td><td id="t58-start">1042</td><td id="t58-end">1055</td><td> 8-21</td><td>predicted cytochrome C peroxidase</td><td>b3518</td><td>-</td><td>3667411-3665814</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t59"><td><input name="p59" value="000913829895-831459_69-82" type="checkbox"></td><td>-14.45</td><td>-1.79</td><td>((((((..((((((&amp;))))))..))))))</td><td id="t59-start">-131</td><td id="t59-end">-118</td><td> 8-21</td><td>ATP dependent RNA helicase</td><td>b0797</td><td>+</td><td>829895-831459</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t60"><td><input name="p60" value="000913c649913-648805_103-116" type="checkbox"></td><td>-14.41</td><td>-1.78</td><td>(((((((((.((((&amp;)))).)))))))))</td><td id="t60-start">-97</td><td id="t60-end">-84</td><td> 8-21</td><td>citrate lyase; citryl ACP lyase (beta) subunit</td><td>b0616</td><td>-</td><td>649913-648805</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t61"><td><input name="p61" value="000913c1762233-1760546_497-515" type="checkbox"></td><td>-14.40</td><td>-1.78</td><td>(((..(((..(((((((((&amp;)))))))))..)))..)))</td><td id="t61-start">297</td><td id="t61-end">315</td><td> 4-22</td><td>component of SufBCD complex</td><td>b1683</td><td>-</td><td>1762233-1760546</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t62"><td><input name="p62" value="000913319251-320305_251-267" type="checkbox"></td><td>-14.39</td><td>-1.78</td><td>(((((.((.((((((((&amp;)))))))).)).)))))</td><td id="t62-start">51</td><td id="t62-end">67</td><td> 5-21</td><td>predicted DNA binding transcriptional regulator</td><td>b0305</td><td>+</td><td>319251-320305</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t63"><td><input name="p63" value="000913c1189199-1187539_640-659" type="checkbox"></td><td>-14.37</td><td>-1.78</td><td>((((.(((((((((((((((&amp;))))...))))))))))).))))</td><td id="t63-start">440</td><td id="t63-end">459</td><td> 7-29</td><td>sensory histidine kinase in two component regulatory system with PhoP</td><td>b1129</td><td>-</td><td>1189199-1187539</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t64"><td><input name="p64" value="000913c3307146-3306062_372-385" type="checkbox"></td><td>-14.36</td><td>-1.77</td><td>(((((((((.((((&amp;)))).)))))))))</td><td id="t64-start">172</td><td id="t64-end">185</td><td> 8-21</td><td>lipoprotein involved in osmotic sensitivity and filamentation</td><td>b3163</td><td>-</td><td>3307146-3306062</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t65"><td><input name="p65" value="0009133783083-3784827_1545-1556" type="checkbox"></td><td>-14.34</td><td>-1.77</td><td>((((((((((((&amp;))))))))))))</td><td id="t65-start">1345</td><td id="t65-end">1356</td><td> 7-18</td><td>phosphoglycero mutase III; cofactor independent</td><td>b3612</td><td>+</td><td>3783083-3784827</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t66"><td><input name="p66" value="000913c1222057-1221528_497-513" type="checkbox"></td><td>-14.34</td><td>-1.77</td><td>((((((((..(((((((&amp;))))))).))))))))</td><td id="t66-start">297</td><td id="t66-end">313</td><td> 7-22</td><td>predicted protein</td><td>b1171</td><td>-</td><td>1222057-1221528</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t67"><td><input name="p67" value="000913c2241874-2241006_294-308" type="checkbox"></td><td>-14.32</td><td>-1.76</td><td>(((((((((..((((&amp;)))).)))))))))</td><td id="t67-start">94</td><td id="t67-end">108</td><td> 8-21</td><td>GTP cyclohydrolase I</td><td>b2153</td><td>-</td><td>2241874-2241006</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t68"><td><input name="p68" value="000913c3860210-3859196_314-331" type="checkbox"></td><td>-14.31</td><td>-1.76</td><td>(((((((((..(((((((&amp;))))))))))))))))</td><td id="t68-start">114</td><td id="t68-end">131</td><td> 7-22</td><td>NA</td><td>NA</td><td>-</td><td>3860210-3859196</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t69"><td><input name="p69" value="0009131271530-1272425_9-28" type="checkbox"></td><td>-14.30</td><td>-1.76</td><td>((((((((((((((((((((&amp;)).))))))))))))))..))))</td><td id="t69-start">-191</td><td id="t69-end">-172</td><td> 8-30</td><td>cation transport regulator</td><td>b1218</td><td>+</td><td>1271530-1272425</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t70"><td><input name="p70" value="000913c4579685-4578091_190-211" type="checkbox"></td><td>-14.28</td><td>-1.75</td><td>(((((((.((((..((((((.(&amp;).))))))..)).)).)))))))</td><td id="t70-start">-10</td><td id="t70-end">11</td><td> 7-29</td><td>specificity determinant for hsdM and hsdR</td><td>b4348</td><td>-</td><td>4579685-4578091</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t71"><td><input name="p71" value="000913c2954225-2950483_2374-2387" type="checkbox"></td><td>-14.27</td><td>-1.75</td><td>(((((((((((.((&amp;)).)))))))))))</td><td id="t71-start">2174</td><td id="t71-end">2187</td><td> 5-18</td><td>exonuclease V (RecBCD complex); beta subunit</td><td>b2820</td><td>-</td><td>2954225-2950483</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t72"><td><input name="p72" value="0009131300723-1301843_18-29" type="checkbox"></td><td>-14.26</td><td>-1.75</td><td>((((((((((((&amp;))))))))))))</td><td id="t72-start">-182</td><td id="t72-end">-171</td><td> 4-15</td><td>oligopeptide transporter subunit</td><td>b1244</td><td>+</td><td>1300723-1301843</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t73"><td><input name="p73" value="000913c3109348-3108612_698-711" type="checkbox"></td><td>-14.23</td><td>-1.74</td><td>(((((..(((((((&amp;)))))))..)))))</td><td id="t73-start">498</td><td id="t73-end">511</td><td> 8-21</td><td>predicted secretion pathway M type protein; membrane anchored</td><td>b2968</td><td>-</td><td>3109348-3108612</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t74"><td><input name="p74" value="000913c4584984-4581272_2961-2979" type="checkbox"></td><td>-14.22</td><td>-1.74</td><td>(((((.((((((((.((((&amp;)))))))))))))))))</td><td id="t74-start">2761</td><td id="t74-end">2779</td><td> 5-21</td><td>endonuclease R Type I restriction enzyme</td><td>b4350</td><td>-</td><td>4584984-4581272</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t75"><td><input name="p75" value="000913c3065395-3064299_782-791" type="checkbox"></td><td>-14.21</td><td>-1.74</td><td>((((((((((&amp;))))))))))</td><td id="t75-start">582</td><td id="t75-end">591</td><td> 8-17</td><td>predicted DNA binding transcriptional regulator</td><td>b2921</td><td>-</td><td>3065395-3064299</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t76"><td><input name="p76" value="000913c2119778-2118184_833-846" type="checkbox"></td><td>-14.20</td><td>-1.74</td><td>((((((((((((((&amp;)))))))))).))))</td><td id="t76-start">633</td><td id="t76-end">646</td><td> 7-21</td><td>predicted UDP glucose lipid carrier transferase</td><td>b2047</td><td>-</td><td>2119778-2118184</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t77"><td><input name="p77" value="000913240143-240816_123-135" type="checkbox"></td><td>-14.18</td><td>-1.73</td><td>(((((((((((((&amp;)))))))))))))</td><td id="t77-start">-77</td><td id="t77-end">-65</td><td> 10-22</td><td>inhibitor of vertebrate C lysozyme</td><td>b0220</td><td>+</td><td>240143-240816</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t78"><td><input name="p78" value="000913c2870002-2869323_530-541" type="checkbox"></td><td>-14.17</td><td>-1.73</td><td>((((((((((((&amp;))))))))))))</td><td id="t78-start">330</td><td id="t78-end">341</td><td> 6-17</td><td>2C methyl D erythritol 2;4 cyclodiphosphate synthase</td><td>b2746</td><td>-</td><td>2870002-2869323</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t79"><td><input name="p79" value="0009132233087-2234522_927-937" type="checkbox"></td><td>-14.16</td><td>-1.73</td><td>(((((((((((&amp;)))))))))))</td><td id="t79-start">727</td><td id="t79-end">737</td><td> 8-18</td><td>Dihydropyrimidine dehydrogenase; NADH dependent; subunit B</td><td>b2147</td><td>+</td><td>2233087-2234522</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t80"><td><input name="p80" value="0009133814499-3815562_1024-1040" type="checkbox"></td><td>-14.16</td><td>-1.73</td><td>(((..((((((((((((&amp;)))))))))))))))</td><td id="t80-start">824</td><td id="t80-end">840</td><td> 7-21</td><td>conserved protein; UPF0701 family</td><td>b3644</td><td>+</td><td>3814499-3815562</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t81"><td><input name="p81" value="000913c1173387-1169741_2729-2739" type="checkbox"></td><td>-14.14</td><td>-1.72</td><td>(((((((((((&amp;)))))))))))</td><td id="t81-start">2529</td><td id="t81-end">2539</td><td> 7-17</td><td>transcription repair coupling factor</td><td>b1114</td><td>-</td><td>1173387-1169741</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t82"><td><input name="p82" value="000913c2693765-2689678_2562-2577" type="checkbox"></td><td>-14.10</td><td>-1.71</td><td>(((((((((..(((((&amp;))))).)))))))))</td><td id="t82-start">2362</td><td id="t82-end">2377</td><td> 7-21</td><td>phosphoribosylformyl glycineamide synthetase</td><td>b2557</td><td>-</td><td>2693765-2689678</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t83"><td><input name="p83" value="0009133282507-3283510_575-586" type="checkbox"></td><td>-14.07</td><td>-1.7</td><td>((((((((((((&amp;))))))))))))</td><td id="t83-start">375</td><td id="t83-end">386</td><td> 7-18</td><td>N acetylgalactosamine specific enzyme IIC component of PTS</td><td>b3139</td><td>+</td><td>3282507-3283510</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t84"><td><input name="p84" value="000913463426-464024_493-506" type="checkbox"></td><td>-14.07</td><td>-1.7</td><td>((((((((((((((&amp;))))))))))))))</td><td id="t84-start">293</td><td id="t84-end">306</td><td> 8-21</td><td>long chain acyl CoA thioesterase III</td><td>b0443</td><td>+</td><td>463426-464024</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t85"><td><input name="p85" value="000913968412-969844_836-850" type="checkbox"></td><td>-14.06</td><td>-1.7</td><td>(((((((((((((((&amp;))))))).))))))))</td><td id="t85-start">636</td><td id="t85-end">650</td><td> 6-21</td><td>conserved protein</td><td>b0916</td><td>+</td><td>968412-969844</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t86"><td><input name="p86" value="000913c1625604-1623359_840-852" type="checkbox"></td><td>-14.05</td><td>-1.7</td><td>(((((((((((((&amp;)).)))))))))))</td><td id="t86-start">640</td><td id="t86-end">652</td><td> 8-21</td><td>dipeptidyl carboxypeptidase II</td><td>b1538</td><td>-</td><td>1625604-1623359</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t87"><td><input name="p87" value="000913c3781884-3780665_830-845" type="checkbox"></td><td>-14.05</td><td>-1.7</td><td>((((((((((((((((&amp;))))))))))).)))))</td><td id="t87-start">630</td><td id="t87-end">645</td><td> 6-22</td><td>glycerol 3 phosphate dehydrogenase (NAD+)</td><td>b3608</td><td>-</td><td>3781884-3780665</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t88"><td><input name="p88" value="000913c3325157-3323023_1405-1419" type="checkbox"></td><td>-14.05</td><td>-1.7</td><td>((((((((((.((((&amp;)))).))))))))))</td><td id="t88-start">1205</td><td id="t88-end">1219</td><td> 8-22</td><td>protease; ATP dependent zinc metallo</td><td>b3178</td><td>-</td><td>3325157-3323023</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t89"><td><input name="p89" value="000913c1651062-1629026_11201-11214" type="checkbox"></td><td>-14.04</td><td>-1.7</td><td>(((((((...((((&amp;))))....)))))))</td><td id="t89-start">11001</td><td id="t89-end">11014</td><td> 8-22</td><td>NA</td><td>NA</td><td>-</td><td>1651062-1629026</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t90"><td><input name="p90" value="0009133352454-3357207_3653-3667" type="checkbox"></td><td>-14.03</td><td>-1.7</td><td>(((((((((.(((((&amp;))))))))))))))</td><td id="t90-start">3453</td><td id="t90-end">3467</td><td> 8-21</td><td>glutamate synthase; large subunit</td><td>b3211</td><td>+</td><td>3352454-3357207</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t91"><td><input name="p91" value="000913c334446-333749_393-413" type="checkbox"></td><td>-14.02</td><td>-1.69</td><td>(((((((((((.(((((((((&amp;))))))))).))........)))))))))</td><td id="t91-start">193</td><td id="t91-end">213</td><td> 1-29</td><td>predicted inner membrane protein</td><td>b0317</td><td>-</td><td>334446-333749</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t92"><td><input name="p92" value="000913c358114-357015_1062-1073" type="checkbox"></td><td>-14.01</td><td>-1.69</td><td>((((((((((((&amp;))))))))))))</td><td id="t92-start">862</td><td id="t92-end">873</td><td> 7-18</td><td>transcriptional activator of cyn operon; autorepressor</td><td>b0338</td><td>-</td><td>358114-357015</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t93"><td><input name="p93" value="000913c3386410-3384243_1966-1976" type="checkbox"></td><td>-14.01</td><td>-1.69</td><td>(((((((((((&amp;)))))))))))</td><td id="t93-start">1766</td><td id="t93-end">1776</td><td> 8-18</td><td>p hydroxybenzoic acid efflux system component</td><td>b3240</td><td>-</td><td>3386410-3384243</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t94"><td><input name="p94" value="0009133643208-3644250_599-613" type="checkbox"></td><td>-13.99</td><td>-1.69</td><td>((((((.((((((((&amp;))))))))..))))))</td><td id="t94-start">399</td><td id="t94-end">413</td><td> 6-21</td><td>protein required for the utilization of DNA as a carbon source; predicted DNA processing protein</td><td>b3499</td><td>+</td><td>3643208-3644250</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t95"><td><input name="p95" value="000913c1047368-1045072_332-345" type="checkbox"></td><td>-13.97</td><td>-1.68</td><td>((((.(((((((((&amp;))))))))).))))</td><td id="t95-start">132</td><td id="t95-end">145</td><td> 8-21</td><td>conserved protein</td><td>b0984</td><td>-</td><td>1047368-1045072</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t96"><td><input name="p96" value="000913c2869526-2868277_54-65" type="checkbox"></td><td>-13.97</td><td>-1.68</td><td>((((((((((((&amp;))))))))))))</td><td id="t96-start">-146</td><td id="t96-end">-135</td><td> 6-17</td><td>tRNA(Glu) U13 pseudouridine synthase</td><td>b2745</td><td>-</td><td>2869526-2868277</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t97"><td><input name="p97" value="000913c2913222-2911721_1178-1190" type="checkbox"></td><td>-13.96</td><td>-1.68</td><td>(((((((((((((&amp;)))))))))))))</td><td id="t97-start">978</td><td id="t97-end">990</td><td> 3-15</td><td>23S rRNA m(5)U1939 methyltransferase; SAM dependent</td><td>b2785</td><td>-</td><td>2913222-2911721</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t98"><td><input name="p98" value="000913c1214898-1213487_563-576" type="checkbox"></td><td>-13.96</td><td>-1.68</td><td>((((((((((((((&amp;)))).))))))))))</td><td id="t98-start">363</td><td id="t98-end">376</td><td> 8-22</td><td>anti
+ repressor for YcgE; blue light responsive; FAD binding; has c di GMP 
+phosphodiesterase like EAL domain; but does not degrade c di GMP</td><td>b1163</td><td>-</td><td>1214898-1213487</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t99"><td><input name="p99" value="0009133737528-3738981_522-532" type="checkbox"></td><td>-13.96</td><td>-1.68</td><td>(((((((((((&amp;)))))))))))</td><td id="t99-start">322</td><td id="t99-end">332</td><td> 1-11</td><td>valine pyruvate aminotransferase</td><td>b3572</td><td>+</td><td>3737528-3738981</td><td>NC_000913</td><td>chromosome</td></tr>
+<tr id="t100"><td><input name="p100" value="0009131184867-1186293_889-902" type="checkbox"></td><td>-13.95</td><td>-1.68</td><td>(((..(((((((((&amp;)))))))))..)))</td><td id="t100-start">689</td><td id="t100-end">702</td><td> 8-21</td><td>peptidase T</td><td>b1127</td><td>+</td><td>1184867-1186293</td><td>NC_000913</td><td>chromosome</td></tr>
+</tbody>
+
+		</table>
+
+		<table style="display: none;">
+
+		<tbody><tr><td id="hits">10000</td></tr>
+
+		</tbody></table>
+
+
+<input name="page" id="page" value="3" type="hidden">
+<input name="sRNA" id="sRNA" value="GAAAGACGCGCAUUUGUUAUCAUCAUCCCUGAAUUCAGAGAUGAAAUUUUGGCCACUCACGAGUGGCCUUUUUCUUUU" type="hidden">
+<input name="tempdir" id="tempdir" value="HMeIW9qDZi" type="hidden">
+<input name="begincheck" value="1" type="hidden">
+<input value="Post-Process" type="submit">
+</form>
+</div>
+<br>
+ <div class="copyright">
+	<hr>
+	2010 - 2011 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> - last update 24. Feb 2011
+   </div>
+  </body></html>

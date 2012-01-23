@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+       "http://www.w3.org/TR/html4/loose.dtd">
+<!-- Version ohne Java-Script .. Hinweis Nachricht auf Ineffektivitaet-->
+<html>
+<head>
+<title>RNA - Plex sRNA Target Prediction Webserver</title>
+<link rel="stylesheet" type="text/css" href="css/RNA.css">
+</head>
+<body>
+	<h1>RNA - Plex Target Prediction Webserver</h1>
+	<hr>
+	<div align ="center">
+	<table border="0">
+		<tr>
+		    	<th align ="left"><h2>Follow the steps below:</h2></th>
+			<th></th>
+		</tr>			
+  		<tr>
+    			<td>	<form action="/cgi-bin/auswertung.pl" method="post" accept-charset="ISO-8859-1">
+					<h4><u>1. Target Genome:</u></h4>
+					<select name="Genomeselection" size="5">
+      						<option>S. aureus</option>
+      						<option>E. gge</option>
+					        <option>C. difficile</option>
+						<option selected>E. coli</option>
+						<option>P. aeroginosa</option>
+					</select>
+				</form>
+			</td>
+			<td>
+			</td>
+		</tr>
+		<tr>
+                        <td>
+					<form action="/cgi-bin/auswertung.pl" method="post" accept-charset="ISO-8859-1">
+                                        <h4><u>2. Select annotated sRNA/ provide own sRNA</u></h4>
+                                        <select name="sRNA_mode" size="2">
+                                                <option>provide own sRNA</option>
+                                                <option selected>available sRNA</option>
+                                        </select>
+                                </form>
+                        </td>
+		<tr>
+			<td>
+				<form action="/cgi-bin/auswertung.pl" method="post" accept-charset="ISO-8859-1">
+                               		<h4><u>3a. Select annotated sRNA</u></h4>
+		                       	<select name="available_sRNA" size="4">
+	        	                        <option>eColi_K12_dsrA</option>
+						<option>eColi_K12_micC</option>
+						<option>eColi_K12_OxyS</option>
+	                                        <option selected>eColi_K12_dsrA</option>
+	                                </select>
+                	       </form>	
+			</td>	
+		</tr>
+		<tr>
+			<td>               
+				<form action="/cgi-bin/auswertung.pl" method="post" accept-charset="ISO-8859-1">
+                                        <h4><u>3b. Provide own sRNA</u></h4>
+					<p>sRNA: <input name="own_sRNA" type="text" size="30" maxlength="30"> </p>
+                               </form>
+                         </td>
+		</tr>  
+		<tr>
+                        <td colspan ="2">
+                                <form action="/cgi-bin/auswertung.pl" method="post" accept-charset="ISO-8859-1">
+                                       <div align ="center"> <input type="submit" value="Predict!"> </div>
+                               </form>
+                         </td>
+                </tr>  
+	</table>
+	<hr>
+	<a href="http://output..blablub">Output-Draft</a> <a href="help">Help</a>
+	</div>
+</body>
+</html>
+

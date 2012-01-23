@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title> RNApredator bacterial sRNA target prediction Webserver - Introduction </title>
+  </head>
+  <body>
+	<div align ="center">
+	<img src="./pictures/banner_final.png">
+	<hr>
+	<table width="100%">
+
+		<tr>
+         		<td><a href="introduction.html"><img src="./pictures/introduction.png" alt="Introduction" border="0"></a></td>
+			<td><a href="available_genomes.cgi"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
+         		<td><a href="target_search.cgi"><img src="./pictures/target_search.png" alt="Target Search" border="0"></a></td>
+			<td><a href="help.html"><img src="./pictures/help.png" alt="Help" border="0"></a></td>
+		</tr>
+	</table>
+	<hr>
+	</div>
+
+<div align ="left">
+	<script src="./javascript/input.js"></script>
+	<script src="./javascript/sorttable.js"></script>
+	<noscript>This page does not decay graceful :-) - Please enable your java-script </noscript>
+	<style type="text/css">
+			
+			table {black solid; }
+			table thead {background:#ccc; }
+			table td.last { padding-right:15px; }
+			.scroll {height:20ex; overflow-y:scroll; overflow-x:hidden; }
+			table td {text-align:center; border:0px black solid; }
+	</style>
+</div>
+<div align="center">
+<h3 id="stepx_title">= Introduction =</h3>
+</div>
+<div align="left">
+<P STYLE="margin-top: 0.17in; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Introduction</FONT></FONT></P>
+<P>sRNAs are non-coding RNAs found in bacteria. sRNAs are very
+heterogeneous both in sizes, structures and functions Most
+of them act as post-transcriptional regulators by interacting
+ with the 5' untranslated region of mRNA transcripts, modifying
+ their stability and/or their ability to be translated. 
+</P>
+<P>The RNApredator software facilitates the prediction of sRNA-mRNA
+interactions in bacteria. Currently targets can be searched in more
+than 1300 bacterial species. RNApredator uses a dynamic programming
+approach to compute putative targets. The main machinery used by
+RNApredator to find targets is the program called  <A HREF="http://www.bioinf.uni-leipzig.de/Software/RNAplex/">RNAplex</A>.
+RNAplex is a new approach for RNA-RNA interaction search, which has
+a prediction accuracy  similar to that of algorithms that explicitly consider intramolecular
+ structures, but running at least three orders of magnitude faster than RNAup and IntaRNA. This is achieved
+by using a combination of pre-computed accessibility profiles, with an approximate energy-
+model, allowing to mimic the effects of the competition between intra- and intermolecular interactions.
+The addition of the accessibility information into the computation of the sRNA-mRNA interactions allows to improve the specificity as very
+structured targets are discarded.</P>
+
+<P STYLE="margin-top: 0.08in; margin-bottom: 0.08in">
+<IMG SRC="pictures/RNAplex.png" NAME="graphics1" ALIGN=LEFT WIDTH=30% BORDER=0>
+<BR CLEAR=LEFT><FONT SIZE=3><I>
+<div align="left">	
+	Illustration1:<br>
+	Top: In algorithm like TargetRNA or RNAhybrid, the energy gained<br>
+	by adding a base-pair (i,j) to an existing duplex (S(i,j;i-1,j+)<br>
+	does not take the energy necessary to free base-pairs i and j <br
+	from all the intramolecular interactions they are involved in. <br>
+	Bottom:
+	For each nucleotide added to the duplex, the energy necessary<br>
+	to remove the nucleotide from all its intramolecular interactions (d<SUB>1</SUB><SUP>x</SUP>,
+	d<SUB>1</SUB><SUP>y</SUP>)<br> is taken into account. This allows to
+	reach a greater specificity in the target predictions.</I></FONT>
+	</div>
+</P>
+<P>Besides the raw prediction of binding partners, RNApredator allows
+the analysis of the results in different post-processing steps. It is
+possible to look at enriched GO terms/pathways in a set of
+user-selected targets. Furthermore RNApredator offers the user the
+possibility to look at the difference of accessibility around the
+ribosome binding site before and after binding of the sRNA to its
+target, which is useful when the user wants to know the sRNA will up
+or downregulate its target.</P>
+
+</div>
+	
+</div>
+
+ <div class="copyright">
+	<hr>
+	2010 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> 
+    </div>
+  </body>
+
+</html>
+
+

@@ -1,0 +1,108 @@
+[% INCLUDE resultheader %]
+ <style type="text/css">
+                        .tooltip2 {
+                                position: absolute;
+                                display: none;
+                                background-color: #FFFFFF;
+                                border-width: 1px;
+                                border-style: solid;
+                                border-color: #000000;
+                                padding: 2px;
+                        }
+                        .tooltip2 .head{
+                        background-color: #006666;
+                        color: white;
+                        font-weight: stronf;
+                        padding: 2px;
+                        }
+                        .tooltip2 .content{
+                        color: 000066;
+                        font-size: 12px;
+                        border-size: 4px;
+                        }
+                        .tooltip2 .content td{
+                        width: 50%;
+                        font-size: 10px;
+                        text-align: center;
+                        }
+        </style>
+
+<div id="1" class="tooltip2" style="width: 500px;">
+<div class="content">
+<div class="head">Post-processing:</div>
+<p>Provides additional resources for selected interactions from the list:<br>
+- Calculation of a plot visualizing the accessibility change around<br>
+  the RBS after sRNA binding<br>
+- Download of mRNA and sRNA sequences as .fasta files<br>
+- Enrichment analysis of Gene-Ontology terms in the set of selected targets<br>
+</p>
+</div>
+</div>
+<div align ="center">
+	<h3 id="stepx_title">= Target prediction =</h3>
+</div>
+<hr>
+<div align ="left">
+<h2>Predicted Top Interactions of [% interactionnumber %] Total:</h2>
+</div>
+<div align = "left">
+<!--<table class="tablesorter" border="1" cellspacing="1">
+	<tr>
+	<td> -</td><td>Interaction</td><td>Target</td>
+	<tr>
+</table>-->
+<form name="filter1" action="#" method="get">
+<table class="filtertable"  cellspacing="3">
+	<tr>
+		<td>Resources:</td>
+		<td>- all predictions as <a href="[% all_predictions %]">.csv-file</a> or as RNAplex <a href="[% plex_output_file %]">.res-file</a> </td>
+		<td></td>
+		<td>   - provided sRNA sequence as <a href="[% sRNA_fasta %]">.fasta-file</a> </td>     
+	<tr>
+           	<td>Filtering:</td>
+		<td>- Show top	
+			<form name="filter1">
+                        <select name="topselector" id="selectorid"  size="1" onchange="select(this)" >
+				[% INSERT $drop_options %]
+                        </select>
+			interactions by energy
+                </td>
+		<td></td>
+		<td> [% filter %]  
+		</td>
+        </tr>
+</table>
+</form>
+<form action="target_search.cgi" id="postprocess-submit"  method="get">
+<input type="button" value="Post-Process" onClick="check_postprocess()"> Select interactions below for postprocessing <a href="#" onmouseover="XBT(this, {id:'1'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
+<div id='submission-error' style="color:#FF0000"> </div>
+<table class="tablesorter" id="myTable" border="1"  cellspacing="1">             
+    <thead>
+        <tr>
+	    <th style="width: 1%">Select</th> 
+	    <th style="width: 3%">Rank</th>
+            <th style="width: 6%">Energy<br> [kJ/mol]</th> 
+            <th style="width: 4%">z-Score</th> 
+            <th style="width: 15%">Interaction<br> [dot-bracket]</th> 
+	    <th style="width: 3%">mRNA<br> [Start]</th>
+	    <th style="width: 3%">mRNA<br> [End]</th>
+            <th style="width: 3%">sRNA</th>
+	    <th style="width: 12%">Gene<br> Annotation</th>
+            <th style="width: 5%">Locus<br>Tag</th>
+	    <th style="width: 3%">Strand</th> 
+            <th style="width: 7%">Genomic<br> Coordinates</th> 
+            <th style="width: 5%">Accession</th>
+	    <th style="width: 5%">Replicon</th>	 
+        </tr> 
+    </thead>
+<tbody>
+[% INSERT $resulttable %]
+<input type="hidden" name="page" id="page"  value="3">
+<input type="hidden" name="sRNA" id="sRNA" value="[% sRNA %]">
+<input type="hidden" name="tempdir" id="tempdir"  value="[% tempdir %]">
+<input type="hidden" name="begincheck" value="1">
+<input type="button" value="Post-Process" onClick="check_postprocess()">
+</form>
+</div>
+<br>
+[% INCLUDE footer %]

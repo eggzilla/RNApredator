@@ -1,0 +1,44 @@
+.boxes{
+	padding: 10px;
+	width: 47%;
+}
+h3{
+	text-decoration: underline;
+}
+h4{
+	cursor: pointer;
+}
+.expArrow{
+	padding-left: 20px;
+	background: url(images/arrow-down.png) no-repeat 0px 4px;
+}
+.collArrow{
+	padding-left: 20px;
+	background: url(images/arrow-up.png) no-repeat 0px 4px;
+}
+.expIco{
+	padding-left: 26px;
+	background: url(../pictures/eggarrowdown.png) no-repeat 0px 4px;
+}
+.collIco{
+	padding-left: 26px;
+	background: url(../pictures/eggarrowup.png) no-repeat 0px 4px;
+}
+.demo6{
+	border: 1px solid #B9E3FF;
+	background: #0099FF;
+	padding-left: 5px;
+	color: #FFFFFF;
+}
+.panel{
+	border: 1px solid #B9E3FF;
+	padding: 10px;
+}
+pre
+{
+font-family:courier, "courier new", monospace;
+font-size:1.5em;
+color:#000;
+background-color:#fff;
+}
+
