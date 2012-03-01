@@ -210,10 +210,10 @@ if(defined($top_input)){
         $top = 100;
 }
 
-#tempdir taint check ... needs to be a foldername from /u/html/RNApredator
+#tempdir taint check ... needs to be a foldername from $base_dir
 my $tempdir;
 if(defined($tempdir_input)){
-        if(-e "/u/html/RNApredator/$tempdir_input"){
+        if(-e "$base_dir/$tempdir_input"){
             $tempdir = $tempdir_input;    
         }
 }else{
@@ -341,12 +341,12 @@ if($page==1){
 	    my $name = Digest::MD5::md5_base64(rand);
 	    $name =~ s/\+/_/g;
 	    $name =~ s/\//_/g;
-	    my $uploaddir="/u/html/RNApredator/test/";
-	    unless(-e "/u/html/RNApredator/test/"){
+	    my $uploaddir="$base_dir/test/";
+	    unless(-e "$base_dir/test/"){
             mkdir("$uploaddir");
 	    }
 	    #my $io_handle = $sRNA_input_filehandle->handle;
-	    #open (OUTFILE,'>',"/u/html/RNApredator/test/$name");
+	    #open (OUTFILE,'>',"$base_dir/test/$name");
 	    #my $buffer;
 	    #my $bytesread;
 	    #while ($bytesread = $io_handle->read($buffer,1024)) {
@@ -473,7 +473,6 @@ if($page==4){
                 java_script_location  => "./javascript/calculate.js"
         };
         $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
-        my $base_dir = "/u/html/$webserver_name";
 	#process parsed array here we need to loop once for each sRNA and then redirect to page=5
 	my $number_of_sRNAs=$parsed_array[2];
 	#print STDERR "######################################PREDATOR-DEBUG:"; 
@@ -666,7 +665,6 @@ if($page==1){
 	#case tax_id push accession numbers on accession array
 	## create temp folder /in /u/html/www
 	#File::Temp code by agruber
-	my $base_dir = "/u/html/$webserver_name";
 	$tempdir = tempdir ( DIR => $base_dir );
 	$tempdir =~ s/$base_dir\///;
 	chmod 0755, "$base_dir/$tempdir";
@@ -890,7 +888,7 @@ if($page == 5){
 #followed by result table with buttons for further requests
 #RESULTPAGE
 if($page == 2){
-	if(-e "/u/html/RNApredator/$tempdir/done"){
+	if(-e "$base_dir/$tempdir/done"){
 	        print $query->header();
 	        my $template = Template->new({
 	                # where to find template files
@@ -903,7 +901,7 @@ if($page == 2){
 	        my $file = './template/results.html';
 		#calculate appropriate dropmenu
 		#get number of interactions and selected number of top interaction	
-		open(IANUMBER, "</u/html/RNApredator/$tempdir/interactionnumber");
+		open(IANUMBER, "<$base_dir/$tempdir/interactionnumber");
 		my $interactionnumber;
 		my $drop_menu_number;
 		while(<IANUMBER>){
@@ -962,7 +960,7 @@ if($page == 2){
 	                java_script_location  => "./javascript/result.js",
 			interactionnumber => "$interactionnumber",
 			top => "$top",
-			resulttable => "../../../../u/html/RNApredator/$tempdir/$resulthtmlfile",
+			resulttable => "../../../..$base_dir/$tempdir/$resulthtmlfile",
 			all_predictions => "./html/$tempdir/all_predictions.csv",
                		sRNA_fasta => "./html/$tempdir/sRNA.fasta",
 			plex_output_file => "./html/$tempdir/prediction.res",
@@ -1063,17 +1061,17 @@ if($page == 3){
 
 	if(defined($begin_check)){
 			if($begin_check == 1){
-				if(-e "/u/html/RNApredator/$tempdir/begin2"){
-	                	        `rm /u/html/RNApredator/$tempdir/begin2`;
+				if(-e "$base_dir/$tempdir/begin2"){
+	                	        `rm $base_dir/$tempdir/begin2`;
         		        }
-   			        if(-e "/u/html/RNApredator/$tempdir/done2"){
-                        		`rm /u/html/RNApredator/$tempdir/done2`;
+   			        if(-e "$base_dir/$tempdir/done2"){
+                        		`rm $base_dir/$tempdir/done2`;
                 		}
 			}
 	}
 	
-	unless(-e "/u/html/RNApredator/$tempdir/begin2"){
-			`touch /u/html/RNApredator/$tempdir/begin2`;
+	unless(-e "$base_dir/$tempdir/begin2"){
+			`touch $base_dir/$tempdir/begin2`;
 		print $query->header();
                  my $template = Template->new({
                         # where to find template files
@@ -1097,7 +1095,7 @@ if($page == 3){
                         help => "help.html",
                         accession_default => "$accession_default",
                         tax_id_default => "$tax_id_default",
-                        postprocess => "../../../../u/html/RNApredator/$tempdir/postprocess",
+                        postprocess => "../../../..$base_dir/$tempdir/postprocess",
                         java_script_location  => "./javascript/postprocessing.js"
 
                 };
@@ -1110,8 +1108,8 @@ if($page == 3){
                        			</script>";
                	}elsif (defined $pid){
 			# close STDOUT;
-			open (RESULTTABLE, "</u/html/RNApredator/$tempdir/all_predictions.csv") or die "No Result Table Found $! - $tempdir";	
-			open (POSTPROCESSING, ">/u/html/RNApredator/$tempdir/postprocess") or die "Could Not Write POSTPROCESSING $! - $tempdir";
+			open (RESULTTABLE, "<$base_dir/$tempdir/all_predictions.csv") or die "No Result Table Found $! - $tempdir";	
+			open (POSTPROCESSING, ">$base_dir/$tempdir/postprocess") or die "Could Not Write POSTPROCESSING $! - $tempdir";
 			my @result_table_array;
 	       		while(<RESULTTABLE>){
 				 push(@result_table_array,$_);
@@ -1225,9 +1223,9 @@ if($page == 3){
 								}	
 							}
 						}
-						open (SEQUENCEPRINT, ">/u/html/RNApredator/$tempdir/$split_result_line[0].fasta") or die "Could NOT write Sequence >/u/html/RNApredator/$tempdir/$split_result_line[0].fasta $! - $tempdir";
+						open (SEQUENCEPRINT, ">$base_dir/$tempdir/$split_result_line[0].fasta") or die "Could NOT write Sequence >$base_dir/$tempdir/$split_result_line[0].fasta $! - $tempdir";
 						print SEQUENCEPRINT "$sequence_header\n$sequence\n";
-						open (sRNA, "</u/html/RNApredator/$tempdir/sRNA.fasta")	or die "could not open sRNA.fasta";
+						open (sRNA, "<$base_dir/$tempdir/sRNA.fasta")	or die "could not open sRNA.fasta";
 						my $sRNA_seq;
 						while(<sRNA>){
                                                         $sRNA_seq=$_;
@@ -1277,7 +1275,7 @@ if($page == 3){
 						my $accessiblity_plot ="Accessiblity Plot: <a href=\"$server/accessiblity_plot.cgi?s=$split_result_line[0]&b=$absolute_mRNA_interaction_start&e=$absolute_mRNA_interaction_stop&tempdir=$tempdir&page=0\" target=\"_blank\"><br>Calculate (new window)</a><br>";
 						my $rna_up_submit ="RNAup Webserver: <a href=\"$server/cgi-bin/RNAup.cgi?PAGE=2&SCREEN=$sequence\n&SCREEN2=$sRNA_seq\n&tempdir=$tempdir&page=0\" target=\"_blank\"><br>Submit (new window)</a><br>";
 						#my $go_calculation="Gene Ontology:  <a href=\"http://insulin.tbi.univie.ac.at/accessiblity_plot.cgi?s=$split_result_line[0]&b=$absolute_mRNA_interaction_start&e=$absolute_mRNA_interaction_stop&sRNA=$sRNA&tempdir=$tempdir\"\ target=\"_blank\">Calculate (new window)</a><br>";
-						open(ASCII, "</u/html/RNApredator/$tempdir/$split_result_line[0].ascii") or die "could not open /u/html/RNApredator/$tempdir/$split_result_line[0].asccii ,$! ";
+						open(ASCII, "<$base_dir/$tempdir/$split_result_line[0].ascii") or die "could not open $base_dir/$tempdir/$split_result_line[0].asccii ,$! ";
                                                 my $ascii_string="";
                                                 while(<ASCII>){
                                                         $ascii_string="$ascii_string"."$_";
@@ -1296,7 +1294,7 @@ if($page == 3){
 						push(@entries_print_array,$entry_print);
 						$entry_counter++;
 						
-						#exec "/scratch2/egg/webserv/executables/accessibility_analysis_batch.pl -s /u/html/RNApredator/$tempdir/$split_result_line[0].fasta -b $absolute_mRNA_interaction_start -e $absolute_mRNA_interaction_stop -d $calculate_accessiblity_begin -f $calculate_accessiblity_end";
+						#exec "/scratch2/egg/webserv/executables/accessibility_analysis_batch.pl -s $base_dir/$tempdir/$split_result_line[0].fasta -b $absolute_mRNA_interaction_start -e $absolute_mRNA_interaction_stop -d $calculate_accessiblity_begin -f $calculate_accessiblity_end";
 						#system(@arguments_array) == 0 or die "$! - $?"; #creates interactionplot
 					}
 				}
@@ -1306,7 +1304,7 @@ if($page == 3){
 			exec "export SGE_ROOT=/usr/share/gridengine\n";
 			@genomes_without_goa_array=keys(%genomes_without_goa);
 			unless(@tag_array==0){	
-				open (MERGEDGOA, ">/u/html/RNApredator/$tempdir/$tempdir.ftn.goa") or die "Could Not Write Merged .goa file $! - $tempdir";
+				open (MERGEDGOA, ">$base_dir/$tempdir/$tempdir.ftn.goa") or die "Could Not Write Merged .goa file $! - $tempdir";
 				foreach my $nc_id (@accession_number_array){
 					open (GOA, "<$source_dir/data/ebi_hakim/$nc_id.ftn.goa") or print STDERR "Could Not Read $nc_id.goa file $! - $tempdir";
 					while(<GOA>){
@@ -1316,26 +1314,26 @@ if($page == 3){
 					close GOA;	
 				}
 				close MERGEDGOA;
-                        	my $GO_path = "/u/html/RNApredator/$tempdir/";
+                        	my $GO_path = "$base_dir/$tempdir/";
     		                my $accession_number = $tempdir; #$tempdir.goa
-        	                my $csv_path="/u/html/RNApredator/$tempdir/all_predictions.csv";
-				my $GO_Kegg_path = "/u/html/RNApredator/$tempdir/";
-                	        open (SELECTEDLIST, ">/u/html/RNApredator/$tempdir/selected_list") or die "Could Not Write Selected List $! - $tempdir";
+        	                my $csv_path="$base_dir/$tempdir/all_predictions.csv";
+				my $GO_Kegg_path = "$base_dir/$tempdir/";
+                	        open (SELECTEDLIST, ">$base_dir/$tempdir/selected_list") or die "Could Not Write Selected List $! - $tempdir";
 				foreach my $tag(@tag_array){
 					print SELECTEDLIST "$tag\n";
 				}
 				close SELECTEDLIST;
-				copy("$source_dir/executables/launch_go_kegg.sh","/u/html/RNApredator/$tempdir/launch_go_kegg.sh") or die "Copy failed launch_go_kegg.sh : $!";
-				copy("$source_dir/executables/GO_Kegg.R","/u/html/RNApredator/$tempdir/GO_Kegg.R") or die "Copy failed- GO_Kegg.R: $!";
-				chmod 0755, "/u/html/RNApredator/$tempdir/launch_go_kegg.sh", "/u/html/RNApredator/$tempdir/GO_Kegg.R";
-        	                my @GO_arguments_array = ("/u/html/RNApredator/$tempdir/launch_go_kegg.sh", "$GO_path","$accession_number","$csv_path","/u/html/RNApredator/$tempdir/selected_list","$GO_Kegg_path");
+				copy("$source_dir/executables/launch_go_kegg.sh","$base_dir/$tempdir/launch_go_kegg.sh") or die "Copy failed launch_go_kegg.sh : $!";
+				copy("$source_dir/executables/GO_Kegg.R","$base_dir/$tempdir/GO_Kegg.R") or die "Copy failed- GO_Kegg.R: $!";
+				chmod 0755, "$base_dir/$tempdir/launch_go_kegg.sh", "$base_dir/$tempdir/GO_Kegg.R";
+        	                my @GO_arguments_array = ("$base_dir/$tempdir/launch_go_kegg.sh", "$GO_path","$accession_number","$csv_path","$base_dir/$tempdir/selected_list","$GO_Kegg_path");
                 	        system(@GO_arguments_array) == 0 or die "GO-calculation error:$! - $?"; #creates GO.csvs
 				print POSTPROCESSING "<h3>Gene Ontologie Terms for selected Interactions: </h3>\n";
 				unless(@genomes_without_goa_array==0){
                                		print POSTPROCESSING "No GO-terms available for: @genomes_without_goa_array, no GO analysis possible.";
 				}
 				#MF - Molecular Function
-					open (MF, "</u/html/RNApredator/$tempdir/MF.csv") or die "Could Not Read MF.csv file $! - $tempdir";
+					open (MF, "<$base_dir/$tempdir/MF.csv") or die "Could Not Read MF.csv file $! - $tempdir";
 					my @mf_lines;
 					while(<MF>){
                                 	       	push(@mf_lines,$_);
@@ -1376,7 +1374,7 @@ if($page == 3){
 					print POSTPROCESSING "</table>\n";
 					print POSTPROCESSING "<p class=\"demo5\"></p>\n";
 				#BP - Biological Process
-        	                        open (BP, "</u/html/RNApredator/$tempdir/BP.csv") or die "Could Not Read BP.csv file $! - $tempdir";
+        	                        open (BP, "<$base_dir/$tempdir/BP.csv") or die "Could Not Read BP.csv file $! - $tempdir";
                 	                my @bp_lines;
                         	        while(<BP>){
                                 	       push(@bp_lines,$_);
@@ -1417,7 +1415,7 @@ if($page == 3){
                 	                print POSTPROCESSING "</table>\n";
 					print POSTPROCESSING "<p class=\"demo5\"></p>\n";
 				#CC - Cell Compartment
-        	                        open (CC, "</u/html/RNApredator/$tempdir/CC.csv") or die "Could Not Read CC.csv file $! - $tempdir";
+        	                        open (CC, "<$base_dir/$tempdir/CC.csv") or die "Could Not Read CC.csv file $! - $tempdir";
                 		                my @cc_lines;
                                 	while(<CC>){
 	                                       push(@cc_lines,$_);
@@ -1469,10 +1467,10 @@ if($page == 3){
 			foreach my $print_entry (@entries_print_array){
 				print POSTPROCESSING "$print_entry";
 			}
-			 `touch /u/html/RNApredator/$tempdir/done2`;			
+			 `touch $base_dir/$tempdir/done2`;			
         	}
 	}
-	unless(-e "/u/html/RNApredator/$tempdir/done2"){
+	unless(-e "$base_dir/$tempdir/done2"){
 		print $query->header();
                  my $template = Template->new({
                         # where to find template files
@@ -1495,7 +1493,7 @@ if($page == 3){
                         help => "help.html",
                         accession_default => "$accession_default",
                         tax_id_default => "$tax_id_default",
-                        postprocess => "../../../../u/html/RNApredator/$tempdir/postprocess",
+                        postprocess => "../../../..$base_dir/$tempdir/postprocess",
                         java_script_location  => "./javascript/postprocessing.js"
 
                 };
@@ -1511,7 +1509,7 @@ if($page == 3){
                     	</script>";
 	}
 # window.location = \"http://insulin.tbi.univie.ac.at/target_search.cgi?page=3&tempdir=$tempdir\";	
-	if(-e "/u/html/RNApredator/$tempdir/done2"){
+	if(-e "$base_dir/$tempdir/done2"){
 		print $query->header();
                  my $template = Template->new({
                         # where to find template files
@@ -1534,7 +1532,7 @@ if($page == 3){
                         help => "help.html",
                         accession_default => "$accession_default",
                         tax_id_default => "$tax_id_default",
-                        postprocess => "../../../../u/html/RNApredator/$tempdir/postprocess",
+                        postprocess => "../../../..$base_dir/$tempdir/postprocess",
                         java_script_location  => "./javascript/postprocessing.js"
 
                 };
