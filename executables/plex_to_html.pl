@@ -18,6 +18,7 @@ my $tempdir = $ARGV[0];
 my $top= 10000;
 my $source_dir="/scratch2/RNApredator";
 open (PLEX, "</u/html/RNApredator/$tempdir/prediction.res"); #SHIT TO RECOVER
+open (BUG,   ">/u/html/RNApredator/$tempdir/bug");
 #open (PLEX, "<$tempdir/prediction.res"); #SHIT TO RECOVER
 #results related variables
 my @lines;
@@ -139,6 +140,7 @@ foreach my $genome (@genome_array){
   $command_line.="$source_dir/data/ftn_all_species_Final/$genome.ftn ";
 }
 $command_line.="| grep \">\" | tr -d \">\" | sed -r 's#\\[.+##g' ";
+print BUG "commandline:$command_line\n";
 my @mapping=`$command_line`;
 my $annotation_hash;
 foreach my $mapping_line(@mapping){
@@ -146,6 +148,13 @@ foreach my $mapping_line(@mapping){
   my $annotation_key="";
   my $annotation_value="";
   my $locus_tag="";
+  #getting locus tag
+  #some locus tags contain underscores which are also contained in the annotation key
+  #therefore we copy the mapping_line and split with whitespaces to isolate the locus tag
+  my $mapping_line_locus_tag = $mapping_line;
+  my @line_splitted_locus_tag=split(/[\s]+/,$mapping_line_locus_tag);
+  #the locus tag should be contained in the last element
+  my $locus_tag=pop(@line_splitted_locus_tag);
   #get key
   my @line_splitted=split(/[_\s]+/,$mapping_line);
   $annotation_key = $line_splitted[3];
@@ -153,20 +162,22 @@ foreach my $mapping_line(@mapping){
   #do we have annotation???
   if(scalar(@line_splitted) <= 5){
     $annotation_value="NA";
-    $locus_tag       ="NA";
+    #$locus_tag       ="NA"; changed
     push @{$annotation_hash->{$annotation_key}}, ($annotation_value, $locus_tag);
     next;
   }
   my @annotation_split=split(/[\s-]/,join(" ",@line_splitted[4..$#line_splitted]));
-  $locus_tag=$annotation_split[$#annotation_split];
+  #$locus_tag=$annotation_split[$#annotation_split]; changed
+  print BUG "locustag:$locus_tag\n";
   $annotation_value=join(" ",@annotation_split[0..$#annotation_split-1]);
   $annotation_value =~ s/,/;/g;
-  $locus_tag       =$annotation_split[$#annotation_split];
+  #$locus_tag       =$annotation_split[$#annotation_split]; changed
   if($locus_tag!~/\d/){
     $annotation_value.=" ".$locus_tag;
     $locus_tag="NA";
   }
   push @{$annotation_hash->{$annotation_key}}, ($annotation_value,$locus_tag);
+  print BUG "annotation_value:$annotation_value locus_tag:$locus_tag\n";
 }
 
 if($DEBUG){
@@ -251,6 +262,9 @@ foreach my $sort_key (sort {$parsed_results->{$a}->[7] <=> $parsed_results->{$b}
   $output_line =  "$counter.,$parsed_results->{$sort_key}->[1],$parsed_results->{$sort_key}->[2],$parsed_results->{$sort_key}->[3],$parsed_results->{$sort_key}->[4],$hypothetical_transcript_start,$hypothetical_transcript_end,$sRNA_start,$sRNA_end,$parsed_results->{$sort_key}->[7],$parsed_results->{$sort_key}->[8],$parsed_results->{$sort_key}->[9],$parsed_results->{$sort_key}->[10],$parsed_results->{$sort_key}->[11],\"$parsed_results->{$sort_key}->[12]\",$parsed_results->{$sort_key}->[13],$parsed_results->{$sort_key}->[14],$parsed_results->{$sort_key}->[0]";
   print CSV $output_line,"\n";
 }
+
+#open (BUG,   ">/u/html/RNApredator/$tempdir/bug");
+#print BUG Dumper($parsed_results);
 
 my $footer=	"</tbody>\n
 		</table>\n
