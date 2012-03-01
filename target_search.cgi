@@ -14,9 +14,13 @@ use Digest::MD5;
 use CGI::Carp qw(fatalsToBrowser);
 use File::Temp qw/tempdir tempfile/;
 my $webserver_name = "RNApredator";
+#defaults for server 
+#my $server="http://rna.tbi.univie.ac.at/RNApredator2";
+#my $source_dir=cwd();
 my $server="http://rna.tbi.univie.ac.at/RNApredator2";
 my $source_dir=cwd();
-my $baseDIR ="/u/html/RNApredator";
+#baseDIR points to the tempdir folder
+my $base_dir ="$source_dir/html";
 #Write all Output to file at once
 $|=1 ;
 
@@ -290,8 +294,8 @@ if(defined($tax_id_input)){
 #if there is a sRNAfile for this folder we read from there
 my $sRNA;
 my @sRNA_tempdir_file_array;
-if(-e "$baseDIR/$tempdir/sRNA.fasta"){
-	open(SRNA, "<$baseDIR/$tempdir/sRNA.fasta") or die("Could not open");
+if(-e "$base_dir/$tempdir/sRNA.fasta"){
+	open(SRNA, "<$base_dir/$tempdir/sRNA.fasta") or die("Could not open");
 	while(<SRNA>) {
 		chomp;
 		push(@sRNA_tempdir_file_array, $_);
@@ -469,7 +473,7 @@ if($page==4){
                 java_script_location  => "./javascript/calculate.js"
         };
         $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
-        my $baseDIR = "/u/html/$webserver_name";
+        my $base_dir = "/u/html/$webserver_name";
 	#process parsed array here we need to loop once for each sRNA and then redirect to page=5
 	my $number_of_sRNAs=$parsed_array[2];
 	#print STDERR "######################################PREDATOR-DEBUG:"; 
@@ -478,13 +482,13 @@ if($page==4){
 	for($sRNA_count;$sRNA_count<$number_of_sRNAs; $sRNA_count++){
 		#retrieve sRNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		$sRNA=$parsed_array[2*($sRNA_count+1)+2];
-	        $tempdir = tempdir ( DIR => $baseDIR );
+	        $tempdir = tempdir ( DIR => $base_dir );
 		print STDERR "Tempdir:$tempdir, sRNA-seq:$sRNA\n";
-      		$tempdir =~ s/$baseDIR\///;
-        	chmod 0755, "$baseDIR/$tempdir";
+      		$tempdir =~ s/$base_dir\///;
+        	chmod 0755, "$base_dir/$tempdir";
 		push(@tempdir_array,$tempdir);
         	#print"- folder created<br>";
-	        open(SRNA, ">$baseDIR/$tempdir/sRNA.fasta") or die("Could not open");
+	        open(SRNA, ">$base_dir/$tempdir/sRNA.fasta") or die("Could not open");
 	        #upper bound for -u argument of RNAup must not exceed string length
 	        my $sRNA_length = length($sRNA);
 	        my $u_argument_upperbound = "40";
@@ -495,16 +499,16 @@ if($page==4){
 	        }
 	        print SRNA ">sRNA\n"."$sRNA";
 	        #add to path or taintcheck will complain
-	        $ENV{PATH} = "$baseDIR/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
+	        $ENV{PATH} = "$base_dir/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
 	        #print commands.sh which contains the next orders
-	        open (COMMANDS, ">$baseDIR/$tempdir/commands.sh") or die "Could not create comments.sh";
+	        open (COMMANDS, ">$base_dir/$tempdir/commands.sh") or die "Could not create comments.sh";
 	        #TODO send to sge
 	        #calculate sRNA accessiblity
 	        print COMMANDS "#!/bin/bash\n";
-	        #print COMMANDS "cd $baseDIR/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta;\n";
-	        print COMMANDS "cd $baseDIR/$tempdir/; $source_dir/executables/RNAup -u 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta;\n";
+	        #print COMMANDS "cd $base_dir/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
+	        print COMMANDS "cd $base_dir/$tempdir/; $source_dir/executables/RNAup -u 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
 	        print COMMANDS "mv sRNA_u1*.out sRNA_u1_to_$u_argument_upperbound.out;\n";
-	        print COMMANDS "$source_dir/executables/hakim_convert_up_to_plfold.sh $baseDIR/$tempdir/sRNA_u1_to_$u_argument_upperbound.out;\n";
+	        print COMMANDS "$source_dir/executables/hakim_convert_up_to_plfold.sh $base_dir/$tempdir/sRNA_u1_to_$u_argument_upperbound.out;\n";
 	        #PREDICTION
 	        #this part is run once in case of submitted accession number or for submitted tax_id for every child accession number
 	        #FORK here and hand over tempdir names for page 5
@@ -537,12 +541,12 @@ if($page==4){
 				#retrieve sRNA
 				my $sRNA_index_number=(2*($sRNA_count2+1))+2;
 				$sRNA=$parsed_array[$sRNA_index_number];
-	                	open (COMMANDS, ">>$baseDIR/$tempdir/commands.sh") or die "Could not create comments.sh";
+	                	open (COMMANDS, ">>$base_dir/$tempdir/commands.sh") or die "Could not create comments.sh";
 	                	#prepare mRNAaccessiblitites
-	                	mkdir("$baseDIR/$tempdir/accessibilites/",0744);
+	                	mkdir("$base_dir/$tempdir/accessibilites/",0744);
 	                	my $mRNA_accessibility_root_path ="$source_dir/data/mRNA_accessiblities/all/";
 	                	#create link to sRNA accessiblity in mRNAaccessiblity folder
-	                	my $query = "$baseDIR/$tempdir/sRNA.fasta";
+	                	my $query = "$base_dir/$tempdir/sRNA.fasta";
         	        	## run plex prediction
 	                	my $run=1;
 	                	my $interaction_length;
@@ -557,33 +561,33 @@ if($page==4){
 	                        	#RNAplex accepts only one folder for all accessibilites (sRNA/mRNA) 
 	                        	#create a temporary accessiblity folder containing symlinks to sRNA and mRNA needed
 	                        	my $mRNA_accessiblity_path = $mRNA_accessibility_root_path . "$accession_number_entry/accessiblity/";
-	                        	mkdir("$baseDIR/$tempdir/accessibilites/$accession_number_entry",0744);
+	                        	mkdir("$base_dir/$tempdir/accessibilites/$accession_number_entry",0744);
 					my @count_files=<$mRNA_accessiblity_path/*>;
 		                        my $file_count =@count_files;
 					$total_mRNA_counter+=$file_count;
 	                        	my $target = "$source_dir/data/ftn_all_species_Final/"."$accession_number_entry.ftn";
-	                        	print COMMANDS "cd $mRNA_accessiblity_path; for file in *; do cp -s $mRNA_accessiblity_path\$file $baseDIR/$tempdir/accessibilites/$accession_number_entry/\$file; done\n";
-	                        	print COMMANDS "cd $baseDIR/$tempdir/;\n";
-	                        	print COMMANDS "cp -s $baseDIR/$tempdir/sRNA_openen $baseDIR/$tempdir/accessibilites/$accession_number_entry/sRNA_openen;\n";
+	                        	print COMMANDS "cd $mRNA_accessiblity_path; for file in *; do cp -s $mRNA_accessiblity_path\$file $base_dir/$tempdir/accessibilites/$accession_number_entry/\$file; done\n";
+	                        	print COMMANDS "cd $base_dir/$tempdir/;\n";
+	                        	print COMMANDS "cp -s $base_dir/$tempdir/sRNA_openen $base_dir/$tempdir/accessibilites/$accession_number_entry/sRNA_openen;\n";
 	                        	if($run==1){
-	                                	print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $baseDIR/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
+	                                	print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
 						$run ++;
 	                       		}else{
-	                                	print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $baseDIR/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
+	                                	print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
 	                        	}
                		 	}
 				 #write total_mRNA_counter to file
-		                open (TOTALMRNACOUNTER, ">$baseDIR/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
+		                open (TOTALMRNACOUNTER, ">$base_dir/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
                 		print TOTALMRNACOUNTER "$total_mRNA_counter";
                 		close TOTALMRNACOUNTER;
 	                	print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir;\n";
 	                	print COMMANDS "touch done;\n";
 	                	close COMMANDS;
-	                	chmod (0755,"$baseDIR/$tempdir/commands.sh");
+	                	chmod (0755,"$base_dir/$tempdir/commands.sh");
 				my $ip_adress=$ENV{'REMOTE_ADDR'};
 				$ip_adress=~s/\.//g;
-	                	#$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $baseDIR/$tempdir/commands.sh >$baseDIR/$tempdir/Jobid;";	
-	                	$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $baseDIR/$tempdir/commands.sh >$baseDIR/$tempdir/Jobid;";	
+	                	#$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+	                	$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 			}
 			#send all jobs to the queue 
 			exec "$exec_command" or die "$!";
@@ -662,12 +666,12 @@ if($page==1){
 	#case tax_id push accession numbers on accession array
 	## create temp folder /in /u/html/www
 	#File::Temp code by agruber
-	my $baseDIR = "/u/html/$webserver_name";
-	$tempdir = tempdir ( DIR => $baseDIR );
-	$tempdir =~ s/$baseDIR\///;
-	chmod 0755, "$baseDIR/$tempdir";
+	my $base_dir = "/u/html/$webserver_name";
+	$tempdir = tempdir ( DIR => $base_dir );
+	$tempdir =~ s/$base_dir\///;
+	chmod 0755, "$base_dir/$tempdir";
 	#print"- folder created<br>";
-	open(SRNA, ">$baseDIR/$tempdir/sRNA.fasta") or die("Could not open");
+	open(SRNA, ">$base_dir/$tempdir/sRNA.fasta") or die("Could not open");
 	#upper bound for -u argument of RNAup must not exceed string length
 	my $sRNA_length = length($sRNA);
 	my $u_argument_upperbound = "40";
@@ -678,19 +682,19 @@ if($page==1){
 	}
 	print SRNA ">sRNA\n"."$sRNA";
 	#add to path or taintcheck will complain
-	$ENV{PATH} = "$baseDIR/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
+	$ENV{PATH} = "$base_dir/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
 	#print commands.sh which contains the next orders
-	open (COMMANDS, ">$baseDIR/$tempdir/commands.sh") or die "Could not create comments.sh";	
+	open (COMMANDS, ">$base_dir/$tempdir/commands.sh") or die "Could not create comments.sh";	
 	#TODO send to sge
 	#calculate sRNA accessiblity
 	print COMMANDS "#!/bin/bash\n";
-	#print COMMANDS "cd $baseDIR/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta;\n";
-	print COMMANDS "cd $baseDIR/$tempdir/; $source_dir/executables/RNAup -u 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta;\n";
+	#print COMMANDS "cd $base_dir/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
+	print COMMANDS "cd $base_dir/$tempdir/; $source_dir/executables/RNAup -u 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
 	print COMMANDS "mv sRNA_u1*.out sRNA_u1_to_$u_argument_upperbound.out;\n";
 	
-	print COMMANDS "$source_dir/executables/hakim_convert_up_to_plfold.sh $baseDIR/$tempdir/sRNA_u1_to_$u_argument_upperbound.out;\n";
-	#`cd $baseDIR/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta`;
-	#`cd $baseDIR/$tempdir/; ~ronny/WORK/ViennaRNA/Progs/RNAup -u 1-$u_argument_upperbound <$baseDIR/$tempdir/sRNA.fasta >$baseDIR/$tempdir/sRNA.log;
+	print COMMANDS "$source_dir/executables/hakim_convert_up_to_plfold.sh $base_dir/$tempdir/sRNA_u1_to_$u_argument_upperbound.out;\n";
+	#`cd $base_dir/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta`;
+	#`cd $base_dir/$tempdir/; ~ronny/WORK/ViennaRNA/Progs/RNAup -u 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta >$base_dir/$tempdir/sRNA.log;
 	# /scratch2/egg/webserv/executables/hakim_convert_up_to_plfold.sh *.out`;
 	#print"outfile produced";
 	#PREDICTION
@@ -711,14 +715,14 @@ if($page==1){
 		close COMMANDS; #close COMMANDS so child can reopen filehandle
 	}elsif (defined $pid){		
 		close STDOUT;
-		open (COMMANDS, ">>$baseDIR/$tempdir/commands.sh") or die "Could not create comments.sh";
+		open (COMMANDS, ">>$base_dir/$tempdir/commands.sh") or die "Could not create comments.sh";
 		#prepare mRNAaccessiblitites
-		mkdir("$baseDIR/$tempdir/accessibilites/",0744);
+		mkdir("$base_dir/$tempdir/accessibilites/",0744);
 		my $mRNA_accessibility_root_path ="$source_dir/data/mRNA_accessiblities/all/";
 		#create link to sRNA accessiblity in mRNAaccessiblity folder
 		#print COMMANDS "Accession-Array:@accession_number_array\n";
 		#print COMMANDS "tax-id_input:$tax_id_input";
-		my $query = "$baseDIR/$tempdir/sRNA.fasta";
+		my $query = "$base_dir/$tempdir/sRNA.fasta";
 		## run plex prediction
 		#TODO for each accession number + send to sge
 		my $run=1;
@@ -737,33 +741,33 @@ if($page==1){
 			my @count_files=<$mRNA_accessiblity_path/*>;
 			my $file_count =@count_files;
 			$total_mRNA_counter+=$file_count;
-			mkdir("$baseDIR/$tempdir/accessibilites/$accession_number_entry",0744);
+			mkdir("$base_dir/$tempdir/accessibilites/$accession_number_entry",0744);
 			my $target = "$source_dir/data/ftn_all_species_Final/"."$accession_number_entry.ftn";	
-			#print COMMANDS "cp -sR $mRNA_accessiblity_path $baseDIR/$tempdir/accessibilites/$accession_number_entry/";
-			#print COMMANDS "for file in $mRNA_accessiblity_path/*;\n do cp -s $mRNA_accessiblity_path/$file $baseDIR/$tempdir/accessibilites/$accession_number_entry/$file done\n";
-			print COMMANDS "cd $mRNA_accessiblity_path; for file in *; do cp -s $mRNA_accessiblity_path\$file $baseDIR/$tempdir/accessibilites/$accession_number_entry/\$file; done\n";
-			print COMMANDS "cd $baseDIR/$tempdir/;\n";
-			print COMMANDS "cp -s $baseDIR/$tempdir/sRNA_openen $baseDIR/$tempdir/accessibilites/$accession_number_entry/sRNA_openen;\n";
+			#print COMMANDS "cp -sR $mRNA_accessiblity_path $base_dir/$tempdir/accessibilites/$accession_number_entry/";
+			#print COMMANDS "for file in $mRNA_accessiblity_path/*;\n do cp -s $mRNA_accessiblity_path/$file $base_dir/$tempdir/accessibilites/$accession_number_entry/$file done\n";
+			print COMMANDS "cd $mRNA_accessiblity_path; for file in *; do cp -s $mRNA_accessiblity_path\$file $base_dir/$tempdir/accessibilites/$accession_number_entry/\$file; done\n";
+			print COMMANDS "cd $base_dir/$tempdir/;\n";
+			print COMMANDS "cp -s $base_dir/$tempdir/sRNA_openen $base_dir/$tempdir/accessibilites/$accession_number_entry/sRNA_openen;\n";
 			if($run==1){
-				print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $baseDIR/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
+				print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
 $run ++;
 			}else{
-				print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $baseDIR/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
+				print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
 			}
 		}
 		#write total_mRNA_counter to file
-		open (TOTALMRNACOUNTER, ">$baseDIR/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
+		open (TOTALMRNACOUNTER, ">$base_dir/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
 		print TOTALMRNACOUNTER "$total_mRNA_counter";
 		close TOTALMRNACOUNTER;
 		print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir;\n";
 		print COMMANDS "touch done;\n";
 		close COMMANDS;
-		chmod (0755,"$baseDIR/$tempdir/commands.sh");
+		chmod (0755,"$base_dir/$tempdir/commands.sh");
 		my $ip_adress=$ENV{'REMOTE_ADDR'};
                 $ip_adress=~s/\.//g;
-		#exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $baseDIR/$tempdir/commands.sh >$baseDIR/$tempdir/Jobid" or die "$!";
-		exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error $baseDIR/$tempdir/commands.sh >$baseDIR/$tempdir/Jobid" or die "$!";
-		#exec "cd $baseDIR/$tempdir/; ./commands.sh" or die "$!";
+		#exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+		exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+		#exec "cd $base_dir/$tempdir/; ./commands.sh" or die "$!";
 		#analysing and displaying progress:	
 		#if(defined($tax_id)){
 		#print"<script type=\"text/javascript\">
@@ -774,7 +778,7 @@ $run ++;
 		#	 window.location = \"http://insulin.tbi.univie.ac.at/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\";
 		#	</script>";
 		#}
-		#print "Plex executed: cd $baseDIR/$tempdir/; RNAplex -l 30 -t $target -q $query  -a $mRNA_accessiblity_path/accessiblity >prediction.res<br>";	
+		#print "Plex executed: cd $base_dir/$tempdir/; RNAplex -l 30 -t $target -q $query  -a $mRNA_accessiblity_path/accessiblity >prediction.res<br>";	
 		# clean up -> in output
 		#remove sRNA accessiblity link
 		#`rm $mRNA_accessiblity_path/sRNA_openen`;
@@ -836,14 +840,14 @@ if($page == 5){
 	foreach my $tempdir_progress(@tempdir_array){
                 #Stuff for progress:    
                 #Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
-                open (TOTALMRNACOUNTER, "<$baseDIR/$tempdir_progress/total_mRNA_counter") or die "Could not open total_mRNA_counter";
+                open (TOTALMRNACOUNTER, "<$base_dir/$tempdir_progress/total_mRNA_counter") or die "Could not open total_mRNA_counter";
                 my @total_counter_array;
                 while(<TOTALMRNACOUNTER>){
                         push(@total_counter_array,$_);
                 }
                 my $total_mRNA_number=shift(@total_counter_array);
                 close TOTALMRNACOUNTER;
-                my $mRNAs_processed=`grep sRNA $baseDIR/$tempdir_progress/prediction.res | wc -l`;
+                my $mRNAs_processed=`grep sRNA $base_dir/$tempdir_progress/prediction.res | wc -l`;
                 my $progress_percentage=($mRNAs_processed/$total_mRNA_number)*100;
                 my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage);
 		my $queueing_status="";
@@ -851,22 +855,22 @@ if($page == 5){
 		my $RNAplex_interaction_prediction="";
 		my $parsing_results="";
 		my $result_page_link="";
-                if(-e "$baseDIR/$tempdir_progress/commands.sh"){$queueing_status="Processing..";} 
+                if(-e "$base_dir/$tempdir_progress/commands.sh"){$queueing_status="Processing..";} 
 		else {$queueing_status="<span style=\"color:#CCCCCC\">Queued</span>";}
-                if(-e "$baseDIR/$tempdir_progress/sRNA_openen"){$sRNA_status="Processing..";} 
+                if(-e "$base_dir/$tempdir_progress/sRNA_openen"){$sRNA_status="Processing..";} 
 		else {$sRNA_status="<span style=\"color:#CCCCCC\">-</span>";}
-                if(-e "$baseDIR/$tempdir_progress/prediction.res"){$sRNA_status="done"; $RNAplex_interaction_prediction="Progress: $rounded_progress_percentage%";} 
+                if(-e "$base_dir/$tempdir_progress/prediction.res"){$sRNA_status="done"; $RNAplex_interaction_prediction="Progress: $rounded_progress_percentage%";} 
 		else {$RNAplex_interaction_prediction="<span style=\"color:#CCCCCC\">-</span>";}
-                if(-e "$baseDIR/$tempdir_progress/top100.html"){$RNAplex_interaction_prediction="done"; $parsing_results="Processing.."; } 
+                if(-e "$base_dir/$tempdir_progress/top100.html"){$RNAplex_interaction_prediction="done"; $parsing_results="Processing.."; } 
 		else {$parsing_results= "<span style=\"color:#CCCCCC\">-</span>";}
                 if(defined($tax_id)){
-			if(-e "$baseDIR/$tempdir_progress/done"){$parsing_results="done"; $queueing_status="done"; $result_page_link="<a href=\"$server/target_search.cgi?page=2&tax-id=$tax_id&tempdir=$tempdir_progress\">Link</a>";}
+			if(-e "$base_dir/$tempdir_progress/done"){$parsing_results="done"; $queueing_status="done"; $result_page_link="<a href=\"$server/target_search.cgi?page=2&tax-id=$tax_id&tempdir=$tempdir_progress\">Link</a>";}
 			else {$parsing_results= "<span style=\"color:#CCCCCC\"><br>-</span>";}
                 print"<script type=\"text/javascript\">
                                  window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&tax-id=$tax_id&tempdir_array=$tempdir_array_input\"\', 5000);
                          </script>";
                 }else{
-			if(-e "$baseDIR/$tempdir_progress/done"){ $parsing_results="done"; $queueing_status="done"; $result_page_link=" <a href=\"$server/target_search.cgi?page=2&accession=$accession_number&tempdir=$tempdir_progress\">Link</a>";} 
+			if(-e "$base_dir/$tempdir_progress/done"){ $parsing_results="done"; $queueing_status="done"; $result_page_link=" <a href=\"$server/target_search.cgi?page=2&accession=$accession_number&tempdir=$tempdir_progress\">Link</a>";} 
 			else {print "<span style=\"color:#CCCCCC\">-</span>";}
                         print"<script type=\"text/javascript\">
                          window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&accession=$accession_number&tempdir_array=$tempdir_array_input\"\', 5000);
@@ -1009,30 +1013,30 @@ if($page == 2){
 		print "<br>Progress:<br>";
 		#Stuff for progress:	
 		#Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
-		open (TOTALMRNACOUNTER, "<$baseDIR/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
+		open (TOTALMRNACOUNTER, "<$base_dir/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
                 my @total_counter_array;
                 while(<TOTALMRNACOUNTER>){
                         push(@total_counter_array,$_);
                 }
 		my $total_mRNA_number=shift(@total_counter_array);
 		close TOTALMRNACOUNTER;
-		my $mRNAs_processed=`grep sRNA $baseDIR/$tempdir/prediction.res | wc -l`;
+		my $mRNAs_processed=`grep sRNA $base_dir/$tempdir/prediction.res | wc -l`;
 		my $progress_percentage=($mRNAs_processed/$total_mRNA_number)*100;
 		my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage); 
-                if(-e "$baseDIR/$tempdir/commands.sh"){ print "- Writing Job Script";} else {print "<span style=\"color:#CCCCCC\">- Writing Job Script</span>";}
-		#print "- Writing Job Script" if -e "$baseDIR/$tempdir/commands.sh";
-                if(-e "$baseDIR/$tempdir/"){ print " .. done<br>- Creating Temporary Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Creating Temporary Folder</span>";}
-		#print " .. done<br>- Creating Temporary Folder" if -e "$baseDIR/$tempdir/";
-		if(-e "$baseDIR/$tempdir/sRNA_openen"){ print " .. done<br>- Calculating sRNA - Accessibility";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating sRNA - Accessibility</span>";}
-                #print " .. done<br>- Calculating sRNA - Accessibility" if -e "$baseDIR/$tempdir/sRNA_openen";
+                if(-e "$base_dir/$tempdir/commands.sh"){ print "- Writing Job Script";} else {print "<span style=\"color:#CCCCCC\">- Writing Job Script</span>";}
+		#print "- Writing Job Script" if -e "$base_dir/$tempdir/commands.sh";
+                if(-e "$base_dir/$tempdir/"){ print " .. done<br>- Creating Temporary Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Creating Temporary Folder</span>";}
+		#print " .. done<br>- Creating Temporary Folder" if -e "$base_dir/$tempdir/";
+		if(-e "$base_dir/$tempdir/sRNA_openen"){ print " .. done<br>- Calculating sRNA - Accessibility";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating sRNA - Accessibility</span>";}
+                #print " .. done<br>- Calculating sRNA - Accessibility" if -e "$base_dir/$tempdir/sRNA_openen";
                 #if(-e "$mRNA_accessiblity_path/accessiblity/sRNA_openen"){ print " .. done<br>- Preparing Precalculated mRNA - Accessiblity Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Preparing Precalculated mRNA - Accessiblity Folder</span>";}
 		#print " .. done<br>- Preparing Precalculated mRNA - Accessiblity Folder"  if -e "$mRNA_accessiblity_path/accessiblity/sRNA_openen";
-		 if(-e "$baseDIR/$tempdir/prediction.res"){ print " .. done<br>- Calculating RNAplex Interaction Prediction - Progress: $rounded_progress_percentage%";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating RNAplex Interaction Prediction</span>";}
-                #print " .. done<br>- Calculating RNAplex Interaction Prediction" if -e "$baseDIR/$tempdir/prediction.res";
-		if(-e "$baseDIR/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
-                #print " .. done<br>- Parsing and Extracting Top Hits" if -e "$baseDIR/$tempdir/result_html_table";
-	 	if(-e "$baseDIR/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
-		#print " .. done<br>- Dumping all Hits to .csv" if -e "$baseDIR/$tempdir/all_predictions.csv";
+		 if(-e "$base_dir/$tempdir/prediction.res"){ print " .. done<br>- Calculating RNAplex Interaction Prediction - Progress: $rounded_progress_percentage%";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating RNAplex Interaction Prediction</span>";}
+                #print " .. done<br>- Calculating RNAplex Interaction Prediction" if -e "$base_dir/$tempdir/prediction.res";
+		if(-e "$base_dir/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
+                #print " .. done<br>- Parsing and Extracting Top Hits" if -e "$base_dir/$tempdir/result_html_table";
+	 	if(-e "$base_dir/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
+		#print " .. done<br>- Dumping all Hits to .csv" if -e "$base_dir/$tempdir/all_predictions.csv";
 		if(defined($tax_id)){
                 print"<script type=\"text/javascript\">
 				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
@@ -1080,7 +1084,7 @@ if($page == 3){
                         RELATIVE=>1,
                 });
                 my @output_array;
-		$ENV{PATH} = "$baseDIR/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
+		$ENV{PATH} = "$base_dir/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
                 my $file = './template/postprocessing.html';
                 #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
                 my $vars = {
