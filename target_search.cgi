@@ -13,17 +13,24 @@ use Cwd;
 use Digest::MD5;
 use CGI::Carp qw(fatalsToBrowser);
 use File::Temp qw/tempdir tempfile/;
+######################### Webserver machine specific settings ############################################
+##########################################################################################################
 my $webserver_name = "RNApredator";
 #defaults for server 
 #my $server="http://rna.tbi.univie.ac.at/RNApredator2";
 #my $source_dir=cwd();
-my $server="http://rna.tbi.univie.ac.at/RNApredator2";
+my $server="http://localhost:800/RNApredator";
 my $source_dir=cwd();
 #baseDIR points to the tempdir folder
 my $base_dir ="$source_dir/html";
+#sun grid engine settings
+my $qsub_location="/usr/bin/qsub";
+my $sge_queue_name="web_short_q";
+my $sge_error_dir="$source_dir/error";
+my $sge_log_output_dir="$source_dir/error";
+##########################################################################################################
 #Write all Output to file at once
 $|=1 ;
-
 #Control of the CGI Object remains with webserv.pl, additional functions are defined in the requirements below.
 use CGI;
 $CGI::POST_MAX=100000; #max 100kbyte posts
@@ -585,8 +592,8 @@ if($page==4){
 	                	chmod (0755,"$base_dir/$tempdir/commands.sh");
 				my $ip_adress=$ENV{'REMOTE_ADDR'};
 				$ip_adress=~s/\.//g;
-	                	#$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
-	                	$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+				#$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";
+	                	$exec_command=$exec_command."$qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 			}
 			#send all jobs to the queue 
 			exec "$exec_command" or die "$!";
