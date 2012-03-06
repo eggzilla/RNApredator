@@ -15,12 +15,13 @@ use Data::Dumper;
 ##########################################################################
 #convert the total specieslist into an html table for the user input page
 my $tempdir = $ARGV[0];
-my $tempdir_parent_directory="/srv/http/RNApredator/html";
+my $base_dir=$ARGV[1];
+#my $tempdir_parent_directory="/srv/http/RNApredator/html";
 my $top= 10000;
 #toDO: hand over sourcedir and hand over full tempdir path
 my $source_dir="/srv/http/RNApredator";
-open (PLEX, "<$tempdir_parent_directory/$tempdir/prediction.res"); #STUFF TO RECOVER
-open (BUG,  ">$tempdir_parent_directory/$tempdir/bug");
+open (PLEX, "<$base_dir/$tempdir/prediction.res"); #STUFF TO RECOVER
+open (BUG,  ">$base_dir/$tempdir/bug");
 #results related variables
 my @lines;
 my $query="";
@@ -210,13 +211,13 @@ if($DEBUG){
 
 
 
-open (TOP25, ">$tempdir_parent_directory/$tempdir/top25.html");
-open (TOP50, ">$tempdir_parent_directory/$tempdir/top50.html");
-open (TOP75, ">$tempdir_parent_directory/$tempdir/top75.html");
-open (TOP100,">$tempdir_parent_directory/$tempdir/top100.html");
-open (TOP500,">$tempdir_parent_directory/$tempdir/top500.html");
-open (ALL,   ">$tempdir_parent_directory/$tempdir/topAll.html");
-open (CSV,   ">$tempdir_parent_directory/$tempdir/all_predictions.csv");
+open (TOP25, ">$base_dir/$tempdir/top25.html");
+open (TOP50, ">$base_dir/$tempdir/top50.html");
+open (TOP75, ">$base_dir/$tempdir/top75.html");
+open (TOP100,">$base_dir/$tempdir/top100.html");
+open (TOP500,">$base_dir/$tempdir/top500.html");
+open (ALL,   ">$base_dir/$tempdir/topAll.html");
+open (CSV,   ">$base_dir/$tempdir/all_predictions.csv");
 
 
 my $counter=0;
@@ -256,7 +257,7 @@ foreach my $sort_key (sort {$parsed_results->{$a}->[7] <=> $parsed_results->{$b}
   print CSV $output_line,"\n";
 }
 
-#open (BUG,   ">$tempdir_parent_directory/$tempdir/bug");
+#open (BUG,   ">$base_dir/$tempdir/bug");
 #print BUG Dumper($parsed_results);
 
 my $footer=	"</tbody>\n
@@ -278,6 +279,6 @@ close TOP100;
 close TOP500;
 close ALL;
 close CSV;
-open (IANUMBER, ">$tempdir_parent_directory/$tempdir/interactionnumber");
+open (IANUMBER, ">$base_dir/$tempdir/interactionnumber");
 #open (IANUMBER, ">$tempdir/interactionnumber");
 print IANUMBER "$counter";
