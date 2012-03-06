@@ -3,24 +3,27 @@
 #ignore all arguments save the job script
 #place this script in a folder defined by the $PATH variable
 
-
 use strict;
 use Getopt::Std;
 
 # declare the perl command line flags/options we want to allow
 my %options=();
-getopts("hj:ln:s:", \%options);
+getopts("N:q:e:o:", \%options);
 
 # test for the existence of the options on the command line.
 # in a normal program you'd do more than just print these.
-print "-N $options{h}\n" if defined $options{N};
-print "-q $options{j}\n" if defined $options{q};
-print "-e $options{l}\n" if defined $options{e};
-print "-o $options{n}\n" if defined $options{o};
+print "-N $options{N}\n" if defined $options{N};
+print "-q $options{q}\n" if defined $options{q};
+print "-e $options{e}\n" if defined $options{e};
+print "-o $options{o}\n" if defined $options{o};
 
 # other things found on the command line
 print "Other things found on the command line:\n" if $ARGV[0];
-foreach (@ARGV)
-{
-  print "$_\n";
-}
+#foreach (@ARGV)
+#{
+#  print "$_\n";
+#}
+
+my $jobscript_command=join(" ",@ARGV);
+print "$jobscript_command";
+exec "$jobscript_command" or die "qsub dummy script failed: $!";

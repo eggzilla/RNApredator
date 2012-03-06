@@ -593,7 +593,7 @@ if($page==4){
 				my $ip_adress=$ENV{'REMOTE_ADDR'};
 				$ip_adress=~s/\.//g;
 				#$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";
-	                	$exec_command=$exec_command."$qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+	                	$exec_command=$exec_command." -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 			}
 			#send all jobs to the queue 
 			exec "$exec_command" or die "$!";
@@ -710,11 +710,13 @@ if($page==1){
 		#send user to result page
 		if(defined $tax_id){
                 print"<script type=\"text/javascript\">
-                          window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\";
+                          window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
+                          //window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\";
                          </script>";
                 }else{
                 print"<script type=\"text/javascript\">
-                        window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\";
+                        window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
+                        //window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\";
                        </script>";
                 }
 		close COMMANDS; #close COMMANDS so child can reopen filehandle
@@ -955,7 +957,9 @@ if($page == 2){
 	        my $vars = {
 	                title => "RNApredator bacterial sRNA target prediction Webserver - Results",
 	                tbihome => "http://www.tbi.univie.ac.at/",
-			drop_options => "../../../../$source_dir/template/dropmenu$drop_menu_number",
+			#hier weiter
+			#drop_options => "$source_dir/template/dropmenu$drop_menu_number",
+			drop_options => "dropmenu$drop_menu_number",
 	                banner => "./pictures/banner_final.png",
 	                introduction => "introduction.html",
 	                available_genomes => "available_genomes.cgi",
@@ -967,7 +971,8 @@ if($page == 2){
 	                java_script_location  => "./javascript/result.js",
 			interactionnumber => "$interactionnumber",
 			top => "$top",
-			resulttable => "../../../..$base_dir/$tempdir/$resulthtmlfile",
+			#hier weiter
+			resulttable => "./html/$tempdir/$resulthtmlfile",
 			all_predictions => "./html/$tempdir/all_predictions.csv",
                		sRNA_fasta => "./html/$tempdir/sRNA.fasta",
 			plex_output_file => "./html/$tempdir/prediction.res",
@@ -976,17 +981,17 @@ if($page == 2){
         	};
         	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	}else{
-#PROGRESS PAGE
-		print $query->header();	
-		 my $template = Template->new({
-                        # where to find template files
-                        INCLUDE_PATH => ['./template'],
-                        #Interpolate => 1 allows simple variable reference
-                        #INTERPOLATE=>1,
-                        #allows use of relative include path
-                        RELATIVE=>1,
-                });
-		 my $file = './template/calc.html';
+            #PROGRESS PAGE
+	    print $query->header();	
+	    my $template = Template->new({
+		# where to find template files
+		INCLUDE_PATH => ['./template'],
+		#Interpolate => 1 allows simple variable reference
+		#INTERPOLATE=>1,
+		#allows use of relative include path
+		RELATIVE=>1,
+					 });
+		my $file = './template/calc.html';
 	        #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
        		my $vars = {
                 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -1001,7 +1006,6 @@ if($page == 2){
                 	java_script_location  => "./javascript/calculate.js"
         	};
         	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
-		
 		if(defined($accession_number)){
                        my $accession_link="$server/target_search.cgi?"."page=$page"."&accession=$accession_number"."&sRNA=$sRNA"."&tempdir=$tempdir";
                       print "<p>Processing:</p>";
@@ -1011,11 +1015,13 @@ if($page == 2){
                 }else{
                        my $tax_link="";
                        print "<p>Processing:</p>";
-                       print "This can take some minutes<br>";
-                       print "Wait for calculation to finish or bookmark following <a href=\"$tax_link\">link</a> and return later.<br>";
+                       print "This can take some minutes.";
+                       print "<br>Wait for calculation to finish or";
+		       print "<br>bookmark following <a href=\"$tax_link\">link</a> and return later.";
                 }
 		print "<br>";
 		print "<br>Progress:<br>";
+	        #hier weiter - progress is not shown
 		#Stuff for progress:	
 		#Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
 		open (TOTALMRNACOUNTER, "<$base_dir/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
@@ -1029,17 +1035,10 @@ if($page == 2){
 		my $progress_percentage=($mRNAs_processed/$total_mRNA_number)*100;
 		my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage); 
                 if(-e "$base_dir/$tempdir/commands.sh"){ print "- Writing Job Script";} else {print "<span style=\"color:#CCCCCC\">- Writing Job Script</span>";}
-		#print "- Writing Job Script" if -e "$base_dir/$tempdir/commands.sh";
                 if(-e "$base_dir/$tempdir/"){ print " .. done<br>- Creating Temporary Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Creating Temporary Folder</span>";}
-		#print " .. done<br>- Creating Temporary Folder" if -e "$base_dir/$tempdir/";
 		if(-e "$base_dir/$tempdir/sRNA_openen"){ print " .. done<br>- Calculating sRNA - Accessibility";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating sRNA - Accessibility</span>";}
-                #print " .. done<br>- Calculating sRNA - Accessibility" if -e "$base_dir/$tempdir/sRNA_openen";
-                #if(-e "$mRNA_accessiblity_path/accessiblity/sRNA_openen"){ print " .. done<br>- Preparing Precalculated mRNA - Accessiblity Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Preparing Precalculated mRNA - Accessiblity Folder</span>";}
-		#print " .. done<br>- Preparing Precalculated mRNA - Accessiblity Folder"  if -e "$mRNA_accessiblity_path/accessiblity/sRNA_openen";
 		 if(-e "$base_dir/$tempdir/prediction.res"){ print " .. done<br>- Calculating RNAplex Interaction Prediction - Progress: $rounded_progress_percentage%";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating RNAplex Interaction Prediction</span>";}
-                #print " .. done<br>- Calculating RNAplex Interaction Prediction" if -e "$base_dir/$tempdir/prediction.res";
 		if(-e "$base_dir/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
-                #print " .. done<br>- Parsing and Extracting Top Hits" if -e "$base_dir/$tempdir/result_html_table";
 	 	if(-e "$base_dir/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
 		#print " .. done<br>- Dumping all Hits to .csv" if -e "$base_dir/$tempdir/all_predictions.csv";
 		if(defined($tax_id)){

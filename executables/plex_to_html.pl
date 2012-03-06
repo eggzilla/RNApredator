@@ -15,11 +15,12 @@ use Data::Dumper;
 ##########################################################################
 #convert the total specieslist into an html table for the user input page
 my $tempdir = $ARGV[0];
+my $tempdir_parent_directory="/srv/http/RNApredator/html";
 my $top= 10000;
-my $source_dir="/scratch2/RNApredator";
-open (PLEX, "</u/html/RNApredator/$tempdir/prediction.res"); #SHIT TO RECOVER
-open (BUG,   ">/u/html/RNApredator/$tempdir/bug");
-#open (PLEX, "<$tempdir/prediction.res"); #SHIT TO RECOVER
+#toDO: hand over sourcedir and hand over full tempdir path
+my $source_dir="/srv/http/RNApredator";
+open (PLEX, "<$tempdir_parent_directory/$tempdir/prediction.res"); #STUFF TO RECOVER
+open (BUG,  ">$tempdir_parent_directory/$tempdir/bug");
 #results related variables
 my @lines;
 my $query="";
@@ -209,21 +210,13 @@ if($DEBUG){
 
 
 
-open (TOP25, ">/u/html/RNApredator/$tempdir/top25.html");
-open (TOP50, ">/u/html/RNApredator/$tempdir/top50.html");
-open (TOP75, ">/u/html/RNApredator/$tempdir/top75.html");
-open (TOP100,">/u/html/RNApredator/$tempdir/top100.html");
-open (TOP500,">/u/html/RNApredator/$tempdir/top500.html");
-open (ALL,   ">/u/html/RNApredator/$tempdir/topAll.html");
-open (CSV,   ">/u/html/RNApredator/$tempdir/all_predictions.csv");
-#open (TOP25, ">$tempdir/top25.html");
-#open (TOP50, ">$tempdir/top50.html");
-#open (TOP75, ">$tempdir/top75.html");
-#open (TOP100,">$tempdir/top100.html");
-#open (TOP500,">$tempdir/top500.html");
-#open (ALL,   ">$tempdir/topAll.html");
-#open (CSV,   ">$tempdir/all_predictions.csv");
-
+open (TOP25, ">$tempdir_parent_directory/$tempdir/top25.html");
+open (TOP50, ">$tempdir_parent_directory/$tempdir/top50.html");
+open (TOP75, ">$tempdir_parent_directory/$tempdir/top75.html");
+open (TOP100,">$tempdir_parent_directory/$tempdir/top100.html");
+open (TOP500,">$tempdir_parent_directory/$tempdir/top500.html");
+open (ALL,   ">$tempdir_parent_directory/$tempdir/topAll.html");
+open (CSV,   ">$tempdir_parent_directory/$tempdir/all_predictions.csv");
 
 
 my $counter=0;
@@ -263,7 +256,7 @@ foreach my $sort_key (sort {$parsed_results->{$a}->[7] <=> $parsed_results->{$b}
   print CSV $output_line,"\n";
 }
 
-#open (BUG,   ">/u/html/RNApredator/$tempdir/bug");
+#open (BUG,   ">$tempdir_parent_directory/$tempdir/bug");
 #print BUG Dumper($parsed_results);
 
 my $footer=	"</tbody>\n
@@ -285,6 +278,6 @@ close TOP100;
 close TOP500;
 close ALL;
 close CSV;
-open (IANUMBER, ">/u/html/RNApredator/$tempdir/interactionnumber");
+open (IANUMBER, ">$tempdir_parent_directory/$tempdir/interactionnumber");
 #open (IANUMBER, ">$tempdir/interactionnumber");
 print IANUMBER "$counter";
