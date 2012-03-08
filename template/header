@@ -9,10 +9,9 @@
   </head>
   <body>
 	<div align ="center">
-	<img src="[% banner %]">
-	<hr>
-	<table width="100%">
+	<table width="100%">	
 		<tr>
+			<td width="50%" height="100%"><img src="[% banner %]"> </td>
          		<td><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction" border="0"></a></td>
 			<td><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
          		<td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search" border="0"></a></td>
