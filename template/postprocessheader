@@ -2,23 +2,27 @@
 
 <html>
   <head>
-    	<title> [% title %] - [% tbihome  %] </title>
-	<script type="text/javascript" src="./javascript/jquery-1.4.4.min.js"></script> 
-	<script type="text/javascript" src="./javascript/jquery.tablesorter.min.js"></script> 
-	<script src="./javascript/jquery.collapser.js"></script>
-	<script src="./javascript/jquery.ui.js"></script>	
+    <title> [% title %] - [% tbihome  %] </title>
+    <script type="text/javascript" src="./javascript/jquery-1.4.4.min.js"></script> 
+    <script type="text/javascript" src="./javascript/jquery.tablesorter.min.js"></script> 
+    <script src="./javascript/jquery.collapser.js"></script>
+    <script src="./javascript/jquery.ui.js"></script>	
   </head>
   <body>
-	<div align ="center">
-	<img src="[% banner %]">
-	<hr>
-	<table width="100%">
-		<tr>
-         		<td><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction" border="0"></a></td>
-			<td><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
-         		<td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search" border="0"></a></td>
-			<td><a href="[% help %]"><img src="./pictures/help.png" alt="help" border="0"></a></td>
-		</tr>
-	</table>
-	<hr>
+    <div align ="center">
+      <table width="100%">
+	<tr>
+	  <td rowspan="2" width="45%" height="100%"><img src="[% banner %]"> </td>
+          <td width="11%"><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction" border="0"></a></td>
+	  <td width="18%"><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
+          <td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search" border="0"></a></td>
+	  <td><a href="[% help %]"><img src="./pictures/help.png" alt="help" border="0"></a></td>
+	  </tr>
+	    <tr>
+	      <td></td>
+		  <td colspan="2" bgcolor="#dcdcdc" height="75%"><a href="[% introduction %]#history">Status:</a> Added several bufixes <td>
+ 		    </tr>
+		  </table>
+		  <hr>
 	</div>
+		  
