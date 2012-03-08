@@ -28,6 +28,8 @@ my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
 my $sge_error_dir="$source_dir/error";
 my $sge_log_output_dir="$source_dir/error";
+# exec "export SGE_ROOT=/usr/share/gridengine\n";
+my $sge_root_directory="/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once
 $|=1 ;
@@ -1265,7 +1267,7 @@ if($page == 3){
                                                 my $absolute_mRNA_interaction_stop = $mRNA_end + 200;
 						
 						#Calculate detailed interaction view
-						my @arguments_array = ("$source_dir/executables/interactionrenderer.pl", "$tempdir","$split_result_line[0]", "$absolute_mRNA_interaction_start" , "$absolute_mRNA_interaction_stop" , "$split_result_line[7]", "$split_result_line[8]" , "$split_result_line[4]");
+						my @arguments_array = ("$source_dir/executables/interactionrenderer.pl", "$tempdir","$split_result_line[0]", "$absolute_mRNA_interaction_start" , "$absolute_mRNA_interaction_stop" , "$split_result_line[7]", "$split_result_line[8]" , "$split_result_line[4]" , "$base_dir");
 						# exec'/scratch2/egg/webserv/executables/interactionrenderer.pl',"$tempdir $split_result_line[0] $absolute_mRNA_interaction_start $absolute_mRNA_interaction_stop $sRNA_coordinates[0] $sRNA_coordinates[1] \'$split_result_line[4]\'" or die "$!";
 						system(@arguments_array) == 0 or die "$! - $?"; #creates interactionplot
 						#Calculate parameters for gene ontology
@@ -1282,7 +1284,7 @@ if($page == 3){
 						    $ascii_string="$ascii_string"."$_";
                                                 }
 						
-						#my $processing_field = "</td><td id=\"processing-$split_result_line[0]\" colspan=\"11\"><strong>Detailed Interaction(.png):</strong><br>
+						#my $processing_field = "</td><td id=\"processing-$split_result_line[0]\" colspan=\"11\"><strong>Detailed Interaction.png):</strong><br>
 						#<img alt=\"Detailed Interaction\" src=\"$server/html/$tempdir/$split_result_line[0].png\"><br>
 						my $processing_field = "</td><td id=\"processing-$split_result_line[0]\" colspan=\"11\">
 						<br><strong>Detailed Interaction(as ASCII):</strong>
@@ -1302,7 +1304,7 @@ if($page == 3){
 	    }
 	    #now calclate go, then print go, then everything else
 	    #merge all NC_id.goa files into one and name it tempdir.goa and put it in the tempdir
-	    exec "export SGE_ROOT=/usr/share/gridengine\n";
+	    #exec "export SGE_ROOT = $sge_root_directory\n";
 	    @genomes_without_goa_array=keys(%genomes_without_goa);
 			unless(@tag_array==0){	
 			    open (MERGEDGOA, ">$base_dir/$tempdir/$tempdir.ftn.goa") or die "Could Not Write Merged .goa file $! - $tempdir";
