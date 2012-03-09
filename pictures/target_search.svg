@@ -12,9 +12,9 @@
    id="svg3495"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   width="198.54665"
-   height="16.011148"
-   sodipodi:docname="introduction.png">
+   width="148.5984"
+   height="18.432707"
+   sodipodi:docname="target_search.svg">
   <metadata
      id="metadata3501">
     <rdf:RDF>
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -44,7 +44,7 @@
      showgrid="false"
      inkscape:zoom="1.85"
      inkscape:cx="121.20973"
-     inkscape:cy="8.9671022"
+     inkscape:cy="11.388661"
      inkscape:window-x="129"
      inkscape:window-y="206"
      inkscape:window-maximized="0"
@@ -57,13 +57,13 @@
      xml:space="preserve"
      style="font-size:14px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
      x="26.781998"
-     y="14.688566"
+     y="14.688565"
      id="text3505"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3507"
        x="26.781998"
-       y="14.688566"
+       y="14.688565"
        style="font-size:18px">Target Search</tspan></text>
   <path
      sodipodi:type="arc"
@@ -74,14 +74,14 @@
      sodipodi:rx="5.4198403"
      sodipodi:ry="4.5391164"
      d="m 11.652657,15.569674 a 5.4198403,4.5391164 0 1 1 -10.83968064,0 5.4198403,4.5391164 0 1 1 10.83968064,0 z"
-     transform="matrix(1.4139288,-0.54497437,0.620878,1.1522562,-8.0368418,-6.5811559)" />
+     transform="matrix(1.4139288,-0.54497437,0.620878,1.1522562,-8.0368424,-6.5811564)" />
   <rect
      style="fill:none;stroke:#000000;stroke-width:2.02814436;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
      id="rect4279"
      width="16.59725"
      height="0.28665215"
      x="-13.004774"
-     y="13.086769"
+     y="13.086768"
      transform="matrix(0.54364149,-0.83931754,0.95185612,0.30654514,0,0)" />
   <rect
      style="fill:none;stroke:#000000;stroke-width:2.01904726;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -89,7 +89,7 @@
      width="18.65897"
      height="0.25269631"
      x="-22.149008"
-     y="5.8661904"
+     y="5.86619"
      transform="matrix(-0.98345805,-0.18113602,-0.39808684,0.91734774,0,0)" />
   <path
      sodipodi:type="arc"
@@ -100,5 +100,5 @@
      sodipodi:rx="2.1621621"
      sodipodi:ry="1.6216216"
      d="m 14.054053,13.783784 a 2.1621621,1.6216216 0 1 1 -4.3243245,0 2.1621621,1.6216216 0 1 1 4.3243245,0 z"
-     transform="translate(-1.9812918,-5.9340991)" />
+     transform="translate(-1.9812924,-5.9340996)" />
 </svg>
