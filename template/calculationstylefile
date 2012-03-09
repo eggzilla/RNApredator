@@ -1,0 +1,5 @@
+	<style type="text/css">
+			table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
+			table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
+			table td {text-align:center; border:0px black solid; }
+	</style>

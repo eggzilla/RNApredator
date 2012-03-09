@@ -1,0 +1,36 @@
+	<style type="text/css">
+        	table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
+                table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
+                table td {text-align:center; border:0px black solid; }
+                        .tooltip2 {
+                                position: absolute;
+                                display: none;
+                                background-color: #FFFFFF;
+                                border-width: 1px;
+                                border-style: solid;
+                                border-color: #000000;
+                                padding: 2px;
+                        }
+                        .tooltip2 .head{
+                        background-color: #006666;
+                        color: white;
+                        font-weight: stronf;
+                        padding: 2px;
+                        }
+                        .tooltip2 .content{
+                        color: 000066;
+                        font-size: 12px;
+                        border-size: 4px;
+                        }
+                        .tooltip2 .content td{
+                        width: 50%;
+                        font-size: 10px;
+                        text-align: center;
+                        }
+                        .autocomplete-w1 { background:url(javascript/jquery_autocomplete/shadow.png) no-repeat bottom right; position:absolute; top:0px; left:0px; margin:6px 0 0 6px; /* IE6 fix: */ _background:none; _margin:1px 0 0 0; }
+                        .autocomplete { border:1px solid #999; background:#FFF; cursor:default; text-align:left; max-height:350px; overflow:auto; margin:-6px 6px 6px -6px; /* IE6 specific: */ _height:350px;  _margin:0; _overflow-x:hidden; }
+                        .autocomplete .selected { background:#F0F0F0; }
+                        .autocomplete div { padding:2px 5px; white-space:nowrap; overflow:hidden; }
+                        .autocomplete strong { font-weight:normal; color:#3399FF; }
+
+        </style>

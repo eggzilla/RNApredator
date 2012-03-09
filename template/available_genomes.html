@@ -1,4 +1,4 @@
-[% INCLUDE available_genomes_header %]
+[% INCLUDE header %]
 <div id="genome_node" class="tooltip2" style="width: 400px;">
 <div class="content">
 <div class="head">Genome/Plasmid Node</div>
@@ -56,72 +56,4 @@ you to the "Target Search" page.<br>
 	</td></tr></table><br>
 	<div id="demo1" class="demo">
 	</div>
-
-<script type="text/javascript" class="source">
-$(function () {
-	    $("#demo1").jstree({
-	        "core" : { "initially_open" : [ "2" ] },
-		"types" : {
-	            "valid_children" : [ "root" ],
-	            "types" : {
-	                "root" : {
-	                    "icon" : {
-	                        "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/root.png"
-	                    },
-	                    "valid_children" : [ "default", "genome", "species", "tax" ],
-	                    "max_depth" : 2,
-	                    "hover_node" : false,
-	                    "select_node" : function () {return false;}
-	                },
-	                "default" : {
-	                    "valid_children" : [ "default", "genome", "species", "tax"  ]
-	                },
-			"genome" : {
-                            "icon" : {
-                                "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/genome.png"
-                            },
-                            "valid_children" : [ "default", "genome", "species", "tax" ],
-                            "max_depth" : 2,
-                            "hover_node" : false,
-                            "select_node" : function (n) {window.location = "http://rna.tbi.univie.ac.at/RNApredator2/target_search.cgi?id=" + n.attr("id");}
-                        },
-			"tax" : {
-                            "icon" : {
-                                "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/tax.png"
-                            },
-                            "valid_children" : [ "default", "genome", "species", "tax" ],
-                            "max_depth" : 2,
-                            "hover_node" : false,
-                        },
-			"species" : {
-                            "icon" : {
-                                "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/species.png"
-                            },
-                            "valid_children" : [ "default", "genome", "species", "tax" ],
-                            "max_depth" : 2,
-                            "hover_node" : false,
-                            "select_node" : function () {return false;}
-                        }
-	            }
-	        },		
-		"themes" : {
-                    "theme" : "classic",
-                    "dots" : true,
-                    "icons" : true
-                },
-	        "html_data" : {
-	            "data" : "<li class='jstree-closed' id='2' rel='root'><a href='#'>Bacteria</a></li>",
-	            "ajax" : { "url" : "tree.cgi",
-			       "data" : function (n) {
-	                        return { id : n.attr ? n.attr("id") : 0  };
-			}
-			}
-	        },
-	        "plugins" : [ "themes","html_data","dnd","types" ]
-	    });
-});
-
-</script>
-
-
 [% INCLUDE footer %]

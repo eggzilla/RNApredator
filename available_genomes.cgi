@@ -51,7 +51,9 @@ if($page eq "0"){
 		introduction => "introduction.html",
 	        available_genomes => "available_genomes.cgi",
 	        target_search => "target_search.cgi",
-	        help => "help.html"
+	        help => "help.html",
+		scriptfile => "availablegenomesscriptfile",
+		stylefile => "availablegenomesstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 }

@@ -473,7 +473,9 @@ if($page==4){
 	help => "help.html",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
-	java_script_location  => "./javascript/calculate.js"
+	java_script_location  => "./javascript/calculate.js",
+	scriptfile => "calculationscriptfile",
+	stylefile => "calculationstylefile" 
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	#process parsed array here we need to loop once for each sRNA and then redirect to page=5
@@ -597,7 +599,6 @@ if($page==4){
     
 }
 
-
 ######INPUT######################################################
 #Print HTTP-Header for input-page
 if($page == 0){
@@ -625,7 +626,9 @@ if($page == 0){
 	tax_id_default => "$tax_id_default",
 	#errorscript is a short javascript that returns the errormessage from parsing the fasta-file on the client side
 	error_script => "$errorscript",
-	java_script_location  => "./javascript/input.js"
+	java_script_location  => "./javascript/input.js",
+	scriptfile => "inputscriptfile",
+	stylefile => "inputstylefile"
 	};
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 }
@@ -659,7 +662,9 @@ if($page==1){
 	help => "help.html",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
-                java_script_location  => "./javascript/calculate.js"
+        java_script_location  => "./javascript/calculate.js",
+	scriptfile => "calculationscriptfile",
+	stylefile => "calculationstylefile"
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
     #print "Input: <br> <br> Accession Number - $accession_number <br> Tax-id - $tax_id <br> sRNA - $sRNA <br> page - $page <br><br>";
@@ -691,8 +696,7 @@ if($page==1){
     print COMMANDS "#!/bin/bash\n";
     #print COMMANDS "cd $base_dir/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
     print COMMANDS "cd $base_dir/$tempdir/; $source_dir/executables/RNAup -u 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta;\n";
-    print COMMANDS "mv sRNA_u1*.out sRNA_u1_to_$u_argument_upperbound.out;\n";
-    
+    print COMMANDS "mv sRNA_u1*.out sRNA_u1_to_$u_argument_upperbound.out;\n";    
     print COMMANDS "$source_dir/executables/hakim_convert_up_to_plfold.sh $base_dir/$tempdir/sRNA_u1_to_$u_argument_upperbound.out;\n";
     #`cd $base_dir/$tempdir/; RNAplfold -O 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta`;
     #`cd $base_dir/$tempdir/; ~ronny/WORK/ViennaRNA/Progs/RNAup -u 1-$u_argument_upperbound <$base_dir/$tempdir/sRNA.fasta >$base_dir/$tempdir/sRNA.log;
@@ -828,7 +832,9 @@ if($page == 5){
 	    help => "help.html",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    java_script_location  => "./javascript/calculate.js"
+	    java_script_location  => "./javascript/calculate.js",
+	    scriptfile => "calculationscriptfile",
+	    stylefile => "calculationstylefile"
         };
         $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
         print "<p>This can take some minutes.</p>";
@@ -974,7 +980,9 @@ if($page == 2){
 	    sRNA_fasta => "./html/$tempdir/sRNA.fasta",
 	    plex_output_file => "./html/$tempdir/prediction.res",
 	    sRNA => "$sRNA",
-	    tempdir => "$tempdir"
+	    tempdir => "$tempdir",
+	    scriptfile => "resultscriptfile",
+	    stylefile => "resultstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     }else{
@@ -1000,7 +1008,9 @@ if($page == 2){
 		help => "help.html",
 		accession_default => "$accession_default",
 		tax_id_default => "$tax_id_default",
-		java_script_location  => "./javascript/calculate.js"
+		java_script_location  => "./javascript/calculate.js",
+		scriptfile => "calculationscriptfile",
+		stylefile => "calculationstylefile"
 	    };
 	    $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	    if(defined($accession_number)){
@@ -1099,8 +1109,9 @@ if($page == 3){
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
-	    java_script_location  => "./javascript/postprocessing.js"
-		
+	    java_script_location  => "./javascript/postprocessing.js",
+	    scriptfile => "postprocessingscriptfile",
+	    stylefile => "postprocessingstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
 	if (my $pid = fork) {
@@ -1497,8 +1508,9 @@ if($page == 3){
 		    accession_default => "$accession_default",
 		    tax_id_default => "$tax_id_default",
 		    postprocess => "../../../..$base_dir/$tempdir/postprocess",
-		    java_script_location  => "./javascript/postprocessing.js"
-			    
+		    java_script_location  => "./javascript/postprocessing.js",
+		    scriptfile => "postprocessingscriptfile",
+		    stylefile => "postprocessingstylefile"    
                 };
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	my $link="$server/target_search.cgi?"."page=$page"."&tempdir=$tempdir";
@@ -1537,7 +1549,6 @@ if($page == 3){
                         tax_id_default => "$tax_id_default",
                         postprocess => "../../../..$base_dir/$tempdir/postprocess",
                         java_script_location  => "./javascript/postprocessing.js"
-			    
 	    };
 	    $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
 	}

@@ -1,122 +1,89 @@
 [% INCLUDE header %]
 <div align ="left">
-	<script src="[% java_script_location %]"></script>
-	[% error_script %]
-	<noscript>This page does not decay graceful :-) - Please enable your java-script </noscript>
-	<style type="text/css">
-			table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
-			table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
-			table td {text-align:center; border:0px black solid; }
-			.tooltip2 {
-				position: absolute;
-				display: none;
-				background-color: #FFFFFF;
-				border-width: 1px;
-				border-style: solid;
-				border-color: #000000;
-				padding: 2px;
-			}
-			.tooltip2 .head{
-			background-color: #006666;
-			color: white;
-			font-weight: stronf;
-			padding: 2px;
-			}
-			.tooltip2 .content{
-			color: 000066;
-			font-size: 12px;
-			border-size: 4px;
-			}
-			.tooltip2 .content td{
-			width: 50%;
-			font-size: 10px;
-			text-align: center;
-			}
-	</style>
+  [% error_script %]
 </div>
 <div id="1" class="tooltip2" style="width: 400px;">
-<div class="content">
-<div class="head">Accession Numbers:</div>
-<p>e.g.: NC_000913 for E.coli K-12 MG1655 chromosome<br>
-Represent chromosomes or plasmids.
-If it is in the database an entry will appear in the "Confirm Genome" field. Upon confirmation
-the selected genome will be searched for interaction with the provided sRNA.
-</p>
-</div>
+  <div class="content">
+    <div class="head">Accession Numbers:</div>
+    <p>e.g.: NC_000913 for E.coli K-12 MG1655 chromosome<br>
+      Represent chromosomes or plasmids.
+      If it is in the database an entry will appear in the "Confirm Genome" field. Upon confirmation
+      the selected genome will be searched for interaction with the provided sRNA.
+    </p>
+  </div>
 </div>
 </div>
 <div id="2" class="tooltip2" style="width: 400px;">
-<div class="content">
-<div class="head">Taxonomy ID:</div>
-<p>e.g.: 511145 for E.coli K-12 MG1655<br> 
-Enter a Taxonomy ID(tax-id) representing a bacterial species. If<br> it is in the database
-an entry will appear in the "Confirm Genome" field. Upon confirmation all plasmids and
-chromosomes associated to the tax-id will be searched for interaction with
-the provided sRNA.</p>
+  <div class="content">
+    <div class="head">Taxonomy ID:</div>
+    <p>e.g.: 511145 for E.coli K-12 MG1655<br> 
+      Enter a Taxonomy ID(tax-id) representing a bacterial species. If<br> it is in the database
+      an entry will appear in the "Confirm Genome" field. Upon confirmation all plasmids and
+      chromosomes associated to the tax-id will be searched for interaction with
+      the provided sRNA.</p>
+  </div>
 </div>
 </div>
-</div>
-
 <div id="3" class="tooltip2" style="width: 400px;">
-<div class="content">
-<div class="head">sRNA:</div>
-<p>Enter a sRNA containing only following letters:
-A,U,G,C,T,a,u,g,c,t. T and t will be interpreted
-as U for the computation.</p>
-</div>
+  <div class="content">
+    <div class="head">sRNA:</div>
+    <p>Enter a sRNA containing only following letters:
+      A,U,G,C,T,a,u,g,c,t. T and t will be interpreted
+      as U for the computation.</p>
+  </div>
 </div>
 </div>
 <div align="center">
-	<h3 id="stepx_title">= Target prediction =</h3>	
-	<table id="input_table" bgcolor="white" class="borders" >
-	<tr>
-		<td id="step1_title">1. Select Genome:</td>
-		<td id="step2_title">2. Confirm Genome: </td>
-                <td id="step3_title">3. Enter sRNA-Sequence and Submit:<a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a> </td>
-	</tr>
-	<tr>		
-		<td id="step1_content" >	
-			<form action="/cgi-bin/plexserver.cgi" method="post" target="Daten">
-				<p>NCBI-Accession Number <br><input name="accession_id" id="accession_id" type="text" size="20" maxlength="20" value="[% accession_default  %]" onkeyup="accession_check(this)">
-				 <a href="#" onmouseover="XBT(this, {id:'1'})"> <img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
-				<p><strong>OR</strong></p>
-				<p>NCBI-Taxonomy ID<br><input name="tax_id" id="tax_id" type="text" size="20" maxlength="20" value="[% tax_id_default %]" onkeyup="tax_check(this)">
-				<a href="#" onmouseover="XBT(this, {id:'2'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
-				<p><strong>OR</strong></p>
-				<p>Select from <a href="http://rna.tbi.univie.ac.at/RNApredator2/available_genomes.cgi">Available Genomes</a>
-			</form>
+  <h3 id="stepx_title">= Target prediction =</h3>	
+  <table id="input_table" bgcolor="white" class="borders" >
+    <tr>
+      <td id="step1_title">1. Select Genome:</td>
+      <td id="step2_title">2. Confirm Genome: </td>
+      <td id="step3_title">3. Enter sRNA-Sequence and Submit:<a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a> </td>
+    </tr>
+    <tr>		
+      <td id="step1_content" >	
+	<form action="/cgi-bin/plexserver.cgi" method="post" target="Daten">
+	  <p>NCBI-Accession Number <br><input name="accession_id" id="accession_id" type="text" size="20" maxlength="20" value="[% accession_default  %]" onkeyup="accession_check(this)">
+	    <a href="#" onmouseover="XBT(this, {id:'1'})"> <img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
+	  <p><strong>OR</strong></p>
+	  <p>NCBI-Taxonomy ID<br><input name="tax_id" id="tax_id" type="text" size="20" maxlength="20" value="[% tax_id_default %]" onkeyup="tax_check(this)">
+	    <a href="#" onmouseover="XBT(this, {id:'2'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
+	  <p><strong>OR</strong></p>
+	  <p>Select from <a href="http://rna.tbi.univie.ac.at/RNApredator2/available_genomes.cgi">Available Genomes</a>
+	</form>
 	
-		</td>	
-		<td id="step2_content" valign="top" >
-		
-		</td>
-		 <td id="step3_content" valign="top">
+      </td>	
+      <td id="step2_content" valign="top" >
+	
+      </td>
+      <td id="step3_content" valign="top">
 
-                </td>
-	</tr>	
-</table>
-<table width="90%" border="1">
-<tr border="1">
-	<td>
+      </td>
+    </tr>	
+  </table>
+  <table width="90%" border="1">
+    <tr border="1">
+      <td>
 	<div align="left">
-	<form>
-                <p><input type="button" name="sample_button" value="Paste sample: Escherichia coli str. K-12 substr. MG1655 - MicA sRNA" onClick="sample()">  &nbsp; &nbsp; &nbsp; &nbsp;   If the genome of interest is not available please contact us via email.</p>
-         </form>
+	  <form>
+            <p><input type="button" name="sample_button" value="Paste sample: Escherichia coli str. K-12 substr. MG1655 - MicA sRNA" onClick="sample()">  &nbsp; &nbsp; &nbsp; &nbsp;   If the genome of interest is not available please contact us via email.</p>
+          </form>
         </div>
-	</td>
-</tr>
-</table>
-<div id="confirm_species">
-	
-</div>
-	
+      </td>
+    </tr>
+  </table>
+  <div id="confirm_species">
+    
+  </div>
+  
 </div>
 
 <table id="data" style="display:none" >
-	[% INCLUDE input_data_template %]
+  [% INCLUDE input_data_template %]
 </table>
 <script type="text/javascript">
-window.onload = go();
+  window.onload = go();
 </script>
 
 [% INCLUDE footer %]
