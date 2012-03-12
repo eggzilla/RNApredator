@@ -534,7 +534,7 @@ if($page==4){
 	#print STDERR Dumper(@tempdir_array);
     }elsif (defined $pid){
 	#exec_command 
-	my $exec_command="export SGE_ROOT=/usr/share/gridengine;";
+	my $exec_command="export SGE_ROOT=$sge_root_directory;";
 	#we loop again once for each sRNA
 	 		close STDOUT;
 	my $sRNA_count2=0;
@@ -591,10 +591,10 @@ if($page==4){
 				my $ip_adress=$ENV{'REMOTE_ADDR'};
 	    $ip_adress=~s/\.//g;
 	    #$exec_command=$exec_command." /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";
-	    $exec_command=$exec_command." -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+	    $exec_command=$exec_command." $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 			}
 	#send all jobs to the queue 
-	exec "$exec_command" or die "$!";
+	exec "$exec_command" or die print STDERR "RNApredator: calculate multiple failed: $!";
     }
     
 }
@@ -774,7 +774,7 @@ if($page==1){
 	    my $ip_adress=$ENV{'REMOTE_ADDR'};
 	    $ip_adress=~s/\.//g;
 	    #exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
-	    exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+	    exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
 	    #exec "cd $base_dir/$tempdir/; ./commands.sh" or die "$!";
 	    #analysing and displaying progress:	
 	    #if(defined($tax_id)){
@@ -1036,18 +1036,54 @@ if($page == 2){
 	    while(<TOTALMRNACOUNTER>){
 		push(@total_counter_array,$_);
 	    }
+	   # my $total_mRNA_number=shift(@total_counter_array);
+	   # close TOTALMRNACOUNTER;
+	   # my $mRNAs_processed=`grep sRNA $base_dir/$tempdir/prediction.res | wc -l`;
+	   # my $progress_percentage=($mRNAs_processed/$total_mRNA_number)*100;
+	   # my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage); 
+	   # if(-e "$base_dir/$tempdir/commands.sh"){ print "- Writing Job Script";} else {print "<span style=\"color:#CCCCCC\">- Writing Job Script</span>";}
+	   # if(-e "$base_dir/$tempdir/"){ print " .. done<br>- Creating Temporary Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Creating Temporary Folder</span>";}
+	    #if(-e "$base_dir/$tempdir/sRNA_openen"){ print " .. done<br>- Calculating sRNA - Accessibility";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating sRNA - Accessibility</span>";}
+	    #if(-e "$base_dir/$tempdir/prediction.res"){ print " .. done<br>- Calculating RNAplex Interaction Prediction - Progress: $rounded_progress_percentage%";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating RNAplex Interaction Prediction</span>";}
+	   # if(-e "$base_dir/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
+	   # if(-e "$base_dir/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
+	    #print " .. done<br>- Dumping all Hits to .csv" if -e "$base_dir/$tempdir/all_predictions.csv";
+	    print "<table style=\"border:1px solid #000; width:60%\";>"; #RNA, queueing status, sRNA accessiblity, RNAplex Interaction Prediction, Parsing Results, Result Page Link
+	    print"<tr><td style=\"width:3%\">RNA</td><td style=\"width:10%\">Queueing Status</td><td style=\"width:10%\">sRNA accessiblity</td><td style=\"width:15%\">RNAplex Interaction Prediction</td><td style=\"width:10%\">Parsing Output</td><td style=\"width:10%\">Result Page Link</td></tr>";
+	    #Stuff for progress:    
+	    #Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
+	    open (TOTALMRNACOUNTER, "<$base_dir/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
+	    my @total_counter_array;
+	    while(<TOTALMRNACOUNTER>){
+		push(@total_counter_array,$_);
+	    }
 	    my $total_mRNA_number=shift(@total_counter_array);
 	    close TOTALMRNACOUNTER;
+	    my $tempdir_progress_counter=1;
 	    my $mRNAs_processed=`grep sRNA $base_dir/$tempdir/prediction.res | wc -l`;
 	    my $progress_percentage=($mRNAs_processed/$total_mRNA_number)*100;
-	    my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage); 
-	    if(-e "$base_dir/$tempdir/commands.sh"){ print "- Writing Job Script";} else {print "<span style=\"color:#CCCCCC\">- Writing Job Script</span>";}
-	    if(-e "$base_dir/$tempdir/"){ print " .. done<br>- Creating Temporary Folder";} else {print "<span style=\"color:#CCCCCC\"><br>- Creating Temporary Folder</span>";}
-	    if(-e "$base_dir/$tempdir/sRNA_openen"){ print " .. done<br>- Calculating sRNA - Accessibility";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating sRNA - Accessibility</span>";}
-	    if(-e "$base_dir/$tempdir/prediction.res"){ print " .. done<br>- Calculating RNAplex Interaction Prediction - Progress: $rounded_progress_percentage%";} else {print "<span style=\"color:#CCCCCC\"><br>- Calculating RNAplex Interaction Prediction</span>";}
-	    if(-e "$base_dir/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
-	    if(-e "$base_dir/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
-	    #print " .. done<br>- Dumping all Hits to .csv" if -e "$base_dir/$tempdir/all_predictions.csv";
+	    my $rounded_progress_percentage=sprintf("%.2f",$progress_percentage);
+	    my $queueing_status="";
+	    my $sRNA_status="";
+	    my $RNAplex_interaction_prediction="";
+	    my $parsing_results="";
+	    my $result_page_link="";
+	    if(-e "$base_dir/$tempdir/commands.sh"){$queueing_status="Processing..";} 
+	    else {$queueing_status="<span style=\"color:#CCCCCC\">Queued</span>";}
+	    if(-e "$base_dir/$tempdir/sRNA_openen"){$sRNA_status="Processing..";} 
+	    else {$sRNA_status="<span style=\"color:#CCCCCC\">-</span>";}
+	    if(-e "$base_dir/$tempdir/prediction.res"){$sRNA_status="done"; $RNAplex_interaction_prediction="Progress: $rounded_progress_percentage%";} 
+	    else {$RNAplex_interaction_prediction="<span style=\"color:#CCCCCC\">-</span>";}
+	    if(-e "$base_dir/$tempdir/top100.html"){$RNAplex_interaction_prediction="done"; $parsing_results="Processing.."; } 
+	    else {$parsing_results= "<span style=\"color:#CCCCCC\">-</span>";}
+	    if(defined($tax_id)){
+		if(-e "$base_dir/$tempdir/done"){$parsing_results="done"; $queueing_status="done"; $result_page_link="<a href=\"$server/target_search.cgi?page=2&tax-id=$tax_id&tempdir=$tempdir\">Link</a>";}
+		else {$parsing_results= "<span style=\"color:#CCCCCC\"><br>-</span>";}
+	    }
+	    print "<tr><td>$tempdir_progress_counter</td><td>$queueing_status</td><td>$sRNA_status</td><td>$RNAplex_interaction_prediction</td><td>$parsing_results</td><td>$result_page_link</td></tr>";
+	  
+        
+	print"</table>";
 	    if(defined($tax_id)){
                 print"<script type=\"text/javascript\">
 				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
@@ -1548,7 +1584,9 @@ if($page == 3){
                         accession_default => "$accession_default",
                         tax_id_default => "$tax_id_default",
                         postprocess => "../../../..$base_dir/$tempdir/postprocess",
-                        java_script_location  => "./javascript/postprocessing.js"
+                        java_script_location  => "./javascript/postprocessing.js",
+			scriptfile => "postprocessingscriptfile",
+			stylefile => "postprocessingstylefile"
 	    };
 	    $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
 	}
