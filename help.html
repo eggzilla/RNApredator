@@ -1,121 +1,119 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <title> RNApredator bacterial sRNA target prediction Webserver - Help </title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <title> RNApredator bacterial sRNA target prediction Webserver - Help</title>
+    <style type="text/css">
+      table {black solid; }
+      table thead {background:#ccc; }
+      table td.last { padding-right:15px; }
+      .scroll {height:20ex; overflow-y:scroll; overflow-x:hidden; }
+      table td {text-align:center; border:0px black solid; }
+    </style>
   </head>
   <body>
-	<div align ="center">
-	<img src="./pictures/banner_final.png">
-	<hr>
-	<table width="100%">
-
-		<tr>
-         		<td><a href="introduction.html"><img src="./pictures/introduction.png" alt="Introduction" border="0"></a></td>
-			<td><a href="available_genomes.cgi"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
-         		<td><a href="target_search.cgi"><img src="./pictures/target_search.png" alt="Target Search" border="0"></a></td>
-			<td><a href="help.html"><img src="./pictures/help.png" alt="help" border="0"></a></td>
-		</tr>
-	</table>
-	<hr>
-	</div>
-
-<div align ="left">
-	<script src="./javascript/input.js"></script>
-	<script src="./javascript/sorttable.js"></script>
-	<noscript>This page does not decay graceful :-) - Please enable your java-script </noscript>
-	<style type="text/css">
-			
-			table {black solid; }
-			table thead {background:#ccc; }
-			table td.last { padding-right:15px; }
-			.scroll {height:20ex; overflow-y:scroll; overflow-x:hidden; }
-			table td {text-align:center; border:0px black solid; }
-	</style>
-</div>
-<div align="center">
-	 <h3 id="stepx_title">= Help =</h3>	
-</div>
-<div align="left">
-<P STYLE="margin-top: 0.17in;"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Introduction</FONT></FONT></P>
-<P>The RNApredator software facilitates the prediction of sRNA-mRNA
-interactions in bacteria. Currently targets can be searched in more
-than 1300 bacterial species. RNApredator uses a dynamic programming
-approach to compute putative targets. The main machinery used by
-RNApredator to find targets is the program called <A HREF="http://www.bioinf.uni-leipzig.de/Software/RNAplex/">RNAplex</A>.
-Post-processing steps allow to look at accessibility differences on
-the target mRNA before and after the binding of the sRNAs. It is
-further possible to make a Gene Ontology(GO) and pathways (KEGG) term
-enrichment analysis on a set of selected targets.</P>
-<P STYLE="margin-top: 0.17in;"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Input</FONT></FONT></P>
-<P>The webserver takes as input a genome/plasmid from a set of 2155
-sequences. This can either be entered through the corresponding
-NCBI-Accession Number or the NCBI-Taxonomy ID (Illustration 1). The
-desired genome can also be searched in a tree containing all
-available genomes and grouped into
-phylum/class/order/family/genus/species (Illustration 2). Once the
-desired genome has been selected, a sRNA sequence should be entered,
-without line breaks and without header. The target search is launched
-after the predict button has been pressed. 
-</P>
-<P>An alternative way to enter the genome of interest is to choose it
-from a tree containing all available
- genomes and grouped into
-phylum/class/order/family/genus/species.
-</P>
-<IMG SRC="pictures/inputdemo.png" NAME="graphics1" BORDER=1><br>
-
-	<FONT SIZE=3>
-	<I>Illustration1:<br>
-	Input field of RNApredator. l.h.s Genomes can be introduced<br>
-	either through a NCBI-Accession Number or NCBI-Taxonomy ID. r.h.s<br>
-	The sRNA sequence, without header can be pasted in the corresponding<br>
-	field</I></FONT>
-<br>
-<br>
-
-<IMG SRC="pictures/tree.png" NAME="graphics2" BORDER=1><BR>
-
-	<FONT SIZE=3>
-	<I>Illustration2:<br>
-	 Tree representation of the genomes available in RNApredator. The<br>
-	user can browse by clicking on the arrow symbols. Genomes/plasmids<br>
-	can be selected for target search by clicking on the node designation</I></FONT>
-<BR>
-
-<P STYLE="margin-top: 0.17in;"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Output</FONT></FONT></P>
-<P STYLE="margin-bottom: 0in">The webserver outputs a list of
-sRNA-mRNA interactions which
- is sorted based on the energy of
-interaction returned by the
- dynamic programming approach. It is
-possible to sort the results
- based on the energy/position/name of
-target/Z-score/Genomic
-  coordinate/Accession. Further the output can
-be filtered based on the
- position of the targets relative to the
-start codon. Finally it is also
- possible to  select only the
-25/50/75/100 best interactions. It should
- be noted that all the
-results can be downloaded in tabular format.<br>
-You can view a example result table of the sample input
-<a href="example.html">here(E.coli str. K12 substr. MG1655 - MicA sRNA )</a>.
- 
-</P>
-<P STYLE="margin-bottom: 0in">It is also possible to select a set of
-interations of interst and post-process them. The post-processing
-step will return a list of significantly enriched GO/KEGG terms as
-well as the variation in accessibility around the ribosomal target
-site before and after the binding of the sRNA.</P>
-	
-</div>
-
- <div class="copyright">
-	<hr>
-	2010 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> 
+    <div style="text-align:center">
+      <table width="100%">	
+	<tbody><tr>
+	    <td rowspan="2" height="100%" width="45%"><img src="pictures/banner_final.png"></td>
+            <td width="11%"><a href="introduction.html"><img src="pictures/introduction.png" alt="Introduction" border="0"></a></td>
+	    <td width="18%"><a href="available_genomes.cgi"><img src="pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
+            <td><a href="target_search.cgi"><img src="pictures/target_search.png" alt="Target Search" border="0"></a></td>
+	    <td><a href="help.html"><img src="pictures/help.png" alt="Help" border="0"></a></td>
+	  </tr>
+	  <tr>
+	    <td></td>
+	    <td colspan="2" bgcolor="#dcdcdc" height="75%"><a href="http://localhost:800/RNApredator/introduction.html#history"> History:</a> Version 1.10 online</td>
+	    <td></td>
+	  </tr>
+      </tbody></table>
+      <hr>
     </div>
-  </body>
+    <div style="text-align:center">
+      <h3>= Help =</h3>	
+    </div>
+    <div align="left">
+      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Introduction</font></font></p>
+      <p>The RNApredator software facilitates the prediction of sRNA-mRNA
+	interactions in bacteria. Currently targets can be searched in more
+	than 1300 bacterial species. RNApredator uses a dynamic programming
+	approach to compute putative targets. The main machinery used by
+	RNApredator to find targets is the program called <a href="http://www.bioinf.uni-leipzig.de/Software/RNAplex/">RNAplex</a>.
+	Post-processing steps allow to look at accessibility differences on
+	the target mRNA before and after the binding of the sRNAs. It is
+	further possible to make a Gene Ontology(GO) and pathways (KEGG) term
+	enrichment analysis on a set of selected targets.</p>
+      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Input</font></font></p>
+      <p>The webserver takes as input a genome/plasmid from a set of 2155
+	sequences. This can either be entered through the corresponding
+	NCBI-Accession Number or the NCBI-Taxonomy ID (Illustration 1). The
+	desired genome can also be searched in a tree containing all
+	available genomes and grouped into
+	phylum/class/order/family/genus/species (Illustration 2). Once the
+	desired genome has been selected, a sRNA sequence should be entered,
+	without line breaks and without header. The target search is launched
+	after the predict button has been pressed. 
+      </p>
+      <p>An alternative way to enter the genome of interest is to choose it
+	from a tree containing all available
+	genomes and grouped into
+	phylum/class/order/family/genus/species.
+      </p>
+      <img src="pictures/inputdemo.png" name="graphics1" border=1><br>
+      
+      <font size=3>
+	<I>Illustration1:<br>
+	  Input field of RNApredator. l.h.s Genomes can be introduced<br>
+	  either through a NCBI-Accession Number or NCBI-Taxonomy ID. r.h.s<br>
+	The sRNA sequence, without header can be pasted in the corresponding<br>
+	  field</i></font>
+      <br>
+      <br>
+      
+      <img src="pictures/tree.png" name="graphics2" border=1><br>
+      
+      <font size=3>
+	<I>Illustration2:<br>
+	  Tree representation of the genomes available in RNApredator. The<br>
+	  user can browse by clicking on the arrow symbols. Genomes/plasmids<br>
+	  can be selected for target search by clicking on the node designation</i></font>
+      <br>
+      
+      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Output</font></font></p>
+      <p style="margin-bottom: 0in">The webserver outputs a list of
+	sRNA-mRNA interactions which
+	is sorted based on the energy of
+	interaction returned by the
+	dynamic programming approach. It is
+	possible to sort the results
+	based on the energy/position/name of
+	target/Z-score/Genomic
+	coordinate/Accession. Further the output can
+	be filtered based on the
+	position of the targets relative to the
+	start codon. Finally it is also
+	possible to  select only the
+	25/50/75/100 best interactions. It should
+	be noted that all the
+	results can be downloaded in tabular format.<br>
+	You can view a example result table of the sample input
+	<a href="example.html">here(E.coli str. K12 substr. MG1655 - MicA sRNA )</a>.
+	
+      </p>
+      <p style="margin-bottom: 0in">It is also possible to select a set of
+	interations of interst and post-process them. The post-processing
+	step will return a list of significantly enriched GO/KEGG terms as
+	well as the variation in accessibility around the ribosomal target
+	site before and after the binding of the sRNA.</p>
 
+    </div>
+    
+    <div class="copyright">
+      <hr>
+      2010-2012 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> 
+    </div> 
+  </body>
+  
 </html>
 
 
