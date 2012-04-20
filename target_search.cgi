@@ -18,7 +18,6 @@ use File::Temp qw/tempdir tempfile/;
 my $webserver_name = "RNApredator";
 #defaults for server 
 #my $server="http://rna.tbi.univie.ac.at/RNApredator2";
-#my $source_dir=cwd();
 my $server="http://localhost:800/RNApredator";
 my $source_dir=cwd();
 #baseDIR points to the tempdir folder
@@ -28,11 +27,10 @@ my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
 my $sge_error_dir="$source_dir/error";
 my $sge_log_output_dir="$source_dir/error";
-# exec "export SGE_ROOT=/usr/share/gridengine\n";
 my $sge_root_directory="/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once
-$|=1 ;
+$|=1;
 #Control of the CGI Object remains with webserv.pl, additional functions are defined in the requirements below.
 use CGI;
 $CGI::POST_MAX=100000; #max 100kbyte posts
@@ -67,7 +65,7 @@ my $email=$query->param('email-address')|| undef;
 my $sRNA_input_filename=$query->param('fasta-file')|| undef;
 my $sRNA_input_filehandle=$query->upload('fasta-file')||undef;
 my $tempdir_array_input=$query->param('tempdir_array')|| undef;
-
+my $suboptimal_toggle_input=$query->param('suboptimal_toggle')|| undef;
 
 sub check_fasta(){
 	my $inputstring=shift;
@@ -199,6 +197,17 @@ if(defined($tempdir_array_input)){
     @tempdir_array= split(",",$tempdir_array_input);
 }
 
+#suboptimal_toggle
+my $suboptimal_toggle;
+if(defined($suboptimal_toggle_input)){
+    if($suboptimal_toggle_input eq "on"){
+	$suboptimal_toggle="on";
+    }else{
+	$suboptimal_toggle="off";
+    }
+}else{
+    $suboptimal_toggle="off";
+}
 #top taint check can either be 10. 25 or 100
 my $top;
 if(defined($top_input)){
@@ -344,7 +353,7 @@ my $errorscript="";
 #print STDERR "Got_here_lastest:sRNAinputfilename:!$sRNA_input_filename!:sRNA_input:!$sRNA_input!\n";
 if($page==1){
     #print STDERR "sRNAinputfilename:!$sRNA_input_filename!\n";
-    if($sRNA_input_filename ne ""){
+    if(defined($sRNA_input_filename)){
 	#if the file does not meet requirements we delete it before returning to page0 for error
 	my $name = Digest::MD5::md5_base64(rand);
 	$name =~ s/\+/_/g;
@@ -574,11 +583,19 @@ if($page==4){
 	                        	print COMMANDS "cd $base_dir/$tempdir/;\n";
 		print COMMANDS "cp -s $base_dir/$tempdir/sRNA_openen $base_dir/$tempdir/accessibilites/$accession_number_entry/sRNA_openen;\n";
 		if($run==1){
-		    print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
+		    if($suboptimal_toggle eq "on"){
+			print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
+		    }else{
+			print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >prediction.res;\n";
+		    }
 		    $run ++;
-	                       		}else{
-					    print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
-	                        	}
+		}else{
+		    if($suboptimal_toggle eq "on"){
+			print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -z 20 -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
+		    }else{
+			print COMMANDS "$source_dir/executables/RNAplex -l $interaction_length -e -8 -t $target -q $query  -a $base_dir/$tempdir/accessibilites/$accession_number_entry >>prediction.res;\n";
+		    }
+		}
 	    }
 	    #write total_mRNA_counter to file
 		                open (TOTALMRNACOUNTER, ">$base_dir/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
@@ -723,7 +740,7 @@ if($page==1){
 	close COMMANDS; #close COMMANDS so child can reopen filehandle
 	}elsif (defined $pid){		
 	    close STDOUT;
-	    open (COMMANDS, ">>$base_dir/$tempdir/commands.sh") or die "Could not create comments.sh";
+	    open (COMMANDS, ">>$base_dir/$tempdir/commands.sh") or die "Could not create commands.sh";
 	    #prepare mRNAaccessiblitites
 	    mkdir("$base_dir/$tempdir/accessibilites/",0744);
 	    my $mRNA_accessibility_root_path ="$source_dir/data/mRNA_accessiblities/all/";
@@ -908,18 +925,18 @@ if($page == 2){
 		    #Interpolate => 1 allows simple variable reference
 		    #INTERPOLATE=>1,
 		    #allows use of relative include path
-	                RELATIVE=>1,
+		    RELATIVE=>1,
 					     });
 	my $file = './template/results.html';
 	#calculate appropriate dropmenu
 	#get number of interactions and selected number of top interaction	
-		open(IANUMBER, "<$base_dir/$tempdir/interactionnumber");
+	open(IANUMBER, "<$base_dir/$tempdir/interactionnumber");
 	my $interactionnumber;
 	my $drop_menu_number;
 	while(<IANUMBER>){
 	    $interactionnumber=$_;
 	}
-		#READ Srna from file
+	#READ Srna from file
 	my $filter="";
 	if($top eq "All"){
 	    $filter = "- binding site filter not available for all hits"

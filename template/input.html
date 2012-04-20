@@ -24,12 +24,17 @@
   </div>
 </div>
 </div>
-<div id="3" class="tooltip2" style="width: 400px;">
+<div id="3" class="tooltip2" style="width: 200px;">
   <div class="content">
     <div class="head">sRNA:</div>
     <p>Enter a sRNA containing only following letters:
       A,U,G,C,T,a,u,g,c,t. T and t will be interpreted
-      as U for the computation.</p>
+      as U for the computation. By using fasta like headers
+      you can enter up to 5 sequences at once. e.g:
+    >test1
+    AAAAAAAAAAAAAAAAAAAAA
+    >test2
+    TTTTTTTTTTTTTTTTTTTTT</p>
   </div>
 </div>
 </div>
@@ -39,7 +44,7 @@
     <tr>
       <td id="step1_title">1. Select Genome:</td>
       <td id="step2_title">2. Confirm Genome: </td>
-      <td id="step3_title">3. Enter sRNA-Sequence and Submit:<a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a> </td>
+      <td id="step3_title">3. Enter sRNA <a href="#" onmouseover="XBT(this, {id:'3'})"><a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a> - Sequence and Submit:</td>
     </tr>
     <tr>		
       <td id="step1_content" >	
@@ -52,7 +57,6 @@
 	  <p><strong>OR</strong></p>
 	  <p>Select from <a href="http://rna.tbi.univie.ac.at/RNApredator2/available_genomes.cgi">Available Genomes</a>
 	</form>
-	
       </td>	
       <td id="step2_content" valign="top" >
 	
@@ -74,11 +78,8 @@
     </tr>
   </table>
   <div id="confirm_species">
-    
   </div>
-  
 </div>
-
 <table id="data" style="display:none" >
   [% INCLUDE input_data_template %]
 </table>

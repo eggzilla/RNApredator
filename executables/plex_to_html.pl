@@ -149,7 +149,6 @@ foreach my $mapping_line(@mapping){
   chomp($mapping_line);
   my $annotation_key="";
   my $annotation_value="";
-  my $locus_tag="";
   #getting locus tag
   #some locus tags contain underscores which are also contained in the annotation key
   #therefore we copy the mapping_line and split with whitespaces to isolate the locus tag
