@@ -25,8 +25,8 @@ my $base_dir ="$source_dir/html";
 #sun grid engine settings
 my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
-my $sge_error_dir="$source_dir/error";
-my $sge_log_output_dir="$source_dir/error";
+my $sge_error_dir="$base_dir/error";
+my $sge_log_output_dir="$base_dir/error";
 my $sge_root_directory="/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once
@@ -791,7 +791,7 @@ if($page==1){
 	    my $ip_adress=$ENV{'REMOTE_ADDR'};
 	    $ip_adress=~s/\.//g;
 	    #exec "export SGE_ROOT=/usr/share/gridengine; /usr/bin/qsub -N IP$ip_adress -q web_short_q -e /scr/insulin/egg/sandbox/DA/error -o /scr/insulin/egg/sandbox/DA/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
-	    exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e /scratch2/RNApredator/error -o /scratch2/RNApredator/error $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+	    exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e $sge_error_dir -o $sge_log_output_dir $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
 	    #exec "cd $base_dir/$tempdir/; ./commands.sh" or die "$!";
 	    #analysing and displaying progress:	
 	    #if(defined($tax_id)){
