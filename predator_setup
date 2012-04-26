@@ -1,0 +1,68 @@
+install apache
+install perl-math-round
+install perl-list-moreutils
+install mod_perl
+(arch)sudo pacman -S community/perl-io-string
+(arch)install bioperl from aur - 
+(arch) sudo pacman -S perl-template-toolkit
+start apache
+ 
+make .cgi scripts executable
+by adding to apache document root options ExecCGI
+
+add RNApredator data by coping the folder to the location of the data symlink
+in the RNApredator root folder
+
+add RNApredator accessiblities by coping the folder to the location of the mRNA_accessibility symlink in the RNApredator data folder
+
+Install Vienna RNApackage and make RNAfold, RNAup, RNAplex and RNAplfold
+available over the $PATH variable 
+
+Install sge
+set sge_root_directory in target-search.cgi
+
+One of the R packages needs a fortran compiler
+sudo pacman -S gcc-fortran
+
+Install r
+(arch) sudo pacman -S r
+
+install all folowing R packages as root:
+
+Install r package SparseM (needs gfortran) and fdrtool(needed by subpathwayminer)
+install.packages()
+and select SparseM
+install.packages()
+and select fdrtool
+
+install r package RBGL (needed by subpathwayminer)
+source("http://bioconductor.org/biocLite.R")
+biocLite("RBGL")
+
+Install r package topGO
+open R terminal and execute following commands
+(arch) R
+source("http://bioconductor.org/biocLite.R")
+biocLite("topGO")
+
+Install the r package subpathway miner from the cran archive
+download the .tar.gz and issue
+R CMD INSTALL SubpathwayMiner_3.1.tar.gz
+
+prepare the temp folder...
+
+Set setup variables in target_search.cgi
+
+give html subdir to apache user:
+[egg@erbse RNApredator]$ sudo chown http:users html
+
+
+-----------------------------------------------------------------------------
+
+Deploying RNApredator git repo to linse (rna-server)
+
+change webserver specific settings in target_search.cgi
+change symlinks for data folder and accessiblities folder in data folder 
+change source dir variable in plex_to_html.pl executable
+create an error directory in the html (base_dir) folder and chown it to apache:apache for error and logging messages of sge
+create an accounting directory in the html (base_dir) folder and chown it to apache:apache
