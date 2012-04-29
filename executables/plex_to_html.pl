@@ -11,6 +11,20 @@ use Pod::Usage;
 use Cwd;
 use List::MoreUtils qw/ uniq /;
 use Data::Dumper;
+use Sys::Hostname;
+
+##########################################################################
+#machine specific settings
+my $host = hostname;
+my $source_dir;
+if($host eq "erbse"){
+   $source_dir="/srv/http/RNApredator"; 
+}elsif($host eq "linse"){
+   $source_dir="/scratch2/RNApredator"; 
+}else{
+#if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
+   $source_dir="/scratch2/RNApredator"; 
+}
 
 ##########################################################################
 #convert the total specieslist into an html table for the user input page
@@ -19,7 +33,6 @@ my $base_dir=$ARGV[1];
 #my $tempdir_parent_directory="/srv/http/RNApredator/html";
 my $top= 10000;
 #toDO: hand over sourcedir and hand over full tempdir path
-my $source_dir="/srv/http/RNApredator";
 open (PLEX, "<$base_dir/$tempdir/prediction.res"); #STUFF TO RECOVER
 open (BUG,  ">$base_dir/$tempdir/bug");
 #results related variables

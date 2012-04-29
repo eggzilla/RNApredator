@@ -13,15 +13,30 @@ use Cwd;
 use Digest::MD5;
 use CGI::Carp qw(fatalsToBrowser);
 use File::Temp qw/tempdir tempfile/;
+use Sys::Hostname;
+
 ######################### Webserver machine specific settings ############################################
 ##########################################################################################################
+
+#Set host specific variables according to hostname
+my $host = hostname;
 my $webserver_name = "RNApredator";
-#defaults for server 
-#my $server="http://rna.tbi.univie.ac.at/RNApredator2";
-my $server="http://localhost:800/RNApredator";
 my $source_dir=cwd();
+my $server;
 #baseDIR points to the tempdir folder
-my $base_dir ="$source_dir/html";
+my $base_dir;
+if($host eq "erbse"){
+    $server="http://localhost:800/RNApredator";
+    $base_dir ="$source_dir/html";
+}elsif($host eq "linse"){
+    $server="http://rna.tbi.univie.ac.at/RNApredator2";
+    $base_dir ="/u/html/RNApredator";
+}else{
+#if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
+    $server="http://rna.tbi.univie.ac.at/RNApredator2";
+    $base_dir ="/u/html/RNApredator";
+}
+
 #sun grid engine settings
 my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
