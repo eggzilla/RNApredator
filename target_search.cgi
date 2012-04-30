@@ -626,10 +626,11 @@ if($page==4){
 	    $ip_adress=~s/\.//g;
 	    my ($sec,$min,$hour,$day,$month,$yr19,@rest) = localtime(time);
 	    my $timestamp=(($yr19+1900)."-".sprintf("%02d",++$month)."-".sprintf("%02d",$day)."-".sprintf("%02d",$hour).":".sprintf("%02d",$min).":".sprintf("%02d",$sec));
+	    my $accession_numbers_string=join(",",@accession_number_array);
 	    #write report to accounting file
 	    open(ACCOUNTING, ">>$accounting_dir/accounting") or die "Could not write to accounting file: $!/n";
-	    #ipaddress tempdir timestamp querynumber suboptimal_toggle
-	    print ACCOUNTING "$ip_adress $tempdir $timestamp $number_of_sRNAs $suboptimal_toggle\n";
+	    #ipaddress tempdir timestamp querynumber suboptimal_toggle accession numbers
+	    print ACCOUNTING "$ip_adress $tempdir $timestamp $number_of_sRNAs $suboptimal_toggle $accession_numbers_string\n";
 	    close ACCOUNTING;
 	    $exec_command=$exec_command." $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 	}
@@ -824,10 +825,11 @@ if($page==1){
 	$ip_adress=~s/\.//g;
 	my ($sec,$min,$hour,$day,$month,$yr19,@rest) = localtime(time);
 	my $timestamp=(($yr19+1900)."-".sprintf("%02d",++$month)."-".sprintf("%02d",$day)."-".sprintf("%02d",$hour).":".sprintf("%02d",$min).":".sprintf("%02d",$sec));
+	my $accession_numbers_string=join(",",@accession_number_array);
 	#write report to accounting file
 	open(ACCOUNTING, ">>$accounting_dir/accounting") or die "Could not write to accounting file: $!/n";
-	#ipaddress tempdir timestamp querynumber suboptimal_toggle
-	print ACCOUNTING "$ip_adress $tempdir $timestamp 1 $suboptimal_toggle\n";
+	#ipaddress tempdir timestamp querynumber suboptimal_toggle accession_numbers
+	print ACCOUNTING "$ip_adress $tempdir $timestamp 1 $suboptimal_toggle $accession_numbers_string\n";
 	close ACCOUNTING;
 	exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e $sge_error_dir -o $sge_log_output_dir $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
 	#exec "cd $base_dir/$tempdir/; ./commands.sh" or die "$!";
