@@ -135,7 +135,7 @@ function tax_id_submitter_back(ref){
 function tax_id_confirm(ref){
     var tax_id_value=document.getElementById("tax-id").innerHTML;
     var code ="<form action=\"target_search.cgi\" id=\"submit-form\"  method=\"post\" enctype=\"multipart/form-data\">" +
-        "<textarea id=\"sRNA-Input\"  name=\"sRNA-submit\" type=\"text\" cols=\"40\" rows=\"4\"  maxlength=\"180\" onkeyup=\"lock_sRNA_upload_input(this)\"></textarea>" +
+        "<textarea id=\"sRNA-Input\"  name=\"sRNA-submit\" type=\"text\" cols=\"40\" rows=\"4\"  maxlength=\"500\" onkeyup=\"lock_sRNA_upload_input(this)\"></textarea>" +
         "<div id=\"validation_message\"></div>"+
         "<strong>OR</strong><br>"+
         "Upload a fasta-file:<br>"+
@@ -251,7 +251,7 @@ if(isok){
        	var code ="<form action=\"target_search.cgi\" method=\"post\">" +
             "<u>Tax-id:</u> <br><input id=\"tax-id-submit\"  value=\""+ tax_id_value +"\" name=\"tax-id\" type=\"hidden\"  maxlength=\"30\">" +
             tax_id_value  +"<br><br>"+
-            "<u>sRNA Sequence:</u><br><input id=\"sRNA-submit\" value=\""+sRNA_input+"\"  name=\"sRNA\" type=\"hidden\"  maxlength=\"180\">" +
+            "<u>sRNA Sequence:</u><br><input id=\"sRNA-submit\" value=\""+sRNA_input+"\"  name=\"sRNA\" type=\"hidden\"  maxlength=\"500\">" +
 	    "<input id=\"page\" value=\"1\"  name=\"page\" type=\"hidden\"  maxlength=\"1\">" +	
             "Fasta with "+ sRNA_number +" sequences:<br>" + sRNA_header_output + 
             email_text+
@@ -271,7 +271,7 @@ if(isok){
 	var code ="<form action=\"target_search.cgi\" method=\"post\">" +
             "<u>Tax-id:</u> <br><input id=\"tax-id-submit\"  value=\""+ tax_id_value +"\" name=\"tax-id\" type=\"hidden\"  maxlength=\"30\">" +
             tax_id_value  +"<br><br>"+
-            "<u>sRNA Sequence:</u><br><input id=\"sRNA-submit\" value=\""+sRNA_input+"\"  name=\"sRNA\" type=\"hidden\"  maxlength=\"180\">" +
+            "<u>sRNA Sequence:</u><br><input id=\"sRNA-submit\" value=\""+sRNA_input+"\"  name=\"sRNA\" type=\"hidden\"  maxlength=\"500\">" +
             "<input id=\"page\" value=\"1\"  name=\"page\" type=\"hidden\"  maxlength=\"1\">" +    
             sRNA_input +"<br>"+
             "<input type=\"submit\" value=\"Predict\">"+
@@ -362,7 +362,7 @@ function lock_sRNA_upload_input(ref){
 function accession_confirm(ref){
     var accession_number_value=document.getElementById("accession_number").innerHTML;
     var code ="<form action=\"target_search.cgi\" id=\"submit-form\"  method=\"post\"  enctype=\"multipart/form-data\">" +
-        "<textarea id=\"sRNA-Input\"  name=\"sRNA-submit\" type=\"text\" cols=\"40\" rows=\"3\"  maxlength=\"180\" onkeyup=\"lock_sRNA_upload_input(this)\"></textarea>" +
+        "<textarea id=\"sRNA-Input\"  name=\"sRNA-submit\" type=\"text\" cols=\"40\" rows=\"3\"  maxlength=\"500\" onkeyup=\"lock_sRNA_upload_input(this)\"></textarea>" +
 	"<div id=\"validation_message\"></div>"+
 	"<strong>OR</strong><br>"+
 	"Upload a fasta-file:<br>"+
