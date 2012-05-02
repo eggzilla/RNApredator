@@ -38,7 +38,7 @@
 	interactions in bacteria. Currently targets can be searched in more
 	than 1300 bacterial species. RNApredator uses a dynamic programming
 	approach to compute putative targets. The main machinery used by
-	RNApredator to find targets is the program called <a href="http://www.bioinf.uni-leipzig.de/Software/RNAplex/">RNAplex</a>.
+	RNApredator to find targets is the program called <a href="http://www.bioinf.uni-leipzig.de/Software/RNAplex/">RNAplex (Version 1.8.4)</a>.
 	Post-processing steps allow to look at accessibility differences on
 	the target mRNA before and after the binding of the sRNAs. It is
 	further possible to make a Gene Ontology(GO) and pathways (KEGG) term
@@ -53,6 +53,9 @@
 	desired genome has been selected, a sRNA sequence should be entered,
 	without line breaks and without header. The target search is launched
 	after the predict button has been pressed. 
+      </p>
+      <p>
+	Enabling the "include suboptimal interactions" checkbox adds suboptimal results to the result list.
       </p>
       <p>An alternative way to enter the genome of interest is to choose it
 	from a tree containing all available
@@ -79,9 +82,22 @@
 	  can be selected for target search by clicking on the node designation</i></font>
       <br>
       
+      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Processing</font></font></p>
+      <p style="margin-bottom: 0in">The results are calculated as follows:<br>
+	RNAplex is called with the parameter interaction length set to 30 and precomputed accessibilities produced with RNAplfold (Version 1.8.4)
+	for the mRNAs and RNAup (Version 1.8.4) for the sRNAs.
+	If suboptimal interactions were requested additionally an energy-threshold of -8 and a duplex distance of 20 is used running RNAplex. 
+	The <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAplex.html">RNAplex man page</a> gives a detailed explanation of these parameters.
+	</p>
+      <p style="margin-bottom: 0in">
+	RNAplfold calculation of the mRNA accessiblities was performed with window-size (-W) set to 240, span (-L) to 160, length of the unstructured region to 30, requesting opening energies (-O) (see <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAplfold.html">RNAplfold man-page</a> for details).
+	RNAup computation of sRNA accessibility is called with the parameter for length of the unstructured region (-u) set to 40 or the sequence lenght if shorter
+	(see <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAup.html">RNAup man-page</a> for details).
+      </p>
+      
       <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Output</font></font></p>
       <p style="margin-bottom: 0in">The webserver outputs a list of
-	sRNA-mRNA interactions which
+	sRNA-mRNA interactions (including suboptimal interactions if enabled in input), which
 	is sorted based on the energy of
 	interaction returned by the
 	dynamic programming approach. It is
@@ -101,7 +117,7 @@
 	
       </p>
       <p style="margin-bottom: 0in">It is also possible to select a set of
-	interations of interst and post-process them. The post-processing
+	interations of interest and post-process them. The post-processing
 	step will return a list of significantly enriched GO/KEGG terms as
 	well as the variation in accessibility around the ribosomal target
 	site before and after the binding of the sRNA.</p>

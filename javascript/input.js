@@ -146,7 +146,7 @@ function tax_id_confirm(ref){
         //"<br>Provide email-address(optional):<br>"+
         //"<input id=\"email-address\"  value=\"\" name=\"email\" type=\"text\" maxlength=\"50\"><br>"+
         "<div id=\"email_message\"></div>"+
-	"<br><input type=\"checkbox\" id=\"suboptimal_toggle\" name=\"suboptimal_toggle\" value=\"on\">compute suboptimal interactions<br>"+
+	"<br><input type=\"checkbox\" id=\"suboptimal_toggle\" name=\"suboptimal_toggle\" value=\"on\">include suboptimal interactions<br>"+
         "<br><input type=\"button\" value=\"Predict\" onclick=\"accession_submitter(this)\">"+
         "<input type=\"reset\" value=\"Back\" onclick=\"tax_id_confirm_back(this)\" >"+
         "<input type=\"reset\" value=\"Reset\" onclick=\"reseter(this)\" >"+
@@ -373,7 +373,7 @@ function accession_confirm(ref){
         //"<br>Provide email-address (optional):"+
         //"<input id=\"email-address\"  value=\"\" name=\"email\" type=\"text\" maxlength=\"30\"><br>"+
 	"<div id=\"email_message\"></div>"+
-	"<br><input type=\"checkbox\" id=\"suboptimal_toggle\" name=\"suboptimal_toggle\" value=\"on\">compute suboptimal interactions<br>"+
+	"<br><input type=\"checkbox\" id=\"suboptimal_toggle\" name=\"suboptimal_toggle\" value=\"on\">include suboptimal interactions<br>"+
         "<br><input type=\"button\" value=\"Predict\" onclick=\"accession_submitter(this)\">"+
         "<input type=\"reset\" value=\"Back\" onclick=\"accession_confirm_back(this)\" >"+
         "<input type=\"reset\" value=\"Reset\" onclick=\"reseter(this)\" >"+
