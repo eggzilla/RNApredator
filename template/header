@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title> [% title %] - [% tbihome  %] </title>
     [% PROCESS $scriptfile %]
     [% PROCESS $stylefile %]
   </head>
   <body>
     <div style="text-align:center">
-      <table width="100%">	
+      <table style="width:100%;">	
 	<tr>
-	  <td rowspan="2" width="45%" height="100%"><img src="[% banner %]"></img></td>
-          <td width="11%"><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction" border="0"></img></a></td>
-	  <td width="18%"><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes" border="0"></img></a></td>
-          <td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search" border="0"></img></a></td>
-	  <td><a href="[% help %]"><img src="./pictures/help.png" alt="Help" border="0"></img></a></td>
+	  <td rowspan="2" style="width:45%;"><img src="[% banner %]" alt="Banner"></td>
+          <td style="width:11%;"><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction"></a></td>
+	  <td style="width:18%;"><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes"></a></td>
+          <td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search"></a></td>
+	  <td><a href="[% help %]"><img src="./pictures/help.png" alt="Help"></a></td>
 	</tr>
 	<tr>
 	  <td></td>
-	  <td colspan="2" bgcolor="#dcdcdc" height="75%"><a href="[% introduction %]#history"> History:</a> Version 1.25 online</td>
+	  <td colspan="2" style="background-color:#dcdcdc;height:75%;"><a href="[% introduction %]#history"> History:</a> Version 1.25 online</td>
 	  <td></td>
 	</tr>
       </table>

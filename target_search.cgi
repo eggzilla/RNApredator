@@ -479,7 +479,7 @@ if(@parsed_array){
 if($page==4){
     #if $tax_id is set $accessionnumber is set to undef
     if(defined($tax_id)){$accession_number=undef;}
-    print $query->header();
+    print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
 	INCLUDE_PATH => ['./template'],
@@ -643,7 +643,7 @@ if($page==4){
 ######INPUT######################################################
 #Print HTTP-Header for input-page
 if($page == 0){
-    print $query->header();
+    print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
 	INCLUDE_PATH => ['./template'],
@@ -681,7 +681,7 @@ if($page == 0){
 if($page==1){
     #if $tax_id is set $accessionnumber is set to undef
     if(defined($tax_id)){$accession_number=undef;}
-    print $query->header();
+    print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
 	INCLUDE_PATH => ['./template'],
@@ -753,12 +753,11 @@ if($page==1){
 	#redirect 
 	if(defined $tax_id){
 	    print"<script type=\"text/javascript\">
-                          window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
-                          //window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\";
+                          window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;tax-id=$tax_id&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
                          </script>";
 	}else{
 	    print"<script type=\"text/javascript\">
-                        window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
+                        window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;accession=$accession_number&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
                         //window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\";
                        </script>";
 	}
@@ -869,7 +868,7 @@ if($page == 5){
     #we check each of the tempdirs from the array and display a list
     #when one of them is done we link to the fitting page2
     
-    print $query->header(); 
+    print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
 	INCLUDE_PATH => ['./template'],
@@ -896,9 +895,9 @@ if($page == 5){
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     print "<p>This can take some minutes.</p>";
     if(defined($tax_id)){
-	print "Wait for calculation to finish or return <a href=\"$server/target_search.cgi?page=5&tax-id=$tax_id&tempdir_array=$tempdir_array_input\">here</a> later.<br>";
+	print "Wait for calculation to finish or return <a href=\"$server/target_search.cgi?page=5&amp;tax-id=$tax_id&amp;tempdir_array=$tempdir_array_input\">here</a> later.<br>";
     }else{
-	print "Wait for calculation to finish or return <a href=\"$server/target_search.cgi?page=5&accession=$accession_number&tempdir_array=$tempdir_array_input\">here</a> later.<br>";
+	print "Wait for calculation to finish or return <a href=\"$server/target_search.cgi?page=5&amp;accession=$accession_number&amp;tempdir_array=$tempdir_array_input\">here</a> later.<br>";
     }
     print "<br>";
     my $tempdir_progress_counter=1;
@@ -958,7 +957,7 @@ if($page == 5){
 #RESULTPAGE
 if($page == 2){
     if(-e "$base_dir/$tempdir/done"){
-	print $query->header();
+	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
 	    INCLUDE_PATH => ['./template'],
@@ -1018,7 +1017,6 @@ if($page == 2){
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Results",
 	    tbihome => "http://www.tbi.univie.ac.at/",
 	    #hier weiter
-	    #drop_options => "$source_dir/template/dropmenu$drop_menu_number",
 	    drop_options => "dropmenu$drop_menu_number",
 	    banner => "./pictures/banner_final.png",
 	    introduction => "introduction.html",
@@ -1044,7 +1042,7 @@ if($page == 2){
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     }else{
 	#PROGRESS PAGE
-	print $query->header();	
+	print "Content-type: text/html; charset=utf-8\n\n";	
 	my $template = Template->new({
 	    # where to find template files
 	    INCLUDE_PATH => ['./template'],
@@ -1071,7 +1069,7 @@ if($page == 2){
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	if(defined($accession_number)){
-	    my $accession_link="$server/target_search.cgi?"."page=$page"."&accession=$accession_number"."&sRNA=$sRNA"."&tempdir=$tempdir";
+	    my $accession_link="$server/target_search.cgi?"."page=$page"."&amp;accession=$accession_number"."&amp;sRNA=$sRNA"."&amp;tempdir=$tempdir";
 	    print "<p>Processing:</p>";
 	    print "This can take some minutes.";
 	    print "<br>Wait for calculation to finish or";
@@ -1143,13 +1141,11 @@ if($page == 2){
 	print"</table>";
 	if(defined($tax_id)){
 	    print"<script type=\"text/javascript\">
-				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
-                          //window.location = \"$server/target_search.cgi?page=2&tax-id=$tax_id&sRNA=$sRNA&tempdir=$tempdir\";
+				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;tax-id=$tax_id&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
                          </script>";
 	}else{
 	    print"<script type=\"text/javascript\">
-			 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\"\', 5000);
-                        //window.location = \"$server/target_search.cgi?page=2&accession=$accession_number&sRNA=$sRNA&tempdir=$tempdir\";
+			 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;accession=$accession_number&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
                        </script>";
 	}
     }
@@ -1178,7 +1174,7 @@ if($page == 3){
     
     unless(-e "$base_dir/$tempdir/begin2"){
 	`touch $base_dir/$tempdir/begin2`;
-	print $query->header();
+	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
 	    INCLUDE_PATH => ['./template'],
@@ -1211,7 +1207,7 @@ if($page == 3){
 	    $query->delete_all();
 	    #send user to result page
 	    print"<script type=\"text/javascript\">
-                        			window.location = \"$server/target_search.cgi?page=3&tempdir=$tempdir\";
+                        			window.location = \"$server/target_search.cgi?page=3&amp;tempdir=$tempdir\";
                        			</script>";
 	}elsif (defined $pid){
 	    # close STDOUT;
@@ -1243,7 +1239,7 @@ if($page == 3){
 		    if($result_line =~ m/$postprocess_selected/){
 			#print STDERR "Result line:  $result_line\n";
 			#parse result line
-			my $entry_line="<tr><td><strong>Interaction"."$entry_counter"."</strong></td></tr>\n";
+			my $entry_line="<tr><td><strong>Interaction"."$entry_counter"."</strong></td><td colspan=\"11\"></td></tr>\n";
 			#key0,accession_letters1,accession_number2,coordinates3,dot_bracket_structure4,hypothetical_transcript_start5,hypothetical_transcript_end6,sRNA_start7,sRNA_end8,binding_energy9,intitial_binding_energy10,openening_energy_mRNA11,openening_energy_sRNA12,z-score13,annnotation14,locus-tag15,replicon16
 			#00999945718-46562,NC,009999,45718-46562,((((((((&)))))))),406,413,34,41,-0.23,-3.40,0.26,2.91,-1.36,"putative phage repressor",Sbal195_4635,plasmid pS19502
 			my @split_result_line = split (/,/,$result_line);
@@ -1268,8 +1264,9 @@ if($page == 3){
 			    $genomic_start = $genomic_first_coordinate + 200; #translation start
 			    $genomic_end = $genomic_second_coordinate ;
 			}
-			
-			my $dot_bracket = "<td>"."$split_result_line[4]"."</td>";
+			my $secondary_structure_html=$split_result_line[4];
+			$secondary_structure_html=~s/&/&amp;/g;
+			my $dot_bracket = "<td>"."$secondary_structure_html"."</td>";
 			#mRNA coordinates
 			my $mRNA_start= $split_result_line[5];
 			my $mRNA_start_html= "<td>"."$mRNA_start"."</td>";
@@ -1379,9 +1376,8 @@ if($page == 3){
 			#my $locus_tag_line = "locus tag: $locus_tag <br>";
 			my $get_mRNA_sequence = "<tr><td>download:<br>  <a href=\"$server/html/$tempdir/$split_result_line[0].fasta\">mRNA sequence</a><br>";
 			my $get_sRNA_sequence = "download:<br> <a href=\"$server/html/$tempdir/sRNA.fasta\">sRNA sequence</a><br>";	
-			my $accessiblity_plot ="Accessiblity Plot: <a href=\"$server/accessiblity_plot.cgi?s=$split_result_line[0]&b=$absolute_mRNA_interaction_start&e=$absolute_mRNA_interaction_stop&tempdir=$tempdir&page=0\" target=\"_blank\"><br>Calculate (new window)</a><br>";
-			my $rna_up_submit ="RNAup Webserver: <a href=\"$server/cgi-bin/RNAup.cgi?PAGE=2&SCREEN=$sequence\n&SCREEN2=$sRNA_seq\n&tempdir=$tempdir&page=0\" target=\"_blank\"><br>Submit (new window)</a><br>";
-			#my $go_calculation="Gene Ontology:  <a href=\"http://insulin.tbi.univie.ac.at/accessiblity_plot.cgi?s=$split_result_line[0]&b=$absolute_mRNA_interaction_start&e=$absolute_mRNA_interaction_stop&sRNA=$sRNA&tempdir=$tempdir\"\ target=\"_blank\">Calculate (new window)</a><br>";
+			my $accessiblity_plot ="Accessiblity Plot: <a href=\"$server/accessiblity_plot.cgi?s=$split_result_line[0]&amp;b=$absolute_mRNA_interaction_start&amp;e=$absolute_mRNA_interaction_stop&amp;tempdir=$tempdir&amp;page=0\" target=\"_blank\"><br>Calculate (new window)</a><br>";
+			my $rna_up_submit ="RNAup Webserver: <a href=\"http://rna.tbi.univie.ac.at/cgi-bin/RNAup.cgi?PAGE=2&amp;SCREEN=$sequence&amp;SCREEN2=$sRNA_seq&amp;tempdir=$tempdir&amp;page=0\" target=\"_blank\"><br>Submit (new window)</a><br>";
 			open(ASCII, "<$base_dir/$tempdir/$split_result_line[0].ascii") or die "could not open $base_dir/$tempdir/$split_result_line[0].asccii ,$! ";
 			my $ascii_string="";
 			while(<ASCII>){
@@ -1393,7 +1389,7 @@ if($page == 3){
 			my $processing_field = "</td><td id=\"processing-$split_result_line[0]\" colspan=\"11\">
 						<br><strong>Detailed Interaction(as ASCII):</strong>
 						$ascii_string
-						</td></tr><tr><td style=\"border:none\">&nbsp;</td></tr>";
+						</td></tr><tr><td colspan=\"12\" style=\"border:none\">&nbsp;</td></tr>";
 			my $go_term_line="<tr><td>Associated GO-terms</td><td colspan=\"11\">$associated_go_terms</td></tr>";
 			my $processing_line = "$get_mRNA_sequence"."$get_sRNA_sequence"."$accessiblity_plot"."$rna_up_submit"."$processing_field\n";
 			#print POSTPROCESSING "$entry_line"."$headerline"."$dataline"."$processing_line";
@@ -1448,7 +1444,7 @@ if($page == 3){
 		close MF;
 		#print mf table
 		print POSTPROCESSING "<u>Molecular Function:</u><br>\n";
-		print POSTPROCESSING "<table style=\"display:none\" class=\"tablesorter\" id=\"myTable\" border=\"1\"  cellspacing=\"1\" width=\"75%\">\n";
+		print POSTPROCESSING "<table style=\"display:none;width:75%;border: 1px solid black;\" class=\"tablesorter\" id=\"myTable\">\n";
 		print POSTPROCESSING "<thead>\n";
 		print POSTPROCESSING "<tr>\n
 								<th>GO.ID</th>\n 
@@ -1489,7 +1485,7 @@ if($page == 3){
 		close BP;
 		#print bp table
 		print POSTPROCESSING "<u>Biological Process:</u><br>\n";
-		print POSTPROCESSING "<table style=\"display:none\"  class=\"tablesorter\" id=\"myTable1\" border=\"1\"  cellspacing=\"1\" width=\"75%\">\n";
+		print POSTPROCESSING "<table style=\"display:none;width:75%;border: 1px solid black;\"  class=\"tablesorter\" id=\"myTable1\">\n";
 		print POSTPROCESSING "<thead>\n";
 		print POSTPROCESSING "<tr>\n
         	                                                <th>GO.ID</th>\n
@@ -1529,7 +1525,7 @@ if($page == 3){
 		}
 		#print cc table
 		print POSTPROCESSING "<u>Cell Component:</u><br>\n";
-		print POSTPROCESSING "<table style=\"display:none\"  class=\"tablesorter\" id=\"myTable2\" border=\"1\"  cellspacing=\"1\" width=\"75%\">\n";
+		print POSTPROCESSING "<table style=\"display:none;width:75%;border: 1px solid black;\"  class=\"tablesorter\" id=\"myTable2\">\n";
 		print POSTPROCESSING "<thead>\n";
 		print POSTPROCESSING "<tr>\n
         	                                                <th>GO.ID</th>\n
@@ -1570,15 +1566,16 @@ if($page == 3){
 	    }
 	    #Selected Entries:	
 	    print POSTPROCESSING "<h3>Detailed View for selected Interactions: </h3>\n";
-	    print POSTPROCESSING "<table class=\"postprocess\" cellspacing=\"3\" border=\"1\">";
+	    print POSTPROCESSING "<table class=\"postprocess\">";
 	    foreach my $print_entry (@entries_print_array){
 		print POSTPROCESSING "$print_entry";
 	    }
+	    print POSTPROCESSING "</table>\n</div>\n";
 	    `touch $base_dir/$tempdir/done2`;			
 	}
     }
     unless(-e "$base_dir/$tempdir/done2"){
-	print $query->header();
+	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
 	    INCLUDE_PATH => ['./template'],
@@ -1606,19 +1603,19 @@ if($page == 3){
 	    stylefile => "postprocessingstylefile"    
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
-	my $link="$server/target_search.cgi?"."page=$page"."&tempdir=$tempdir";
+	my $link="$server/target_search.cgi?"."page=$page"."&amp;tempdir=$tempdir";
 	print "<p>Postprocessing:</p>";
 	print "<p>This can take some minutes.</p>";
 	print "<p>Wait for calculation to finish or</p>";
 	print "<p>bookmark following <a href=\"$link\">link</a> and return later.</p>";
 	print "<br>";
 	print"<script type=\"text/javascript\">
-			window.setTimeout (\' window.location = \"$server/target_search.cgi?page=3&tempdir=$tempdir\"\', 5000);
+			window.setTimeout (\' window.location = \"$server/target_search.cgi?page=3&amp;tempdir=$tempdir\"\', 5000);
                     	</script>";
     }
 # window.location = \"http://insulin.tbi.univie.ac.at/target_search.cgi?page=3&tempdir=$tempdir\";	
     if(-e "$base_dir/$tempdir/done2"){
-	print $query->header();
+	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
 	    INCLUDE_PATH => ['./template'],

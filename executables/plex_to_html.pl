@@ -246,7 +246,9 @@ foreach my $sort_key (sort {$parsed_results->{$a}->[7] <=> $parsed_results->{$b}
   }else{
     $strand="+";
   }
-  my $output_line =  "\<tr id\=\"t"."$counter\"\>"."<td>"."<input type=\"checkbox\" id=\"p"."$counter\" name=\"p"."$counter"."\" value=\"$parsed_results->{$sort_key}->[0]\">"."</td>"."<td>"."$counter."."</td>"."<td>"."$parsed_results->{$sort_key}->[7]"."</td>"."<td>"."$parsed_results->{$sort_key}->[11]"."</td>"."<td>"."$parsed_results->{$sort_key}->[4]"."</td>"."<td id=\"t"."$counter"."-start\">"."$hypothetical_transcript_start"."</td>"."<td id=\"t"."$counter"."-end\">"."$hypothetical_transcript_end"."</td>"."<td> $parsed_results->{$sort_key}->[6]"."</td>"."<td>"."$parsed_results->{$sort_key}->[12]"."</td>"."<td>"."$parsed_results->{$sort_key}->[13]"."</td>"."<td>"."$strand"."</td>"."<td>"."$genomic_coordinates"."</td>"."<td>"."$parsed_results->{$sort_key}->[1]_$parsed_results->{$sort_key}->[2]"."</td>"."<td>"."$parsed_results->{$sort_key}->[14]"."</td>"."</tr>";
+  my $secondary_structure_html=$parsed_results->{$sort_key}->[4];
+  $secondary_structure_html=~s/&/&amp;/g;
+  my $output_line =  "\<tr id\=\"t"."$counter\"\>"."<td>"."<input type=\"checkbox\" id=\"p"."$counter\" name=\"p"."$counter"."\" value=\"$parsed_results->{$sort_key}->[0]\">"."</td>"."<td>"."$counter."."</td>"."<td>"."$parsed_results->{$sort_key}->[7]"."</td>"."<td>"."$parsed_results->{$sort_key}->[11]"."</td>"."<td>"."$secondary_structure_html"."</td>"."<td id=\"t"."$counter"."-start\">"."$hypothetical_transcript_start"."</td>"."<td id=\"t"."$counter"."-end\">"."$hypothetical_transcript_end"."</td>"."<td> $parsed_results->{$sort_key}->[6]"."</td>"."<td>"."$parsed_results->{$sort_key}->[12]"."</td>"."<td>"."$parsed_results->{$sort_key}->[13]"."</td>"."<td>"."$strand"."</td>"."<td>"."$genomic_coordinates"."</td>"."<td>"."$parsed_results->{$sort_key}->[1]_$parsed_results->{$sort_key}->[2]"."</td>"."<td>"."$parsed_results->{$sort_key}->[14]"."</td>"."</tr>";
   if($counter<26){
     print TOP25 "$output_line\n";
   }

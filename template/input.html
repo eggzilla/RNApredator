@@ -1,5 +1,5 @@
 [% INCLUDE header %]
-<div align ="left">
+<div style="text-align:left">
   [% error_script %]
 </div>
 <div id="1" class="tooltip2" style="width: 400px;">
@@ -12,7 +12,6 @@
     </p>
   </div>
 </div>
-</div>
 <div id="2" class="tooltip2" style="width: 400px;">
   <div class="content">
     <div class="head">Taxonomy ID:</div>
@@ -22,7 +21,6 @@
       chromosomes associated to the tax-id will be searched for interaction with
       the provided sRNA.</p>
   </div>
-</div>
 </div>
 <div id="3" class="tooltip2" style="width: 200px;">
   <div class="content">
@@ -38,39 +36,38 @@
     Uploaded sequence files can have up to 2000 letters.</p>
   </div>
 </div>
-</div>
-<div align="center">
+<div style="text-align:center">
   <h3 id="stepx_title">= Target prediction =</h3>	
-  <table id="input_table" bgcolor="white" class="borders" >
+  <table id="input_table" class="borders" >
     <tr>
       <td id="step1_title">1. Select Genome:</td>
       <td id="step2_title">2. Confirm Genome: </td>
-      <td id="step3_title">3. Enter sRNA <a href="#" onmouseover="XBT(this, {id:'3'})"><a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a> - Sequence and Submit:</td>
+      <td id="step3_title">3. Enter sRNA <a href="#" onmouseover="XBT(this, {id:'3'})"><img style="vertical-align:middle" src="pictures/test2.png" alt="info"></a> - Sequence and Submit:</td>
     </tr>
     <tr>		
       <td id="step1_content" >	
 	<form action="/cgi-bin/plexserver.cgi" method="post" target="Daten">
 	  <p>NCBI-Accession Number <br><input name="accession_id" id="accession_id" type="text" size="20" maxlength="20" value="[% accession_default  %]" onkeyup="accession_check(this)">
-	    <a href="#" onmouseover="XBT(this, {id:'1'})"> <img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
+	    <a href="#" onmouseover="XBT(this, {id:'1'})"> <img style="vertical-align:middle" src="pictures/test2.png" alt="info"></a>
 	  <p><strong>OR</strong></p>
 	  <p>NCBI-Taxonomy ID<br><input name="tax_id" id="tax_id" type="text" size="20" maxlength="20" value="[% tax_id_default %]" onkeyup="tax_check(this)">
-	    <a href="#" onmouseover="XBT(this, {id:'2'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0"></a>
+	    <a href="#" onmouseover="XBT(this, {id:'2'})"><img style="vertical-align:middle" src="pictures/test2.png" alt="info"></a>
 	  <p><strong>OR</strong></p>
 	  <p>Select from <a href="http://rna.tbi.univie.ac.at/RNApredator2/available_genomes.cgi">Available Genomes</a>
 	</form>
       </td>	
-      <td id="step2_content" valign="top" >
+      <td id="step2_content" style="vertical-align:top">
 	
       </td>
-      <td id="step3_content" valign="top">
+      <td id="step3_content" style="vertical-align:top">
 
       </td>
     </tr>	
   </table>
-  <table width="90%" border="1">
-    <tr border="1">
+  <table style="width:95%;border: 0px solid black;">
+    <tr>
       <td>
-	<div align="left">
+	<div style="text-align:left">
 	  <form>
             <p><input type="button" name="sample_button" value="Paste sample: Escherichia coli str. K-12 substr. MG1655 - MicA sRNA" onClick="sample()">  &nbsp; &nbsp; &nbsp; &nbsp;   If the genome of interest is not available please contact us via email.</p>
           </form>

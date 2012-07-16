@@ -142,5 +142,5 @@ for(my $i=0;$i<=$length;$i++){
 
 #asccii output:
 open (ASCII, ">$base_dir/$tempdir/$mRNA_identifier.ascii") or die "Could not write $tempdir/$mRNA_identifier.ascii";
-print ASCII  "<table><tr><td><pre>mRNA: 5'-<br><br>sRNA: 3'-</pre></td><td><pre>$mRNA_asccii<br>$interaction_asccii<br>$sRNA_asccii<br></pre></td><td><pre>-3'<br><br>-5'</pre></td></tr></table>";	
+print ASCII  "<table><tr><td style=\"0px solid #000000;\"><pre>mRNA: 5'-<br><br>sRNA: 3'-</pre></td><td style=\"0px solid #000000;\"><pre>$mRNA_asccii<br>$interaction_asccii<br>$sRNA_asccii<br></pre></td><td style=\"0px solid #000000;\"><pre>-3'<br><br>-5'</pre></td></tr></table>";	
 close ASCII;

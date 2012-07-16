@@ -18,14 +18,9 @@
 <div style="text-align:center">
 <h2>Predicted Top Interactions of [% interactionnumber %] Total:</h2>
 </div>
-<div align = "left">
-<!--<table class="tablesorter" border="1" cellspacing="1">
-	<tr>
-	<td> -</td><td>Interaction</td><td>Target</td>
-	<tr>
-</table>-->
+<div style="text-align:left">
 <form name="filter1" action="#" method="get">
-<table class="filtertable"  cellspacing="3">
+<table class="filtertable">
 	<tr>
 		<td>Resources:</td>
 		<td>- all predictions as <a href="[% all_predictions %]">.csv-file</a> or as RNAplex <a href="[% plex_output_file %]">.res-file</a> </td>
@@ -34,7 +29,6 @@
 	<tr>
            	<td>Filtering:</td>
 		<td>- Show top	
-			<form name="filter1">
                         <select name="topselector" id="selectorid"  size="1" onchange="select(this)" >
 				[% INSERT $drop_options %]
                         </select>
@@ -47,9 +41,9 @@
 </table>
 </form>
 <form action="target_search.cgi" id="postprocess-submit"  method="get">
-<input type="button" value="Post-Process" onClick="check_postprocess()"> Select interactions below for postprocessing <a href="#" onmouseover="XBT(this, {id:'1'})"><img style="vertical-align:middle" src="pictures/test2.png" border="0" alt="Info"></a>
+<input type="button" value="Post-Process" onClick="check_postprocess()"> Select interactions below for postprocessing <a href="#" onmouseover="XBT(this, {id:'1'})"><img style="vertical-align:middle" src="pictures/test2.png" alt="Info"></a>
 <div id='submission-error' style="color:#FF0000"> </div>
-<table class="tablesorter" id="myTable" border="1"  cellspacing="1">             
+<table class="tablesorter" id="myTable" >             
     <thead>
         <tr>
 	    <th style="width: 1%">Select</th> 

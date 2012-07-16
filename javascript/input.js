@@ -88,9 +88,9 @@ function tax_check(ref){
 			var tax_name = split_array[0];
 			var accession_number = split_array[1];
 			var replicon = split_array[2];
-			code = code + "<p align=\"left\">Tax-Name:" + tax_name +"</p>";
-			code = code + "<p align=\"left\">Associated Chromsoms/Plasmids:</p>";
-			code = code + "<p align=\"left\">*" + accession_number + "-" + replicon + "</p>";
+			code = code + "<p>Tax-Name:" + tax_name +"</p>";
+			code = code + "<p>Associated Chromsoms/Plasmids:</p>";
+			code = code + "<p>*" + accession_number + "-" + replicon + "</p>";
 		    }
                     if(y>1){
 			var split_array = new Array();   
@@ -316,11 +316,11 @@ function accession_check(ref){
 	    //match
 	    //alert(current_input.value);
 	    var code =
-	        "<p align=\"left\">NCBI Accession Number:<strong id=\"accession_number\">" + current_input_id + "</strong></p>"+
-        	"<p align=\"left\">Name:" + current_input_child_name +"</p>"+
-		"<p align=\"left\">Tax-id:" + current_input_child_taxid +"</p>"+
-		"<p align=\"left\">Replicon:" + current_input_child_replicon +"</p>"+
-               	"<p align=\"left\" id=\"step2_buttons\" >Proceed <a href=\"#\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
+	        "<p>NCBI Accession Number:<strong id=\"accession_number\">" + current_input_id + "</strong></p>"+
+        	"<p>Name:" + current_input_child_name +"</p>"+
+		"<p>Tax-id:" + current_input_child_taxid +"</p>"+
+		"<p>Replicon:" + current_input_child_replicon +"</p>"+
+               	"<p id=\"step2_buttons\" >Proceed <a href=\"#\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
                 " Back  <a href=\"#\"><img src=\"pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"accession_check_back()\"></a></p>";
             var myText = document.createTextNode(code);
 	    //disable eventhandlers from step 
