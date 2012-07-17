@@ -1590,7 +1590,7 @@ if($page == 3){
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
 	    tbihome => "http://www.tbi.univie.ac.at/",
-	    banner => "./pictures/banner_final.png\" alt=\"Banner\"",
+	    banner => "./pictures/banner_final.png",
 	    introduction => "introduction.html",
 	    available_genomes => "available_genomes.cgi",
 	    target_search => "target_search.cgi",
@@ -1611,9 +1611,8 @@ if($page == 3){
 	print "<br>";
 	print"<script type=\"text/javascript\">
 			window.setTimeout (\' window.location = \"$server/target_search.cgi?page=3&amp;tempdir=$tempdir\"\', 5000);
-                    	</script>";
-    }
-# window.location = \"http://insulin.tbi.univie.ac.at/target_search.cgi?page=3&tempdir=$tempdir\";	
+                    	</script></div></body></html>";
+    }	
     if(-e "$base_dir/$tempdir/done2"){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
