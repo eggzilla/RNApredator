@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title> RNApredator bacterial sRNA target prediction Webserver - Help</title>
-    <style type="text/css">
-      table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
-      table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
-      table td {text-align:center; border:0px black solid; }
-    </style>
+    <meta charset="utf-8">
+    <title> RNApredator bacterial sRNA target prediction Webserver - Help - http://www.tbi.univie.ac.at/ </title>
+     <style type="text/css">
+    table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%;}
+    table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%;}
+    table td {text-align:center; border:0px black solid; }
+    .tooltip2 {
+    position: absolute;
+    display: none;
+    background-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #000000;
+    padding: 2px;
+    }
+    .tooltip2 .head{
+    background-color: #006666;
+    color: white;
+    padding: 2px;
+    }
+    .tooltip2 .content{
+    font-size: 12px;
+    }
+    .tooltip2 .content td{
+    width: 50%;
+    font-size: 10px;
+    text-align: center;
+    }
+  </style>
   </head>
   <body>
     <div style="text-align:center">
-      <table width="100%">	
+      <table style="width:100%;">	
 	<tr>
-	  <td rowspan="2" height="100%" width="45%"><img src="pictures/banner_final.png"></td>
-          <td width="11%"><a href="introduction.html"><img src="pictures/introduction.png" alt="Introduction" border="0"></a></td>
-	  <td width="18%"><a href="available_genomes.cgi"><img src="pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
-          <td><a href="target_search.cgi"><img src="pictures/target_search.png" alt="Target Search" border="0"></a></td>
-	    <td><a href="help.html"><img src="pictures/help.png" alt="Help" border="0"></a></td>
+	  <td rowspan="2" style="width:45%;"><img src="./pictures/banner_final.png" alt="Banner"></td>
+          <td style="width:11%;"><a href="introduction.html"><img src="./pictures/introduction.png" alt="Introduction"></a></td>
+	  <td style="width:18%;"><a href="available_genomes.cgi"><img src="./pictures/available_genomes.png" alt="Available Genomes"></a></td>
+          <td><a href="target_search.cgi"><img src="./pictures/target_search.png" alt="Target Search"></a></td>
+	  <td><a href="help.html"><img src="./pictures/help.png" alt="Help"></a></td>
 	</tr>
 	<tr>
 	  <td></td>
-	  <td colspan="2" bgcolor="#dcdcdc" height="75%"><a href="http://localhost:800/RNApredator/introduction.html#history"> History:</a> Version 1.25 online</td>
+	  <td colspan="2" style="background-color:#dcdcdc;height:75%;"><a href="introduction.html#history"> History:</a> Version 1.25 online</td>
 	  <td></td>
 	</tr>
       </table>
       <hr>
-    </div>
+      </div>
     <div style="text-align:center">
       <h3>= Help =</h3>	
     </div>
-    <div align="left">
-      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Introduction</font></font></p>
+    <div style="text-align:left">
+      <p style="margin-top: 0.17in;"><strong>Introduction</strong></p>
       <p>The RNApredator software facilitates the prediction of sRNA-mRNA
 	interactions in bacteria. Currently targets can be searched in more
 	than 1300 bacterial species. RNApredator uses a dynamic programming
@@ -41,7 +63,7 @@
 	the target mRNA before and after the binding of the sRNAs. It is
 	further possible to make a Gene Ontology(GO) and pathways (KEGG) term
 	enrichment analysis on a set of selected targets.</p>
-      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Input</font></font></p>
+      <p style="margin-top: 0.17in;"><strong>Input</strong></p>
       <p>The webserver takes as input a genome/plasmid from a set of 2155
 	sequences. This can either be entered through the corresponding
 	NCBI-Accession Number or the NCBI-Taxonomy ID (Illustration 1). The
@@ -60,40 +82,38 @@
 	genomes and grouped into
 	phylum/class/order/family/genus/species.
       </p>
-      <img src="pictures/inputdemo.png" name="graphics1" border=1><br>
+      <img src="pictures/inputdemo.png" alt="inputdemo"><br>
       
-      <font size=3>
 	<I>Illustration1:<br>
 	  Input field of RNApredator. l.h.s Genomes can be introduced<br>
 	  either through a NCBI-Accession Number or NCBI-Taxonomy ID. r.h.s<br>
-	The sRNA sequence, without header can be pasted in the corresponding<br>
-	  field</i></font>
+	  The sRNA sequence, without header can be pasted in the corresponding<br>
+	  field</i>
       <br>
       <br>
       
-      <img src="pictures/tree.png" name="graphics2" border=1><br>
+      <img src="pictures/tree.png" alt="inputdemo"><br>
       
-      <font size=3>
 	<I>Illustration2:<br>
 	  Tree representation of the genomes available in RNApredator. The<br>
 	  user can browse by clicking on the arrow symbols. Genomes/plasmids<br>
-	  can be selected for target search by clicking on the node designation</i></font>
+	  can be selected for target search by clicking on the node designation</i>
       <br>
       
-      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Processing</font></font></p>
+      <p style="margin-top: 0.17in;"><strong>Processing</strong></p>
       <p style="margin-bottom: 0in">The results are calculated as follows:<br>
 	RNAplex is called with the parameter interaction length set to 30 and precomputed accessibilities produced with RNAplfold (Version 1.8.4)
 	for the mRNAs and RNAup (Version 1.8.4) for the sRNAs.
 	If suboptimal interactions were requested additionally an energy-threshold of -8 and a duplex distance of 20 is used running RNAplex. 
 	The <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAplex.html">RNAplex man page</a> gives a detailed explanation of these parameters.
-	</p>
+      </p>
       <p style="margin-bottom: 0in">
 	RNAplfold calculation of the mRNA accessiblities was performed with window-size (-W) set to 240, span (-L) to 160, length of the unstructured region to 30, requesting opening energies (-O) (see <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAplfold.html">RNAplfold man-page</a> for details).
 	RNAup computation of sRNA accessibility is called with the parameter for length of the unstructured region (-u) set to 40 or the sequence lenght if shorter
 	(see <a href="http://www.tbi.univie.ac.at/~ronny/RNA/RNAup.html">RNAup man-page</a> for details).
       </p>
       
-      <p style="margin-top: 0.17in;"><font face="Albany, sans-serif"><font size=4>Output</font></font></p>
+      <p style="margin-top: 0.17in;"><strong>Output</strong></p>
       <p style="margin-bottom: 0in">The webserver outputs a list of
 	sRNA-mRNA interactions (including suboptimal interactions if enabled in input), which
 	is sorted based on the energy of
@@ -111,7 +131,7 @@
 	be noted that all the
 	results can be downloaded in tabular format.<br>
 	You can view a example result table of the sample input
-	<a href="example.html">here(E.coli str. K12 substr. MG1655 - MicA sRNA )</a>.
+	<a href="example.html">here (E.coli str. K12 substr. MG1655 - MicA sRNA )</a>.
 	
       </p>
       <p style="margin-bottom: 0in">It is also possible to select a set of
@@ -119,15 +139,17 @@
 	step will return a list of significantly enriched GO/KEGG terms as
 	well as the variation in accessibility around the ribosomal target
 	site before and after the binding of the sRNA.</p>
-
+      <p style="margin-bottom: 0in">
+	Due to the large amount of output data, job results are only kept for <strong>1 month</strong>
+	after computation! 
+      </p>
     </div>
     
-    <div class="copyright">
-      <hr>
-      2010-2012 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> 
-    </div> 
+ <div class="copyright">
+	<hr>
+	2010 - 2012 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> -  <a href="http://nar.oxfordjournals.org/content/early/2011/06/14/nar.gkr467.full">Publication</a>
+   </div>
   </body>
-  
 </html>
 
 

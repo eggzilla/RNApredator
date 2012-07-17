@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-    <title> RNApredator bacterial sRNA target prediction Webserver - Introduction </title>
+    <meta charset="utf-8">
+    <title> RNApredator bacterial sRNA target prediction Webserver - Introduction - http://www.tbi.univie.ac.at/ </title>
     <style type="text/css">
-      table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
-      table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
+      table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%;}
+      table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; }
       table td {text-align:center; border:0px black solid; }
     </style>
   </head>
   <body>
     <div style="text-align:center">
-      <table width="100%">	
+      <table style="width:100%;">	
 	<tr>
-	  <td rowspan="2" height="100%" width="45%"><img src="pictures/banner_final.png"></td>
-          <td width="11%"><a href="introduction.html"><img src="pictures/introduction.png" alt="Introduction" border="0"></a></td>
-	  <td width="18%"><a href="available_genomes.cgi"><img src="pictures/available_genomes.png" alt="Available Genomes" border="0"></a></td>
-          <td><a href="target_search.cgi"><img src="pictures/target_search.png" alt="Target Search" border="0"></a></td>
-	    <td><a href="help.html"><img src="pictures/help.png" alt="Help" border="0"></a></td>
+	  <td rowspan="2" style="width:45%;"><img src="./pictures/banner_final.png" alt="Banner"></td>
+          <td style="width:11%;"><a href="introduction.html"><img src="./pictures/introduction.png" alt="Introduction"></a></td>
+	  <td style="width:18%;"><a href="available_genomes.cgi"><img src="./pictures/available_genomes.png" alt="Available Genomes"></a></td>
+          <td><a href="target_search.cgi"><img src="./pictures/target_search.png" alt="Target Search"></a></td>
+	  <td><a href="help.html"><img src="./pictures/help.png" alt="Help"></a></td>
 	</tr>
 	<tr>
 	  <td></td>
-	  <td colspan="2" bgcolor="#dcdcdc" height="75%"><a href="http://localhost:800/RNApredator/introduction.html#history"> History:</a> Version 1.25 online</td>
+	  <td colspan="2" style="background-color:#dcdcdc;height:75%;"><a href="introduction.html#history"> History:</a> Version 1.25 online</td>
 	  <td></td>
 	</tr>
       </table>
@@ -31,7 +31,6 @@
       <h3 id="stepx_title">= Introduction =</h3>
     </div>
     <div style="text-align:left">
-      <p style="margin-top: 0.17in; page-break-after: avoid"><font face="Albany, sans-serif"><font size=4>Introduction</font></font></p>
       <p>sRNAs are non-coding RNAs found in bacteria. sRNAs are very
 	heterogeneous both in sizes, structures and functions Most
 	of them act as post-transcriptional regulators by interacting
@@ -52,8 +51,8 @@
 	structured targets are discarded.</p>
 
       <p style="margin-top: 0.08in; margin-bottom: 0.08in">
-	<img src="pictures/RNAplex.png" name="graphics1" align=left width=30% border=0>
-	<br clear=left><font size=3><i>	
+	<img src="pictures/RNAplex.png" style="width:30%;" alt="RNAplex">
+	<br><i>	
 	    Illustration1:<br>
 	    Top: In algorithm like TargetRNA or RNAhybrid, the energy gained<br>
 	    by adding a base-pair (i,j) to an existing duplex (S(i,j;i-1,j+)<br>
@@ -63,7 +62,7 @@
 	    For each nucleotide added to the duplex, the energy necessary<br>
 	    to remove the nucleotide from all its intramolecular interactions (d<sub>1</sub><sup>x</sup>,
 	    d<sub>1</sub><sup>y</sup>)<br> is taken into account. This allows to
-	    reach a greater specificity in the target predictions.</i></font>
+	    reach a greater specificity in the target predictions.</i>
       </p>
       <p>Besides the raw prediction of binding partners, RNApredator allows
 	the analysis of the results in different post-processing steps. It is
@@ -76,20 +75,20 @@
     </div>
     <hr>
     <div style="text-align:center">
-      <h3><a name="history">= History =</a></h3>
-      <table border="1" width="100%">
+      <h3><a id="history">= History =</a></h3>
+      <table style="width:95%;">
 	<tr>
-	  <td><b>Version</b></td>
-	  <td><b>Git-commit</b></td>
-	  <td><b>Date</b></td>
-	  <td><b>Description</b></td>
+	  <td style="border:1px solid black;"><b>Version</b></td>
+	  <td style="border:1px solid black;"><b>Git-commit</b></td>
+	  <td style="border:1px solid black;"><b>Date</b></td>
+	  <td style="border:1px solid black;"><b>Description</b></td>
 	</tr>
 	<tr>
 	  <td>1.00</td>
 	  <td>1</td>
-	  <td>Date</td>
+	  <td>14.06.2011</td>
 	  <td>Release Version</td>
-      </tr>
+	</tr>
 	<tr>
 	  <td>1.10</td>
 	  <td>17</td>
@@ -105,12 +104,20 @@
 	    Changes to the repository, that make future updates simpler, e.g. automatic configuration depending on hostname<br>
 	    Added better accounting of usage statistics and a link to the publication</td>
 	</tr>	
-    </table> 
+	<tr>
+	  <td>1.33</td>
+	  <td>33</td>
+	  <td>17.07.2012 </td>
+	  <td><br>
+	    Bug fixes concerning form field size and postprocessing link to RNAup webserver, migration to HTML5 and validation complete,<br> 
+	    expanded Help page with parameters of programs used in the pipeline</td>
+	</tr>
+      </table> 
     </div>
     <div class="copyright">
-      <hr>
-      2010-2012 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> 
-    </div>
+	<hr>
+	2010 - 2012 TBI - <a href="mailto:egg@tbi.univie.ac.at">Contact</a> -  <a href="http://nar.oxfordjournals.org/content/early/2011/06/14/nar.gkr467.full">Publication</a>
+   </div>
   </body>
 </html>
 

@@ -1,6 +1,6 @@
  <style type="text/css">
-    table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%; word-wrap:break-word; }
-    table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%; word-wrap:break-word; }
+    table {table-layout:fixed; text-align:center; overflow:auto; border:0px black solid; width:95%;}
+    table.borders {table-layout:fixed; text-align:center; overflow:auto; border:1px black solid; width:95%;}
     table td {text-align:center; border:0px black solid; }
     .tooltip2 {
     position: absolute;
@@ -14,13 +14,10 @@
     .tooltip2 .head{
     background-color: #006666;
     color: white;
-    font-weight: stronf;
     padding: 2px;
     }
     .tooltip2 .content{
-    color: 000066;
     font-size: 12px;
-    border-size: 4px;
     }
     .tooltip2 .content td{
     width: 50%;

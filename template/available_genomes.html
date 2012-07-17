@@ -11,20 +11,18 @@ and forward you to the "Target Search" page.
 </p>
 </div>
 </div>
-</div>
 <div id="species_node" class="tooltip2" style="width: 400px;">
 <div class="content">
 <div class="head">Species - Taxonomic Node with Genomes</div>
 <p>Identified by Tax-id<br>
 e.g.: 511145 for E.coli K-12 MG1655<br>
 Taxonomic Node with genomes/plasmids directly associated,<br>
-often with the rank of "species" or "subspecies" therefore<br>
-called "Species Node" in this context."<br>
+often with the rank of &quot;species&quot; or &quot;subspecies&quot; therefore<br>
+called &quot;Species Node&quot; in this context.<br>
 Clicking the designation of the node will select all<br>
 directly associated genomes/plasmids and forward<br>
-you to the "Target Search" page.<br>
+you to the &quot;Target Search&quot; page.<br>
 </p>
-</div>
 </div>
 </div>
 
@@ -34,26 +32,27 @@ you to the "Target Search" page.<br>
 <p>Taxonomic Node with no genomes directly associated.</p>
 </div>
 </div>
-</div>
 
 	<noscript>This page does not decay gracefully :-) - Please enable your java-script </noscript>
         <h2>Choose a target genome:</h2>
 	<hr>
 	<h4>Search for a Genome or Plasmid:</h4>
 		<form method="get" target="http://rna.tbi.univie.ac.at/RNApredator2/available_genomes.cgi">
-        	<input id="query" size="60" type="text" name="query"><input type="hidden" name="page" value="1"><input value="Search" type="submit"></button><br>
+        	<input id="query" size="60" type="text" name="query"><input type="hidden" name="page" value="1"><input value="Search" type="submit"><br>
 		</form>
 		e.g.:<i>Escherichia coli str. K-12 substr. MG1655 chromosome</i><br>
 		You will be redirected to target search upon selection<br>
 	<hr>
-	<table border="0">
+	<table style="border: 1px solid black;">
 	<tr><td>
-	<div align="left">
+	<div style="text-align:left">
 	<h4>Click on a Species or Genome Node:</h4>
-	Taxonomic Node: <a href="#" onmouseover="XBT(this, {id:'tax_node'})"><img border="0" src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/taxinfo.png"></a><br>
-	Species Node: <a href="#" onmouseover="XBT(this, {id:'species_node'})"><img border="0" src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/speciesinfo.png"></a><br>
-	Genome Node: <a href="#" onmouseover="XBT(this, {id:'genome_node'})"><img border="0"  src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/genomeinfo.png" ></a>
+	Taxonomic Node: <a href="#" onmouseover="XBT(this, {id:'tax_node'})"><img alt="taxinfo" src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/taxinfo.png"></a><br>
+	Species Node: <a href="#" onmouseover="XBT(this, {id:'species_node'})"><img alt="speciesinfo" src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/speciesinfo.png"></a><br>
+	Genome Node: <a href="#" onmouseover="XBT(this, {id:'genome_node'})"><img alt="genomeinfo"  src="http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/genomeinfo.png" ></a>
+	</div>
 	</td></tr></table><br>
+	
 	<div id="demo1" class="demo">
 	</div>
 [% INCLUDE footer %]

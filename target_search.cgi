@@ -42,7 +42,7 @@ my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
 my $sge_error_dir="$base_dir/error";
 my $sge_log_output_dir="$base_dir/error";
-my $accounting_dir="$base_dir/accounting";
+my $accounting_dir="$base_dir/";
 my $sge_root_directory="/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once

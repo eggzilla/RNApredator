@@ -1,4 +1,3 @@
-   <script type="text/javascript" src="./javascript/input.js"></script>
    <script type="text/javascript" src="./javascript/jquery-1.4.4.min.js"></script>	
    <script type="text/javascript" src="./javascript/jquery.validate.min.js"></script>
    <script src="[% java_script_location %]"></script>

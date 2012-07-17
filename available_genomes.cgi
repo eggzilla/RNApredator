@@ -32,8 +32,7 @@ my $search_string = $query->param('query') || "";
 #Print HTTP-Header for input-page
 
 if($page eq "0"){
-	print $query->header();
-	
+	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
   	  	# where to find template files
     		INCLUDE_PATH => ['./template'],
@@ -62,7 +61,7 @@ if($page eq "0"){
 
 if($page eq "1"){
 	my $output = output($search_string);
-        print $query->header();
+        print "Content-type: text/html; charset=utf-8\n\n";
         my $template = Template->new({
                 # where to find template files
                 INCLUDE_PATH => ['./template'],
