@@ -1103,8 +1103,8 @@ if($page == 2){
 	# if(-e "$base_dir/$tempdir/topAll.html"){ print " .. done<br>- Parsing and Extracting Top Hits";} else {print "<span style=\"color:#CCCCCC\"><br>- Parsing and Extracting Top Hits</span>";}
 	# if(-e "$base_dir/$tempdir/all_predictions.csv"){ print " .. done<br>- Dumping all Hits to .csv";} else {print "<span style=\"color:#CCCCCC\"><br>- Dumping all Hits to .csv</span>";}
 	#print " .. done<br>- Dumping all Hits to .csv" if -e "$base_dir/$tempdir/all_predictions.csv";
-	print "<table style=\"border:1px solid #000; width:60%\";>"; #RNA, queueing status, sRNA accessiblity, RNAplex Interaction Prediction, Parsing Results, Result Page Link
-	print"<tr><td style=\"width:3%\">RNA</td><td style=\"width:10%\">Queueing Status</td><td style=\"width:10%\">sRNA accessiblity</td><td style=\"width:15%\">RNAplex Interaction Prediction</td><td style=\"width:10%\">Parsing Output</td><td style=\"width:10%\">Result Page Link</td></tr>";
+	print "<table style=\"border:1px solid #000; width:60%;\">"; #RNA, queueing status, sRNA accessiblity, RNAplex Interaction Prediction, Parsing Results, Result Page Link
+	print"<tr><td style=\"width:3%;\">RNA</td><td style=\"width:10%;\">Queueing Status</td><td style=\"width:10%;\">sRNA accessiblity</td><td style=\"width:15%;\">RNAplex Interaction Prediction</td><td style=\"width:10%;\">Parsing Output</td><td style=\"width:10%;\">Result Page Link</td></tr>";
 	#Stuff for progress:    
 	#Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
 	open (TOTALMRNACOUNTER, "<$base_dir/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
