@@ -60,7 +60,6 @@ if($page eq "0"){
 ######SEARCH-RESULT#####################################################
 
 if($page eq "1"){
-	my $output = output($search_string);
         print "Content-type: text/html; charset=utf-8\n\n";
         my $template = Template->new({
                 # where to find template files
@@ -70,8 +69,7 @@ if($page eq "1"){
                 #allows use of relative include path
                 RELATIVE=>1,
         });
-
-        my $file = './template/available_genomes_result.html';
+	my $output = output($search_string);	
         my $vars = {
                 title => "RNApredator bacterial sRNA target prediction Webserver - Available Genomes",
                 tbihome => "http://www.tbi.univie.ac.at/",
@@ -81,9 +79,12 @@ if($page eq "1"){
                 target_search => "target_search.cgi",
 		query => "$search_string",
 		output=> "$output",
-                help => "help.html"
+                help => "help.html",
+		scriptfile => "availablegenomesscriptfile",
+                stylefile => "availablegenomesstylefile"
         };
-        $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
+        my $file = "./template/available_genomes_result.html";	
+        $template->process($file, $vars) || die "Template process failed: $page, $search_string", $template->error(), "\n";
 	
 }
   
