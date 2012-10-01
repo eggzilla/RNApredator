@@ -1409,6 +1409,7 @@ if($page == 3){
 	    unless(@tag_array==0){	
 		open (MERGEDGOA, ">$base_dir/$tempdir/$tempdir.ftn.goa") or die "Could Not Write Merged .goa file $! - $tempdir";
 		foreach my $nc_id (@accession_number_array){
+		    print STDERR "RNApredator-postprocessing - Accessions for merged goa $nc_id\n";
 		    open (GOA, "<$source_dir/data/ebi_hakim/$nc_id.ftn.goa") or print STDERR "Could Not Read $nc_id.goa file $! - $tempdir";
 		    while(<GOA>){
 			#push(@lines,$_);
@@ -1430,6 +1431,7 @@ if($page == 3){
 		copy("$source_dir/executables/GO_Kegg.R","$base_dir/$tempdir/GO_Kegg.R") or die "Copy failed- GO_Kegg.R: $!";
 		chmod 0755, "$base_dir/$tempdir/launch_go_kegg.sh", "$base_dir/$tempdir/GO_Kegg.R";
 		my @GO_arguments_array = ("$base_dir/$tempdir/launch_go_kegg.sh", "$GO_path","$accession_number","$csv_path","$base_dir/$tempdir/selected_list","$GO_Kegg_path");
+		print STDERR "RNApredator-postprocessing:\n@GO_arguments_array\n";
 		system(@GO_arguments_array) == 0 or die "GO-calculation error:$! - $?"; #creates GO.csvs
 		print POSTPROCESSING "<h3>Gene Ontologie Terms for selected Interactions: </h3>\n";
 		unless(@genomes_without_goa_array==0){
