@@ -1431,7 +1431,8 @@ if($page == 3){
 		copy("$source_dir/executables/GO_Kegg.R","$base_dir/$tempdir/GO_Kegg.R") or die "Copy failed- GO_Kegg.R: $!";
 		chmod 0755, "$base_dir/$tempdir/launch_go_kegg.sh", "$base_dir/$tempdir/GO_Kegg.R";
 		my @GO_arguments_array = ("$base_dir/$tempdir/launch_go_kegg.sh", "$GO_path","$accession_number","$csv_path","$base_dir/$tempdir/selected_list","$GO_Kegg_path");
-		print STDERR "RNApredator-postprocessing:\n@GO_arguments_array\n";
+		open (POSTPROCESSINGLOG, ">$base_dir/$tempdir/postprocessinglog") or die "Could Not Write postprocessinglog $! - $tempdir";
+		print POSTPROCESSINGLOG "RNApredator-postprocessing:\n@GO_arguments_array\n";
 		system(@GO_arguments_array) == 0 or die "GO-calculation error:$! - $?"; #creates GO.csvs
 		print POSTPROCESSING "<h3>Gene Ontologie Terms for selected Interactions: </h3>\n";
 		unless(@genomes_without_goa_array==0){
