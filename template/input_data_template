@@ -1,4 +1,5 @@
 <tr id="Accession"><td>Accession</td><td>Length</td><td>Taxid</td><td>TaxName</td><td>Replicon</td><td>Create Date<td></tr>
+<tr id="NC_018267"><td>NC_018267.1</td><td>957990</td><td>100901</td><td>Wolbachia endosymbiont of Onchocerca ochengi</td><td>chromosome</td><td>Sep 10 2012<td></tr>
 <tr id="NC_000907"><td>NC_000907.1</td><td>1830138</td><td>71421</td><td>Haemophilus influenzae Rd KW20</td><td>chromosome</td><td>Oct 19 2001<td></tr>
 <tr id="NC_000908"><td>NC_000908.2</td><td>580076</td><td>243273</td><td>Mycoplasma genitalium G37</td><td>chromosome</td><td>Jan 8 2001<td></tr>
 <tr id="NC_000964"><td>NC_000964.3</td><td>4215606</td><td>224308</td><td>Bacillus subtilis subsp. subtilis str. 168</td><td>chromosome</td><td>Nov 20 1997<td></tr>
