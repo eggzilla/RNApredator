@@ -1286,14 +1286,16 @@ if($page == 3){
 			#try to open .ftn.goa file if it is not there remove selected from @goa_selected 
 			if(-e "$source_dir/data/ebi_hakim/$accession_without_html.ftn.goa"){
 			    my @go_input =`grep -P $split_result_line[15] $source_dir/data/ebi_hakim/$accession_without_html.ftn.goa`;
-			    foreach my $go_input_line(@go_input){
-				my @split_line=split(/\s/,$go_input_line);
-				$associated_go_terms=$associated_go_terms."$split_line[0] ";
-			    }
 			    if(@go_input==0){
 				$associated_go_terms="No GO-terms associated";
+				$genomes_without_goa{$accession_without_html}=0;
+			    }else{
+				foreach my $go_input_line(@go_input){
+				    my @split_line=split(/\s/,$go_input_line);
+				    $associated_go_terms=$associated_go_terms."$split_line[0] ";
+				}
+				push(@tag_array,$split_result_line[15]);
 			    }
-			    push(@tag_array,$split_result_line[15]);
 			}else{
 			    #and set associated go_terms to not available
 			    $associated_go_terms="No GO-terms available";
