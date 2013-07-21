@@ -1288,7 +1288,8 @@ if($page == 3){
 			    my @go_input =`grep -P $split_result_line[15] $source_dir/data/ebi_hakim/$accession_without_html.ftn.goa`;
 			    if(@go_input==0){
 				$associated_go_terms="No GO-terms associated";
-				$genomes_without_goa{$accession_without_html}=0;
+				#set genomes without goa only if all entries are without GO-terms for enrichment
+				#$genomes_without_goa{$accession_without_html}=0;
 			    }else{
 				foreach my $go_input_line(@go_input){
 				    my @split_line=split(/\s/,$go_input_line);
@@ -1437,7 +1438,7 @@ if($page == 3){
 		print POSTPROCESSINGLOG "RNApredator-postprocessing:\n@GO_arguments_array\n";
 		system(@GO_arguments_array) == 0 or die "GO-calculation error:$! - $?"; #creates GO.csvs
 		print POSTPROCESSING "<h3>Gene Ontologie Terms for selected Interactions: </h3>\n";
-		unless(@genomes_without_goa_array==0){
+		if(@genomes_without_goa_array!=0){
 		    print POSTPROCESSING "No GO-terms available for: @genomes_without_goa_array, no GO analysis possible.";
 		}
 		#MF - Molecular Function
