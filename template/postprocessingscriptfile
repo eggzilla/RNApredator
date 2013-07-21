@@ -1,5 +1,6 @@
-	<script type="text/javascript" src="./javascript/jquery-1.4.4.min.js"></script> 
-	<script type="text/javascript" src="./javascript/jquery.tablesorter.min.js"></script> 
+	<script src="./javascript/jquery-1.4.4.min.js"></script> 
+	<script src="./javascript/jquery.tablesorter.min.js"></script> 
 	<script src="./javascript/jquery.collapser.js"></script>
 	<script src="./javascript/jquery.ui.js"></script>
 	<script src="[% java_script_location %]"></script>
+	<script src="./javascript/google-analytics.js"></script>
