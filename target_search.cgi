@@ -1,9 +1,10 @@
 #!/usr/bin/perl
 #Main executable of the RNAPlex webserver 
-#use warnings;
+use warnings;
 use strict;
-#use diagnostics;
+use diagnostics;
 use utf8;
+use lib "/mnt/storage/progs/RNApredator/lib/BioPerl-1.6.901/";
 use File::Copy;
 use Data::Dumper;
 use Pod::Usage;
@@ -20,9 +21,11 @@ use Sys::Hostname;
 
 #Set host specific variables according to hostname
 my $host = hostname;
+print STDERR "Hostname: $host\n";
 my $webserver_name = "RNApredator";
-my $source_dir=cwd();
+my $source_dir="/mnt/storage/progs/RNApredator/";
 my $server;
+my $server_static="http://nylon.tbi.univie.ac.at/RNApredator";
 #baseDIR points to the tempdir folder
 my $base_dir;
 if($host eq "erbse"){
@@ -31,11 +34,19 @@ if($host eq "erbse"){
 }elsif($host eq "linse"){
     $server="http://rna.tbi.univie.ac.at/RNApredator2";
     $base_dir ="/u/html/RNApredator";
+}elsif($host eq "nylon"){
+    $server = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+    $server_static = "http://nylon.tbi.univie.ac.at/RNApredator";
+    $source_dir = "/mnt/storage/progs/RNApredator";
+    $base_dir = "$source_dir/html";
 }else{
 #if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
-    $server="http://rna.tbi.univie.ac.at/RNApredator2";
-    $base_dir ="/u/html/RNApredator";
+    $server = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+    $server_static = "http://rna.tbi.univie.ac.at/RNApredator";
+    $source_dir = "/mnt/storage/progs/RNApredator";
+    $base_dir = "$source_dir/html";
 }
+print STDERR "Hostname: $host\n";
 
 #sun grid engine settings
 my $qsub_location="/usr/bin/qsub";
@@ -54,13 +65,9 @@ my $query = CGI->new;
 #using template toolkit to keep static stuff and logic in seperate files
 use Template;
 
-#Reset these absolut paths when changing the location of the requirements
-#functions for gathering user input
-require "$source_dir/executables/input.pl";
-#functions for calculating of results
-require "$source_dir/executables/calculate.pl";
-#funtions for output of results
-require "$source_dir/executables/output.pl";
+
+################################################################
+open ( STDERR, ">>$base_dir/Log" ) or die "$!";
 
 ######STATE - variables##########################################
 #determine the query state by retriving CGI variables
