@@ -489,11 +489,11 @@ if($page==4){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ['./template'],
+	INCLUDE_PATH => ["$source_dir/template"],
 	RELATIVE=>1,
 				 });
     
-    my $file = './template/calc.html';
+    my $file = 'calc.html';
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -653,14 +653,14 @@ if($page == 0){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ['./template'],
+	INCLUDE_PATH => ["$source_dir/template"],
 	#Interpolate => 1 allows simple variable reference
 	#INTERPOLATE=>1,
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
 
-    my $file = './template/input.html';
+    my $file = "input.html";
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Input form",
@@ -691,14 +691,14 @@ if($page==1){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ['./template'],
+	INCLUDE_PATH => ["$source_dir/template"],
 	#Interpolate => 1 allows simple variable reference
 	#INTERPOLATE=>1,
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
     
-    my $file = './template/calc.html';
+    my $file = 'calc.html';
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -878,11 +878,11 @@ if($page == 5){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ['./template'],
+	INCLUDE_PATH => ["$source_dir/template"],
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
-    my $file = './template/calc.html';
+    my $file = 'calc.html';
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     print "</table>";
     my $vars = {
@@ -967,13 +967,13 @@ if($page == 2){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ['./template'],
+	    INCLUDE_PATH => ["$source_dir/template"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
-	my $file = './template/results.html';
+	my $file = 'results.html';
 	#calculate appropriate dropmenu
 	#get number of interactions and selected number of top interaction	
 	open(IANUMBER, "<$base_dir/$tempdir/interactionnumber");
@@ -1052,13 +1052,13 @@ if($page == 2){
 	print "Content-type: text/html; charset=utf-8\n\n";	
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ['./template'],
+	    INCLUDE_PATH => ["$source_dir/template"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
-	my $file = './template/calc.html';
+	my $file = 'calc.html';
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -1184,7 +1184,7 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ['./template'],
+	    INCLUDE_PATH => ["$source_dir/template"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
@@ -1192,7 +1192,7 @@ if($page == 3){
 				     });
 	my @output_array;
 	$ENV{PATH} = "$base_dir/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
-	my $file = './template/postprocessing.html';
+	my $file = 'postprocessing.html';
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
@@ -1591,14 +1591,14 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ['./template'],
+	    INCLUDE_PATH => ["$source_dir/template"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
 	my @output_array;
-	my $file = './template/postprocessing.html';
+	my $file = 'postprocessing.html';
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
@@ -1630,14 +1630,14 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ['./template'],
+	    INCLUDE_PATH => ["$source_dir/template"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
 	my @output_array;
-	my $file = './template/postprocessingdone.html';
+	my $file = 'postprocessingdone.html';
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
