@@ -25,6 +25,7 @@ print STDERR "Hostname: $host\n";
 my $webserver_name = "RNApredator";
 my $source_dir="/mnt/storage/progs/RNApredator/";
 my $server;
+my $available_genomes;
 my $server_static="http://nylon.tbi.univie.ac.at/RNApredator";
 #baseDIR points to the tempdir folder
 my $base_dir;
@@ -36,6 +37,7 @@ if($host eq "erbse"){
     $base_dir ="/u/html/RNApredator";
 }elsif($host eq "nylon"){
     $server = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+    $available_genomes = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
     $server_static = "http://nylon.tbi.univie.ac.at/RNApredator";
     $source_dir = "/mnt/storage/progs/RNApredator";
     $base_dir = "$source_dir/html";
@@ -43,6 +45,7 @@ if($host eq "erbse"){
 #if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
     $server = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
     $server_static = "http://rna.tbi.univie.ac.at/RNApredator";
+    $available_genomes = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
     $source_dir = "/mnt/storage/progs/RNApredator";
     $base_dir = "$source_dir/html";
 }
@@ -498,11 +501,10 @@ if($page==4){
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
 	tbihome => "http://www.tbi.univie.ac.at/",
-	banner => "./pictures/banner_final.png",
-	introduction => "introduction.html",
-	available_genomes => "available_genomes.cgi",
-	target_search => "target_search.cgi",
-	help => "help.html",
+        serveradress => "$server",
+	staticcontentaddress => "$server_static",
+	banner => "$server_static/pictures/banner_final.png",
+	available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
 	java_script_location  => "./javascript/calculate.js",
@@ -665,11 +667,10 @@ if($page == 0){
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Input form",
 	tbihome => "http://www.tbi.univie.ac.at/",
-	banner => "./pictures/banner_final.png",
-	introduction => "introduction.html",
-	available_genomes => "available_genomes.cgi",
-	target_search => "target_search.cgi",
-	help => "help.html",
+	serveradress => "$server",
+        staticcontentaddress => "$server_static",
+        banner => "$server_static/pictures/banner_final.png",
+        available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
 	#errorscript is a short javascript that returns the errormessage from parsing the fasta-file on the client side
@@ -703,11 +704,12 @@ if($page==1){
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
 	tbihome => "http://www.tbi.univie.ac.at/",
-	banner => "./pictures/banner_final.png",
-	introduction => "introduction.html",
-	available_genomes => "available_genomes.cgi",
-	target_search => "target_search.cgi",
-	help => "help.html",
+	staticcontentaddress => "$server_static",
+        banner => "$server_static/pictures/banner_final.png",
+        serveradress => "$server",
+        staticcontentaddress => "$server_static",
+        banner => "$server_static/pictures/banner_final.png",
+        available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
         java_script_location  => "./javascript/calculate.js",
@@ -888,11 +890,11 @@ if($page == 5){
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
 	tbihome => "http://www.tbi.univie.ac.at/",
-	banner => "./pictures/banner_final.png",
-	introduction => "introduction.html",
-	available_genomes => "available_genomes.cgi",
-	target_search => "target_search.cgi",
-	help => "help.html",
+	staticcontentaddress => "$server_static",
+        serveradress => "$server",
+        staticcontentaddress => "$server_static",
+        banner => "$server_static/pictures/banner_final.png",
+        available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
 	java_script_location  => "./javascript/calculate.js",
@@ -1025,11 +1027,11 @@ if($page == 2){
 	    tbihome => "http://www.tbi.univie.ac.at/",
 	    #hier weiter
 	    drop_options => "dropmenu$drop_menu_number",
-	    banner => "./pictures/banner_final.png",
-	    introduction => "introduction.html",
-	    available_genomes => "available_genomes.cgi",
-	    target_search => "target_search.cgi",
-	    help => "help.html",
+	    staticcontentaddress => "$server_static",
+            serveradress => "$server",
+            staticcontentaddress => "$server_static",
+            banner => "$server_static/pictures/banner_final.png",
+            available_genomes => "$available_genomes",
 	    filter => "$filter",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
@@ -1063,7 +1065,8 @@ if($page == 2){
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
 	    tbihome => "http://www.tbi.univie.ac.at/",
-	    banner => "./pictures/banner_final.png",
+	    staticcontentaddress => "$server_static",
+            banner => "$server_static/pictures/banner_final.png",
 	    introduction => "introduction.html",
 	    available_genomes => "available_genomes.cgi",
 	    target_search => "target_search.cgi",
@@ -1197,7 +1200,8 @@ if($page == 3){
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
 	    tbihome => "http://www.tbi.univie.ac.at/",
-	    banner => "./pictures/banner_final.png",
+	    staticcontentaddress => "$server_static",
+            banner => "$server_static/pictures/banner_final.png",
 	    introduction => "introduction.html",
 	    available_genomes => "available_genomes.cgi",
 	    target_search => "target_search.cgi",
@@ -1603,7 +1607,8 @@ if($page == 3){
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
 	    tbihome => "http://www.tbi.univie.ac.at/",
-	    banner => "./pictures/banner_final.png",
+	    staticcontentaddress => "$server_static",
+            banner => "$server_static/pictures/banner_final.png",
 	    introduction => "introduction.html",
 	    available_genomes => "available_genomes.cgi",
 	    target_search => "target_search.cgi",
@@ -1642,7 +1647,8 @@ if($page == 3){
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
 	    tbihome => "http://www.tbi.univie.ac.at/",
-	    banner => "./pictures/banner_final.png",
+	    staticcontentaddress => "$server_static",
+            banner => "$server_static/pictures/banner_final.png",
 	    introduction => "introduction.html",
 	    available_genomes => "available_genomes.cgi",
 	    target_search => "target_search.cgi",

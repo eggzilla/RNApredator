@@ -11,10 +11,10 @@
       <table style="width:100%;">	
 	<tr>
 	  <td rowspan="2" style="width:45%;"><img src="[% banner %]" alt="Banner"></td>
-          <td style="width:11%;"><a href="[% introduction %]"><img src="./pictures/introduction.png" alt="Introduction"></a></td>
-	  <td style="width:18%;"><a href="[% available_genomes %]"><img src="./pictures/available_genomes.png" alt="Available Genomes"></a></td>
-          <td><a href="[% target_search %]"><img src="./pictures/target_search.png" alt="Target Search"></a></td>
-	  <td><a href="[% help %]"><img src="./pictures/help.png" alt="Help"></a></td>
+          <td style="width:11%;"><a href="[% staticcontentaddress %]/introduction.html"><img src="[% staticcontentaddress %]/pictures/introduction.png" alt="Introduction"></a></td>
+	  <td style="width:18%;"><a href="[% availablegenomes %]"><img src="[% staticcontentaddress %]/pictures/available_genomes.png" alt="Available Genomes"></a></td>
+          <td><a href="[% serveraddress %]"><img src="[% staticcontentaddress %]/pictures/target_search.png" alt="Target Search"></a></td>
+	  <td><a href="[% staticcontentaddress %]/help.html"><img src="[% staticcontentaddress %]/pictures/help.png" alt="Help"></a></td>
 	</tr>
 	<tr>
 	  <td></td>
@@ -22,6 +22,8 @@
 	  <td></td>
 	</tr>
       </table>
+      <div style="display:none" id="server_address">[% serveraddress %]</div>
+      <div style="display:none" id="static_content_address">[% staticcontentaddress %]</div>
       <hr>
       </div>
       
