@@ -507,7 +507,7 @@ if($page==4){
 	available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
-	java_script_location  => "./javascript/calculate.js",
+	java_script_location  => "$server_static/javascript/calculate.js",
 	scriptfile => "calculationscriptfile",
 	stylefile => "calculationstylefile" 
     };
@@ -675,7 +675,7 @@ if($page == 0){
 	tax_id_default => "$tax_id_default",
 	#errorscript is a short javascript that returns the errormessage from parsing the fasta-file on the client side
 	error_script => "$errorscript",
-	java_script_location  => "./javascript/input.js",
+	java_script_location  => "$server_static/javascript/input.js",
 	scriptfile => "inputscriptfile",
 	stylefile => "inputstylefile"
     };
@@ -897,7 +897,7 @@ if($page == 5){
         available_genomes => "$available_genomes",
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
-	java_script_location  => "./javascript/calculate.js",
+	java_script_location  => "$server_static/javascript/calculate.js",
 	scriptfile => "calculationscriptfile",
 	stylefile => "calculationstylefile"
     };
@@ -1035,7 +1035,7 @@ if($page == 2){
 	    filter => "$filter",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    java_script_location  => "./javascript/result.js",
+	    java_script_location  => "$server_static/javascript/result.js",
 	    interactionnumber => "$interactionnumber",
 	    top => "$top",
 	    #hier weiter
@@ -1073,7 +1073,7 @@ if($page == 2){
 	    help => "help.html",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    java_script_location  => "./javascript/calculate.js",
+	    java_script_location  => "$server_static/javascript/calculate.js",
 	    scriptfile => "calculationscriptfile",
 	    stylefile => "calculationstylefile"
 	};
@@ -1209,7 +1209,7 @@ if($page == 3){
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
-	    java_script_location  => "./javascript/postprocessing.js",
+	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "postprocessingscriptfile",
 	    stylefile => "postprocessingstylefile"
 	};
@@ -1616,7 +1616,7 @@ if($page == 3){
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
-	    java_script_location  => "./javascript/postprocessing.js",
+	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "postprocessingscriptfile",
 	    stylefile => "postprocessingstylefile"    
 	};
@@ -1656,7 +1656,7 @@ if($page == 3){
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
-	    java_script_location  => "./javascript/postprocessing.js",
+	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "postprocessingscriptfile",
 	    stylefile => "postprocessingstylefile"
 	};
