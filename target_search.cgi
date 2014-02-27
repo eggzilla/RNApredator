@@ -882,11 +882,11 @@ if($page == 5){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ["$source_dir/template"],
+	INCLUDE_PATH => ["$source_dir"],
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
-    my $file = 'calc.html';
+    my $file = "template/calc.html";
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     print "</table>";
     my $vars = {
@@ -900,8 +900,8 @@ if($page == 5){
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
 	java_script_location  => "$server_static/javascript/calculate.js",
-	scriptfile => "calculationscriptfile",
-	stylefile => "calculationstylefile"
+	scriptfile => "template/calculationscriptfile",
+	stylefile => "template/calculationstylefile"
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     print "<p>This can take some minutes.</p>";
@@ -1056,13 +1056,13 @@ if($page == 2){
 	print "Content-type: text/html; charset=utf-8\n\n";	
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ["$source_dir/template"],
+	    INCLUDE_PATH => ["$source_dir"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
-	my $file = 'calc.html';
+	my $file = "template/calc.html";
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -1076,8 +1076,8 @@ if($page == 2){
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
 	    java_script_location  => "$server_static/javascript/calculate.js",
-	    scriptfile => "calculationscriptfile",
-	    stylefile => "calculationstylefile"
+	    scriptfile => "template/calculationscriptfile",
+	    stylefile => "template/calculationstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	if(defined($accession_number)){
@@ -1189,7 +1189,7 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ["$source_dir/template"],
+	    INCLUDE_PATH => ["$source_dir"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
@@ -1197,7 +1197,7 @@ if($page == 3){
 				     });
 	my @output_array;
 	$ENV{PATH} = "$base_dir/$tempdir/:/usr/bin/:$source_dir/:/bin/:$source_dir/executables";
-	my $file = 'postprocessing.html';
+	my $file = "template/postprocessing.html";
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
@@ -1212,8 +1212,8 @@ if($page == 3){
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
-	    scriptfile => "postprocessingscriptfile",
-	    stylefile => "postprocessingstylefile"
+	    scriptfile => "template/postprocessingscriptfile",
+	    stylefile => "template/postprocessingstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
 	if (my $pid = fork) {
@@ -1597,14 +1597,14 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ["$source_dir/template"],
+	    INCLUDE_PATH => ["$source_dir"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
 	my @output_array;
-	my $file = 'postprocessing.html';
+	my $file = "template/postprocessing.html";
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
@@ -1619,8 +1619,8 @@ if($page == 3){
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
-	    scriptfile => "postprocessingscriptfile",
-	    stylefile => "postprocessingstylefile"    
+	    scriptfile => "template/postprocessingscriptfile",
+	    stylefile => "template/postprocessingstylefile"    
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 	my $link="$server/target_search.cgi?"."page=$page"."&amp;tempdir=$tempdir";
@@ -1637,14 +1637,14 @@ if($page == 3){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ["$source_dir/template"],
+	    INCLUDE_PATH => ["$source_dir"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
 	my @output_array;
-	my $file = 'postprocessingdone.html';
+	my $file = "template/postprocessingdone.html";
 	#if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
 	my $vars = {
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Postprocessing",
@@ -1659,8 +1659,8 @@ if($page == 3){
 	    tax_id_default => "$tax_id_default",
 	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
-	    scriptfile => "postprocessingscriptfile",
-	    stylefile => "postprocessingstylefile"
+	    scriptfile => "template/postprocessingscriptfile",
+	    stylefile => "template/postprocessingstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
     }
