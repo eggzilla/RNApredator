@@ -55,8 +55,8 @@ print STDERR "Hostname: $host\n";
 my $qsub_location="/usr/bin/qsub";
 my $sge_queue_name="web_short_q";
 my $sge_error_dir="$base_dir/error";
-my $sge_log_output_dir="$base_dir/error";
-my $accounting_dir="$base_dir/";
+my $accounting_dir = "$base_dir";
+my $sge_log_output_dir="$source_dir/error";
 my $sge_root_directory="/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once
@@ -569,7 +569,7 @@ if($page==4){
 	#print STDERR Dumper(@tempdir_array);
     }elsif (defined $pid){
 	#exec_command 
-	my $exec_command="export SGE_ROOT=$sge_root_directory;";
+	my $exec_command="";
 	#we loop again once for each sRNA
 	close STDOUT;
 	my $sRNA_count2=0;
@@ -641,10 +641,11 @@ if($page==4){
 	    #ipaddress tempdir timestamp querynumber suboptimal_toggle accession numbers
 	    print ACCOUNTING "$ip_adress $tempdir $timestamp $number_of_sRNAs $suboptimal_toggle $accession_numbers_string\n";
 	    close ACCOUNTING;
-	    $exec_command=$exec_command." $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $source_dir/error  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+	    $exec_command=$exec_command." $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $sge_error_dir  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 	}
 	#send all jobs to the queue 
 	exec "$exec_command" or die print STDERR "RNApredator: calculate multiple failed: $!";
+        #exec "$qsub_location -N IP$ip_adress -q web_short_q -e $base_dir/$tempdir/error -o $base_dir/$tempdir/error $base_dir/$tempdir/commands.sh > $base_dir/$tempdir/Jobid" or die "Could not execute sge submit: $! /n";
     }
     
 }
@@ -839,7 +840,8 @@ if($page==1){
 	#ipaddress tempdir timestamp querynumber suboptimal_toggle accession_numbers
 	print ACCOUNTING "$ip_adress $tempdir $timestamp 1 $suboptimal_toggle $accession_numbers_string\n";
 	close ACCOUNTING;
-	exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e $sge_error_dir -o $sge_log_output_dir $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+	#exec "export SGE_ROOT=$sge_root_directory; $qsub_location -N IP$ip_adress -q web_short_q -e $sge_error_dir -o $sge_log_output_dir $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
+        exec "$qsub_location -N IP$ip_adress -q web_short_q -e $sge_error_dir -o $sge_log_output_dir $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid" or die "$!";
 	#exec "cd $base_dir/$tempdir/; ./commands.sh" or die "$!";
 	#analysing and displaying progress:	
 	#if(defined($tax_id)){
