@@ -62,6 +62,7 @@ function go(){
 function tax_check(ref){
     //perform lookup if species name or tax_id or accession number exists starting with a certain length of input
     //first determine the calling input element and analyse accordingly
+    var static_content_address = document.getElementById("static_content_address").innerHTML;
     var tax_input_field = ref;
     var tax_input_field_value = ref.value;
     var tax_input_field_value_length = tax_input_field_value.length;
@@ -104,8 +105,8 @@ function tax_check(ref){
                 //match
                 //alert(current_input.value);
 		code = code +
-		    "<p align=\"left\" id=\"step2_buttons\" >Proceed <a href=\"#\" style=\"border-style: none\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"tax_id_confirm(this)\" ></a>"+
-                    " Back <a href=\"#\"><img src=\"pictures/deny.png\" style=\"border-style: none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"tax_id_check_back(this)\"></a></p>";
+		    "<p align=\"left\" id=\"step2_buttons\" >Proceed <a href=\"#\" style=\"border-style: none\"><img src=\"" + static_content_address +"/pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"tax_id_confirm(this)\" ></a>"+
+                    " Back <a href=\"#\"><img src=\"" + static_content_address + "/pictures/deny.png\" style=\"border-style: none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"tax_id_check_back(this)\"></a></p>";
                 var myText = document.createTextNode(code);
                 //disable eventhandlers from step 
                 //document.getElementById("accession_id").onkeyup = null;
@@ -124,10 +125,11 @@ function tax_id_check_back(){
 
 function tax_id_submitter_back(ref){
     //hide buttons from 3nd step and disable eventhandlers
+    var static_content_address = document.getElementById("static_content_address").innerHTML;
     document.getElementById("sRNA-Input").disabled=false;
     document.getElementById("step3_buttons").style.display='';
-    document.getElementById("step3_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"pictures/confirm.png\"  style=\"border-style:none\" id=\"step3_confirm\"  alt=\"confirm\" onclick=\"tax_id_submitter(this)\"></a>"+
-        " Back  <a href=\"#\"><img src=\"pictures/deny.png\" alt=\"deny\" style=\"border-style:none\" id=\"step3_reseter\"  onclick=\"tax_id_confirm_back(this)\"></a>";
+    document.getElementById("step3_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"" + static_content_address + "/pictures/confirm.png\"  style=\"border-style:none\" id=\"step3_confirm\"  alt=\"confirm\" onclick=\"tax_id_submitter(this)\"></a>"+
+        " Back  <a href=\"#\"><img src=\"" + static_content_address + "/pictures/deny.png\" alt=\"deny\" style=\"border-style:none\" id=\"step3_reseter\"  onclick=\"tax_id_confirm_back(this)\"></a>";
     //set new stuff
     document.getElementById("step4_content").innerHTML="";
 }
@@ -163,6 +165,7 @@ function tax_id_confirm(ref){
 }
 
 function tax_id_confirm_back(ref){
+    var static_content_address = document.getElementById("static_content_address").innerHTML;
     //Go back to Genome confirm by reversing settings from accession_confirm
     document.getElementById("accession_id").disabled=false;
     document.getElementById("tax_id").disabled=false;
@@ -171,8 +174,8 @@ function tax_id_confirm_back(ref){
     //document.getElementById("step2_confirm").onclick ="accession_confirm()";
     //document.getElementById("step2_reseter").onclick ="reseter()";
     //set new stuff
-    document.getElementById("step2_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"tax_id_confirm(this)\"></a>"+
-        " Back  <a href=\"#\"><img src=\"pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"tax_id_check_back(this)(this)\"></a>";
+    document.getElementById("step2_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"" + static_content_address + "/pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"tax_id_confirm(this)\"></a>"+
+        " Back  <a href=\"#\"><img src=\"" + static_content_address + "pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"tax_id_check_back(this)(this)\"></a>";
     document.getElementById("step3_content").innerHTML="";
 }
 
@@ -296,6 +299,7 @@ if(isok){
 function accession_check(ref){
 //perform lookup if species name or tax_id or accession number exists starting with a certain length of input
     //first determine the calling input element and analyse accordingly
+    var static_content_address = document.getElementById("static_content_address").innerHTML;
     var input_field = ref;
     var input_field_value = ref.value;
     var input_field_value_lenght = ref.value.length;
@@ -320,8 +324,8 @@ function accession_check(ref){
         	"<p>Name:" + current_input_child_name +"</p>"+
 		"<p>Tax-id:" + current_input_child_taxid +"</p>"+
 		"<p>Replicon:" + current_input_child_replicon +"</p>"+
-               	"<p id=\"step2_buttons\" >Proceed <a href=\"#\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
-                " Back  <a href=\"#\"><img src=\"pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"accession_check_back()\"></a></p>";
+               	"<p id=\"step2_buttons\" >Proceed <a href=\"#\"><img src=\"" + static_content_address  + "/pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
+                " Back  <a href=\"#\"><img src=\"" + static_content_address + "/pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"accession_check_back()\"></a></p>";
             var myText = document.createTextNode(code);
 	    //disable eventhandlers from step 
 	    //document.getElementById("accession_id").onkeyup = null;
@@ -390,6 +394,7 @@ function accession_confirm(ref){
 }
 
 function accession_confirm_back(ref){
+    var static_content_address = document.getElementById("static_content_address").innerHTML;
     //Go back to Genome confirm by reversing settings from accession_confirm
     document.getElementById("accession_id").disabled=false;
     document.getElementById("tax_id").disabled=false;
@@ -398,8 +403,8 @@ function accession_confirm_back(ref){
     //document.getElementById("step2_confirm").onclick ="accession_confirm()";
     //document.getElementById("step2_reseter").onclick ="reseter()";
     //set new stuff
-    document.getElementById("step2_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
-        " Back  <a href=\"#\"><img src=\"pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"reseter(this)\"></a>";
+    document.getElementById("step2_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"" + static_content_address  +"pictures/confirm.png\" style=\"border-style:none\" id=\"step2_confirm\" alt=\"confirm\" onclick=\"accession_confirm(this)\"></a>"+
+        " Back  <a href=\"#\"><img src=\"" + static_content_address  +"pictures/deny.png\" style=\"border-style:none\" id=\"step2_reseter\"  alt=\"reset\" onclick=\"reseter(this)\"></a>";
     document.getElementById("step3_content").innerHTML="";
 }
 
@@ -427,8 +432,8 @@ function accession_submitter_back(ref){
     //hide buttons from 3nd step and disable eventhandlers
     document.getElementById("sRNA-Input").disabled=false;
     document.getElementById("step3_buttons").style.display='';
-    document.getElementById("step3_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"pictures/confirm.png\"  style=\"border-style:none\" id=\"step3_confirm\"  alt=\"confirm\" onclick=\"accession_submitter(this)\"></a>"+
-        " Back  <a href=\"#\"><img src=\"pictures/deny.png\" alt=\"deny\" style=\"border-style:none\" id=\"step3_reseter\"  onclick=\"accession_confirm_back(this)\"></a>";
+    document.getElementById("step3_buttons").innerHTML="Proceed <a href=\"#\"><img src=\"" + static_content_address + "pictures/confirm.png\"  style=\"border-style:none\" id=\"step3_confirm\"  alt=\"confirm\" onclick=\"accession_submitter(this)\"></a>"+
+        " Back  <a href=\"#\"><img src=\"" + static_content_address + "pictures/deny.png\" alt=\"deny\" style=\"border-style:none\" id=\"step3_reseter\"  onclick=\"accession_confirm_back(this)\"></a>";
     //set new stuff
     document.getElementById("step4_content").innerHTML="";
 }
