@@ -1210,7 +1210,7 @@ if($page == 3){
 	    help => "help.html",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
+	    postprocess => "html/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "template/postprocessingscriptfile",
 	    stylefile => "template/postprocessingstylefile"
@@ -1617,7 +1617,7 @@ if($page == 3){
 	    help => "help.html",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
+	    postprocess => "html/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "template/postprocessingscriptfile",
 	    stylefile => "template/postprocessingstylefile"    
@@ -1657,7 +1657,7 @@ if($page == 3){
 	    help => "help.html",
 	    accession_default => "$accession_default",
 	    tax_id_default => "$tax_id_default",
-	    postprocess => "../../../..$base_dir/$tempdir/postprocess",
+	    postprocess => "html/$tempdir/postprocess",
 	    java_script_location  => "$server_static/javascript/postprocessing.js",
 	    scriptfile => "template/postprocessingscriptfile",
 	    stylefile => "template/postprocessingstylefile"
