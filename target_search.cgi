@@ -971,13 +971,13 @@ if($page == 2){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
 	    # where to find template files
-	    INCLUDE_PATH => ["$source_dir/template"],
+	    INCLUDE_PATH => ["$source_dir"],
 	    #Interpolate => 1 allows simple variable reference
 	    #INTERPOLATE=>1,
 	    #allows use of relative include path
 	    RELATIVE=>1,
 				     });
-	my $file = 'results.html';
+	my $file = 'template/results.html';
 	#calculate appropriate dropmenu
 	#get number of interactions and selected number of top interaction	
 	open(IANUMBER, "<$base_dir/$tempdir/interactionnumber");
@@ -1028,7 +1028,7 @@ if($page == 2){
 	    title => "RNApredator bacterial sRNA target prediction Webserver - Results",
 	    tbihome => "http://www.tbi.univie.ac.at/",
 	    #hier weiter
-	    drop_options => "dropmenu$drop_menu_number",
+	    drop_options => "template/dropmenu$drop_menu_number",
 	    staticcontentaddress => "$server_static",
             serveradress => "$server",
             staticcontentaddress => "$server_static",
@@ -1041,14 +1041,14 @@ if($page == 2){
 	    interactionnumber => "$interactionnumber",
 	    top => "$top",
 	    #hier weiter
-	    resulttable => "./html/$tempdir/$resulthtmlfile",
-	    all_predictions => "./html/$tempdir/all_predictions.csv",
-	    sRNA_fasta => "./html/$tempdir/sRNA.fasta",
-	    plex_output_file => "./html/$tempdir/prediction.res",
+	    resulttable => "html/$tempdir/$resulthtmlfile",
+	    all_predictions => "html/$tempdir/all_predictions.csv",
+	    sRNA_fasta => "html/tmp/$tempdir/sRNA.fasta",
+	    plex_output_file => "html/$tempdir/prediction.res",
 	    sRNA => "$sRNA",
 	    tempdir => "$tempdir",
-	    scriptfile => "resultscriptfile",
-	    stylefile => "resultstylefile"
+	    scriptfile => "template/resultscriptfile",
+	    stylefile => "template/resultstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     }else{

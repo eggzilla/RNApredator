@@ -1,4 +1,4 @@
-   <script src="./javascript/jquery-1.4.4.min.js"></script>	
-   <script src="./javascript/jquery.validate.min.js"></script>
+   <script src="[% staticcontentaddress %]/javascript/jquery-1.4.4.min.js"></script>	
+   <script src="[% staticcontentaddress %]/javascript/jquery.validate.min.js"></script>
    <script src="[% java_script_location %]"></script>
-   <script src="./javascript/google-analytics.js"></script>
+   <script src="[% staticcontentaddress %]/javascript/google-analytics.js"></script>
