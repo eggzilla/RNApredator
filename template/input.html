@@ -1,4 +1,4 @@
-[% INCLUDE header %]
+[% INCLUDE template/header %]
 <div style="text-align:left">
   [% error_script %]
 </div>
@@ -79,10 +79,10 @@
   </div>
 </div>
 <table id="data" style="display:none" >
-  [% INCLUDE input_data_template %]
+  [% INCLUDE template/input_data_template %]
 </table>
 <script type="text/javascript">
   window.onload = go();
 </script>
 
-[% INCLUDE footer %]
+[% INCLUDE template/footer %]
