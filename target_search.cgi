@@ -52,12 +52,12 @@ if($host eq "erbse"){
 print STDERR "Hostname: $host\n";
 
 #sun grid engine settings
-my $qsub_location="/usr/bin/qsub";
-my $sge_queue_name="web_short_q";
-my $sge_error_dir="$base_dir/error";
+my $qsub_location = "/usr/bin/qsub";
+my $sge_queue_name = "web_short_q";
+my $sge_error_dir = "$base_dir/error";
 my $accounting_dir = "$base_dir";
-my $sge_log_output_dir="$source_dir/error";
-my $sge_root_directory="/usr/share/gridengine";
+my $sge_log_output_dir = "$source_dir/error";
+my $sge_root_directory = "/usr/share/gridengine";
 ##########################################################################################################
 #Write all Output to file at once
 $|=1;
@@ -492,11 +492,11 @@ if($page==4){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ["$source_dir/template"],
+	INCLUDE_PATH => ["$source_dir"],
 	RELATIVE=>1,
 				 });
     
-    my $file = 'calc.html';
+    my $file = 'template/calc.html';
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -508,8 +508,8 @@ if($page==4){
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
 	java_script_location  => "$server_static/javascript/calculate.js",
-	scriptfile => "calculationscriptfile",
-	stylefile => "calculationstylefile" 
+	scriptfile => "template/calculationscriptfile",
+	stylefile => "template/calculationstylefile" 
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
     #process parsed array here we need to loop once for each sRNA and then redirect to page=5
@@ -627,7 +627,7 @@ if($page==4){
 	    open (TOTALMRNACOUNTER, ">$base_dir/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
 	    print TOTALMRNACOUNTER "$total_mRNA_counter";
 	    close TOTALMRNACOUNTER;
-	    print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir $base_dir;\n";
+	    print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir $base_dir $source_dir;\n";
 	    print COMMANDS "touch done;\n";
 	    close COMMANDS;
 	    chmod (0755,"$base_dir/$tempdir/commands.sh");
@@ -656,14 +656,14 @@ if($page == 0){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ["$source_dir/template"],
+	INCLUDE_PATH => ["$source_dir"],
 	#Interpolate => 1 allows simple variable reference
 	#INTERPOLATE=>1,
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
 
-    my $file = "input.html";
+    my $file = "template/input.html";
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Input form",
@@ -677,8 +677,8 @@ if($page == 0){
 	#errorscript is a short javascript that returns the errormessage from parsing the fasta-file on the client side
 	error_script => "$errorscript",
 	java_script_location  => "$server_static/javascript/input.js",
-	scriptfile => "inputscriptfile",
-	stylefile => "inputstylefile"
+	scriptfile => "template/inputscriptfile",
+	stylefile => "template/inputstylefile"
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 }
@@ -693,14 +693,14 @@ if($page==1){
     print "Content-type: text/html; charset=utf-8\n\n";
     my $template = Template->new({
 	# where to find template files
-	INCLUDE_PATH => ["$source_dir/template"],
+	INCLUDE_PATH => ["$source_dir"],
 	#Interpolate => 1 allows simple variable reference
 	#INTERPOLATE=>1,
 	#allows use of relative include path
 	RELATIVE=>1,
 				 });
     
-    my $file = 'calc.html';
+    my $file = 'template/calc.html';
     #if id param is set we already preset it in the appropiate input field e.g. tax_default, accession_default
     my $vars = {
 	title => "RNApredator bacterial sRNA target prediction Webserver - Calculation",
@@ -714,8 +714,8 @@ if($page==1){
 	accession_default => "$accession_default",
 	tax_id_default => "$tax_id_default",
         java_script_location  => "./javascript/calculate.js",
-	scriptfile => "calculationscriptfile",
-	stylefile => "calculationstylefile"
+	scriptfile => "template/calculationscriptfile",
+	stylefile => "template/calculationstylefile"
     };
     $template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
     #print "Input: <br> <br> Accession Number - $accession_number <br> Tax-id - $tax_id <br> sRNA - $sRNA <br> page - $page <br><br>";
@@ -826,7 +826,7 @@ if($page==1){
 	open (TOTALMRNACOUNTER, ">$base_dir/$tempdir/total_mRNA_counter") or die "Could not create total_mRNA_counter";
 	print TOTALMRNACOUNTER "$total_mRNA_counter";
 	close TOTALMRNACOUNTER;
-	print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir $base_dir;\n";
+	print COMMANDS "$source_dir/executables/plex_to_html.pl $tempdir $base_dir $source_dir;\n";
 	print COMMANDS "touch done;\n";
 	close COMMANDS;
 	chmod (0755,"$base_dir/$tempdir/commands.sh");
@@ -1042,9 +1042,9 @@ if($page == 2){
 	    top => "$top",
 	    #hier weiter
 	    resulttable => "html/$tempdir/$resulthtmlfile",
-	    all_predictions => "html/$tempdir/all_predictions.csv",
-	    sRNA_fasta => "html/tmp/$tempdir/sRNA.fasta",
-	    plex_output_file => "html/$tempdir/prediction.res",
+	    all_predictions => "$server_static/tmp/$tempdir/all_predictions.csv",
+	    sRNA_fasta => "$server_static/tmp/$tempdir/sRNA.fasta",
+	    plex_output_file => "$server_static/tmp/$tempdir/prediction.res",
 	    sRNA => "$sRNA",
 	    tempdir => "$tempdir",
 	    scriptfile => "template/resultscriptfile",

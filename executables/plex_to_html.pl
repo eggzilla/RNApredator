@@ -17,19 +17,21 @@ use Sys::Hostname;
 #machine specific settings
 my $host = hostname;
 my $source_dir;
-if($host eq "erbse"){
-   $source_dir="/srv/http/RNApredator"; 
-}elsif($host eq "linse"){
-   $source_dir="/scratch2/RNApredator"; 
-}else{
+#source dir is handed over by calling script
+#if($host eq "erbse"){
+#   $source_dir="/srv/http/RNApredator"; 
+#}elsif($host eq "linse"){
+#   $source_dir="/scratch2/RNApredator"; 
+#}else{
 #if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
-   $source_dir="/scratch2/RNApredator"; 
-}
+#   $source_dir="/scratch2/RNApredator"; 
+#}
 
 ##########################################################################
 #convert the total specieslist into an html table for the user input page
 my $tempdir = $ARGV[0];
-my $base_dir=$ARGV[1];
+my $base_dir = $ARGV[1];
+my $source_dir = $ARGV[2];
 #my $tempdir_parent_directory="/srv/http/RNApredator/html";
 my $top= 10000;
 #toDO: hand over sourcedir and hand over full tempdir path
@@ -71,7 +73,8 @@ while(my $line=<PLEX>){
     $query=~s/>//;
     my @fields = split(/\_/, $target);
     $coordinates=$fields[3]; #save gene location
-    ($accession_number, $accession_version)=split(/\./,$fields[2]); #save gene location
+    #($accession_number, $accession_version)=split(/\./,$fields[2]); #save gene location
+    $accession_number=$fields[2];
     $accession_letters=$fields[1];
   }
   else{
