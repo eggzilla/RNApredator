@@ -16,7 +16,6 @@ use Sys::Hostname;
 ##########################################################################
 #machine specific settings
 my $host = hostname;
-my $source_dir;
 #source dir is handed over by calling script
 #if($host eq "erbse"){
 #   $source_dir="/srv/http/RNApredator"; 
@@ -73,8 +72,13 @@ while(my $line=<PLEX>){
     $query=~s/>//;
     my @fields = split(/\_/, $target);
     $coordinates=$fields[3]; #save gene location
-    #($accession_number, $accession_version)=split(/\./,$fields[2]); #save gene location
-    $accession_number=$fields[2];
+    ($accession_number, $accession_version)=split(/\./,$fields[2]); #save gene location
+    #check if corresponding .ftn file with version exists, otherwise default to accession number without version
+    if(-e "$source_dir/data/ftn_all_species_Final/$fields[2].ftn"){
+      $accession_number=$fields[2]; #save gene location
+    }else{
+      ($accession_number, $accession_version)=split(/\./,$fields[2]); #save gene location
+    }
     $accession_letters=$fields[1];
   }
   else{
