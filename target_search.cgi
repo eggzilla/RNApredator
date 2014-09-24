@@ -35,17 +35,17 @@ if($host eq "erbse"){
 }elsif($host eq "linse"){
     $server="http://rna.tbi.univie.ac.at/RNApredator2";
     $base_dir ="/u/html/RNApredator";
-}elsif($host eq "nylon"){
-    $server = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
-    $available_genomes = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
-    $server_static = "http://nylon.tbi.univie.ac.at/RNApredator";
+}elsif($host eq "nibiru"){
+    $server = "http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+    $available_genomes = "http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
+    $server_static = "http://nibiru.tbi.univie.ac.at/RNApredator";
     $source_dir = "/mnt/storage/progs/RNApredator";
     $base_dir = "$source_dir/html";
 }else{
 #if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
     $server = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
     $server_static = "http://rna.tbi.univie.ac.at/RNApredator";
-    $available_genomes = "http://nylon.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
+    $available_genomes = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
     $source_dir = "/mnt/storage/progs/RNApredator";
     $base_dir = "$source_dir/html";
 }

@@ -1,4 +1,5 @@
 <tr id="Accession"><td>Accession</td><td>Length</td><td>Taxid</td><td>TaxName</td><td>Replicon</td><td>Create Date<td></tr>
+<tr id="NC_016810"><td>NC_016810.1</td><td>4878012</td><td>216597</td><td>Salmonella enterica subsp. enterica serovar Typhimurium str. SL1344</td><td>chromosome</td><td>Aug 20 2013<td></tr>
 <tr id="NC_018220"><td>NC_018220.1</td><td>6260702</td><td>1196325</td><td>Pseudomonas putida DOT-T1E chromosome, complete genome.</td><td>chromosome</td><td>Jun 11 2013<td></tr>
 <tr id="NC_018267"><td>NC_018267.1</td><td>957990</td><td>100901</td><td>Wolbachia endosymbiont of Onchocerca ochengi</td><td>chromosome</td><td>Sep 10 2012<td></tr>
 <tr id="NC_000907"><td>NC_000907.1</td><td>1830138</td><td>71421</td><td>Haemophilus influenzae Rd KW20</td><td>chromosome</td><td>Oct 19 2001<td></tr>
