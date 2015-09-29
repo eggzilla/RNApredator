@@ -1,16 +1,46 @@
 #!/usr/bin/perl
-#Main executable of the RNAPlex webserver 
+#Main executable of the RNAPlex webserver
+my ($host,$webserver_name,$source_dir,$server,$available_genomes,$server_static); 
 use warnings;
 use strict;
 use diagnostics;
 use utf8;
-use Data::Dumper;
-use Pod::Usage;
-use IO::String;
-use Bio::SeqIO;
 use Cwd;
 use CGI::Carp qw(fatalsToBrowser);
-my $source_dir=cwd();
+use Sys::Hostname;
+
+BEGIN{
+  #Set host specific variables according to hostname
+  $host = hostname;
+  $webserver_name = "RNApredator";
+  $source_dir="/mnt/storage/progs/RNApredator/";
+  $server;
+  $available_genomes;
+  $server_static="http://nibiru.tbi.univie.ac.at/RNApredator";
+
+  #baseDIR points to the tempdir folder
+  my $base_dir;
+  if($host eq "erbse"){
+      $server="http://localhost:800/RNApredator";
+      $base_dir ="$source_dir/html";
+  }elsif($host eq "linse"){
+      $server="http://rna.tbi.univie.ac.at/RNApredator2";
+      $base_dir ="/u/html/RNApredator";
+  }elsif($host eq "nibiru"){
+      $server = "http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+      $available_genomes = "http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
+      $server_static = "http://nibiru.tbi.univie.ac.at/RNApredator";
+      $source_dir = "/mnt/storage/progs/RNApredator";
+      $base_dir = "$source_dir/html";
+  }else{
+  #if we are not on erbse or on linse we are propably on rna.tbi.univie.ac.at anyway
+      $server = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi";
+      $server_static = "http://rna.tbi.univie.ac.at/RNApredator";
+      $available_genomes = "http://rna.tbi.univie.ac.at/cgi-bin/RNApredator/available_genomes.cgi";
+      $source_dir = "/mnt/storage/progs/RNApredator";
+      $base_dir = "$source_dir/html";
+  }
+}
 #Control of the CGI Object remains with webserv.pl, additional functions are defined in the requirements below.
 use CGI;
 $CGI::POST_MAX=15000000; #max 15mb posts
@@ -20,7 +50,13 @@ use Template;
 
 #Reset these absolut paths when changing the location of the requirements
 #functions for genome selection
-require "$source_dir/executables/available_genomes.pl";
+use lib "$source_dir/lib/BioPerl-1.6.901/";
+use lib "$source_dir/executables/available_genomes.pl";
+#require "$source_dir/executables/available_genomes.pl";
+use Data::Dumper;
+use Pod::Usage;
+use IO::String;
+use Bio::SeqIO;
 
 ######STATE - variables##########################################
 #determine the query state by retriving CGI variables
@@ -35,24 +71,26 @@ if($page eq "0"){
 	print "Content-type: text/html; charset=utf-8\n\n";
 	my $template = Template->new({
   	  	# where to find template files
-    		INCLUDE_PATH => ['./template'],
+    		INCLUDE_PATH => ["$source_dir"],
 		#Interpolate => 1 allows simple variable reference
 		#INTERPOLATE=>1,
 		#allows use of relative include path
 		RELATIVE=>1,
 	});
 
-	my $file = './template/available_genomes.html';
+	my $file = 'template/available_genomes.html';
 	my $vars = {
    		title => "RNApredator bacterial sRNA target prediction Webserver - Available Genomes",
 	   	tbihome => "http://www.tbi.univie.ac.at/",
-		banner => "./pictures/banner_final.png",
+		banner => "$server_static/pictures/banner_final.png",
+                serveradress => "$server",
 		introduction => "introduction.html",
 	        available_genomes => "available_genomes.cgi",
+                staticcontentaddress => "$server_static",
 	        target_search => "target_search.cgi",
 	        help => "help.html",
-		scriptfile => "availablegenomesscriptfile",
-		stylefile => "availablegenomesstylefile"
+		scriptfile => "template/availablegenomesscriptfile",
+		stylefile => "template/availablegenomesstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";
 }
@@ -63,7 +101,7 @@ if($page eq "1"){
         print "Content-type: text/html; charset=utf-8\n\n";
         my $template = Template->new({
                 # where to find template files
-                INCLUDE_PATH => ['./template'],
+                INCLUDE_PATH => ["$source_dir"],
                 #Interpolate => 1 allows simple variable reference
                 #INTERPOLATE=>1,
                 #allows use of relative include path
@@ -73,17 +111,19 @@ if($page eq "1"){
         my $vars = {
                 title => "RNApredator bacterial sRNA target prediction Webserver - Available Genomes",
                 tbihome => "http://www.tbi.univie.ac.at/",
-                banner => "./pictures/banner_final.png",
+                banner => "$server_static/pictures/banner_final.png",
+                serveradress => "$server",
                 introduction => "introduction.html",
                 available_genomes => "available_genomes.cgi",
                 target_search => "target_search.cgi",
+                staticcontentaddress => "$server_static",
 		query => "$search_string",
 		output=> "$output",
                 help => "help.html",
-		scriptfile => "availablegenomesscriptfile",
-                stylefile => "availablegenomesstylefile"
+		scriptfile => "template/availablegenomesscriptfile",
+                stylefile => "template/availablegenomesstylefile"
         };
-        my $file = "./template/available_genomes_result.html";	
+        my $file = "template/available_genomes_result.html";	
         $template->process($file, $vars) || die "Template process failed: $page, $search_string", $template->error(), "\n";
 	
 }

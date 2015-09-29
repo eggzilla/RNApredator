@@ -1,8 +1,8 @@
-	<script type="text/javascript" src="./javascript/jquery-1.4.4.min.js"></script>
-	<script type="text/javascript" src="./javascript/jquery.jstree.js"></script>
-	<script type="text/javascript" src="./javascript/jquery_autocomplete/jquery.autocomplete.js"></script>
-	<script src="./javascript/google-analytics.js"></script>
-	<script type="text/javascript" src="./javascript/available_genomes3.js"></script>
+	<script type="text/javascript" src="[% staticcontentaddress %]/javascript/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="[% staticcontentaddress %]/javascript/jquery.jstree.js"></script>
+	<script type="text/javascript" src="[% staticcontentaddress %]/javascript/jquery_autocomplete/jquery.autocomplete.js"></script>
+	<script src="[% staticcontentaddress %]/javascript/google-analytics.js"></script>
+	<script type="text/javascript" src="[% staticcontentaddress %]/javascript/available_genomes3.js"></script>
 	<script type="text/javascript" class="source">
 		$(function () {	
 	    	$("#demo1").jstree({
@@ -12,7 +12,7 @@
 	            		 "types" : {
 	                	 "root" : {
 	                    	 "icon" : {
-				     "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/root.png"
+				     "image" : "[% staticcontentaddress %]/pictures/tree/root.png"
 	                    },
 	                    "valid_children" : [ "default", "genome", "species", "tax" ],
 	                    "max_depth" : 2,
@@ -24,16 +24,16 @@
 	                },
 			"genome" : {
                             "icon" : {
-                                "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/genome.png"
+                                "image" : "[% staticcontentaddress %]/pictures/tree/genome.png"
                             },
                             "valid_children" : [ "default", "genome", "species", "tax" ],
                             "max_depth" : 2,
                             "hover_node" : false,
-                            "select_node" : function (n) {window.location = "http://rna.tbi.univie.ac.at/RNApredator2/target_search.cgi?id=" + n.attr("id");}
+                            "select_node" : function (n) {window.location = "[% server %]/target_search.cgi?id=" + n.attr("id");}
                         },
 			"tax" : {
                             "icon" : {
-                                "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/tax.png"
+                                "image" : "[% staticcontentaddress %]/pictures/tree/tax.png"
                             },
                             "valid_children" : [ "default", "genome", "species", "tax" ],
                             "max_depth" : 2,
@@ -41,7 +41,7 @@
                         },
 			"species" : {
                             	  "icon" : {
-                                   "image" : "http://rna.tbi.univie.ac.at/RNApredator2/pictures/tree/species.png"
+                                   "image" : "[% staticcontentaddress %]/pictures/tree/species.png"
                            	 },
 				"valid_children" : [ "default", "genome", "species", "tax" ],
                             	"max_depth" : 2,
