@@ -21,12 +21,11 @@ use Sys::Hostname;
 
 #Set host specific variables according to hostname
 my $host = hostname;
-print STDERR "Hostname: $host\n";
 my $webserver_name = "RNApredator";
 my $source_dir="/mnt/storage/progs/RNApredator/";
 my $server;
 my $available_genomes;
-my $server_static="http://nylon.tbi.univie.ac.at/RNApredator";
+my $server_static="http://nibiru.tbi.univie.ac.at/RNApredator";
 #baseDIR points to the tempdir folder
 my $base_dir;
 if($host eq "erbse"){
@@ -49,7 +48,6 @@ if($host eq "erbse"){
     $source_dir = "/mnt/storage/progs/RNApredator";
     $base_dir = "$source_dir/html";
 }
-print STDERR "Hostname: $host\n";
 
 #sun grid engine settings
 my $qsub_location = "/usr/bin/qsub";
@@ -516,8 +514,7 @@ if($page==4){
     my $number_of_sRNAs=$parsed_array[2];
     #print STDERR "######################################PREDATOR-DEBUG:"; 
     #print STDERR "number_of_sRNAs:$number_of_sRNAs\n";
-    my $sRNA_count=0;
-    for($sRNA_count;$sRNA_count<$number_of_sRNAs; $sRNA_count++){
+    for(my $sRNA_count=0;$sRNA_count<$number_of_sRNAs; $sRNA_count++){
 	#retrieve sRNA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	$sRNA=$parsed_array[2*($sRNA_count+1)+2];
 	$tempdir = tempdir ( DIR => $base_dir );
@@ -553,7 +550,7 @@ if($page==4){
 	#FORK here and hand over tempdir names for page 5
     }
     my $tempdir_submit_array=join(",",@tempdir_array);
-    if (my $pid = fork) {
+    if(my $pid = fork){
 	$query->delete_all();
 	#send user to result page
 	if(defined $tax_id){
@@ -572,8 +569,8 @@ if($page==4){
 	my $exec_command="";
 	#we loop again once for each sRNA
 	close STDOUT;
-	my $sRNA_count2=0;
-	for($sRNA_count2; $sRNA_count2<$number_of_sRNAs; $sRNA_count2++){
+	#my $sRNA_count2=0;
+	for(my $sRNA_count2=0; $sRNA_count2<$number_of_sRNAs; $sRNA_count2++){
 	    #retrieve tempdir
 	    $tempdir=$tempdir_array[$sRNA_count2];
 	    #print STDERR "2.Using tempdir:$tempdir";
@@ -641,7 +638,7 @@ if($page==4){
 	    #ipaddress tempdir timestamp querynumber suboptimal_toggle accession numbers
 	    print ACCOUNTING "$ip_adress $tempdir $timestamp $number_of_sRNAs $suboptimal_toggle $accession_numbers_string\n";
 	    close ACCOUNTING;
-	    $exec_command=$exec_command." $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $sge_error_dir  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
+	    $exec_command=" $qsub_location -N IP$ip_adress -q $sge_queue_name -e $sge_error_dir  -o $sge_error_dir  $base_dir/$tempdir/commands.sh >$base_dir/$tempdir/Jobid;";	
 	}
 	#send all jobs to the queue 
 	exec "$exec_command" or die print STDERR "RNApredator: calculate multiple failed: $!";
@@ -1120,7 +1117,6 @@ if($page == 2){
 	#Stuff for progress:    
 	#Number of Genes: precalculated: lookup number in file total_mRNA_number in tmpfolder, then look how often ">sRNA" appears in the predicts.res file
 	open (TOTALMRNACOUNTER, "<$base_dir/$tempdir/total_mRNA_counter") or die "Could not open total_mRNA_counter";
-	my @total_counter_array;
 	while(<TOTALMRNACOUNTER>){
 	    push(@total_counter_array,$_);
 	}
@@ -1216,7 +1212,7 @@ if($page == 3){
 	    stylefile => "template/postprocessingstylefile"
 	};
 	$template->process($file, $vars) || die "Template process failed: ", $template->error(), "\n";	
-	if (my $pid = fork) {
+	if(my $pid = fork) {
 	    $query->delete_all();
 	    #send user to result page
 	    print"<script type=\"text/javascript\">
