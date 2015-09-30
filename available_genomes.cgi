@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-#Main executable of the RNAPlex webserver
+#Available genomes page
 my ($host,$webserver_name,$source_dir,$server,$available_genomes,$server_static); 
 use warnings;
 use strict;
@@ -14,8 +14,6 @@ BEGIN{
   $host = hostname;
   $webserver_name = "RNApredator";
   $source_dir="/mnt/storage/progs/RNApredator/";
-  $server;
-  $available_genomes;
   $server_static="http://nibiru.tbi.univie.ac.at/RNApredator";
 
   #baseDIR points to the tempdir folder
@@ -51,12 +49,35 @@ use Template;
 #Reset these absolut paths when changing the location of the requirements
 #functions for genome selection
 use lib "$source_dir/lib/BioPerl-1.6.901/";
-use lib "$source_dir/executables/available_genomes.pl";
+use lib "$source_dir/executables/";
 #require "$source_dir/executables/available_genomes.pl";
 use Data::Dumper;
 use Pod::Usage;
 use IO::String;
 use Bio::SeqIO;
+
+sub output{
+        my $query_output = shift;
+        #escape characters for bash
+        my $query_output_quoted=quotemeta($query_output);
+        my @match=`grep -ihP $query_output_quoted $source_dir/template/csv_autocomplete`;
+        my $return_value="";
+        my $header="<tr><td style=\"width: 60%\">Designation</td><td style=\"width: 15%\">Accession Number</td><td style=\"width: 20%\">Select for Target Search</td></tr>";
+        my $output="";
+        #parse matching lines
+        foreach my $matching_line (@match){
+                chomp($matching_line);
+                my @fields =split(/\,/,$matching_line);
+                        $output=$output."<tr><td>$fields[0]</td><td>$fields[1]</td><td><a href=\"$server/target_search.cgi?id=$fields[1]\">Link</a></td></tr>";
+
+        }
+        if($output eq ""){
+                $output=$output."<tr><td colspan=\"3\"><u>no match found</u></td></tr>";
+        }
+        $return_value="$header"."$output";
+        return "$return_value";
+}
+
 
 ######STATE - variables##########################################
 #determine the query state by retriving CGI variables
@@ -85,9 +106,9 @@ if($page eq "0"){
 		banner => "$server_static/pictures/banner_final.png",
                 serveradress => "$server",
 		introduction => "introduction.html",
-	        available_genomes => "available_genomes.cgi",
+	        available_genomes => "$available_genomes",
                 staticcontentaddress => "$server_static",
-	        target_search => "target_search.cgi",
+	        target_search => "$server",
 	        help => "help.html",
 		scriptfile => "template/availablegenomesscriptfile",
 		stylefile => "template/availablegenomesstylefile"
@@ -114,8 +135,8 @@ if($page eq "1"){
                 banner => "$server_static/pictures/banner_final.png",
                 serveradress => "$server",
                 introduction => "introduction.html",
-                available_genomes => "available_genomes.cgi",
-                target_search => "target_search.cgi",
+                available_genomes => "$available_genomes",
+                target_search => "$server",
                 staticcontentaddress => "$server_static",
 		query => "$search_string",
 		output=> "$output",
@@ -128,24 +149,3 @@ if($page eq "1"){
 	
 }
   
-sub output(){
-        my $query_output = shift;
-        #escape characters for bash
-        my $query_output_quoted=quotemeta($query_output);
-        my @match=`grep -ihP $query_output_quoted $source_dir/template/csv_autocomplete`;
-        my $return_value="";
-	my $header="<tr><td style=\"width: 60%\">Designation</td><td style=\"width: 15%\">Accession Number</td><td style=\"width: 20%\">Select for Target Search</td></tr>";
-	my $output="";
-        #parse matching lines
-        foreach my $matching_line (@match){
-                chomp($matching_line);
-                my @fields =split(/\,/,$matching_line);
-			$output=$output."<tr><td>$fields[0]</td><td>$fields[1]</td><td><a href=\"http://rna.tbi.univie.ac.at/RNApredator2/target_search.cgi?id=$fields[1]\">Link</a></td></tr>";
-                
-        }
-	if($output eq ""){
-		$output=$output."<tr><td colspan=\"3\"><u>no match found</u></td></tr>";
-	}
-	$return_value="$header"."$output";
-	return "$return_value";
-}

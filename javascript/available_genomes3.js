@@ -1,7 +1,7 @@
 var options, a;
 jQuery(function(){
-  options = { zIndex: 9999, maxRows: 12, serviceUrl:'http://rna.tbi.univie.ac.at/RNApredator2/autocomplete.cgi' , onSelect: function(value, data){
- window.location = "http://rna.tbi.univie.ac.at/RNApredator2/target_search.cgi?id="+data; }, minChars:4 };
+  options = { zIndex: 9999, maxRows: 12, serviceUrl:'http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/autocomplete.cgi' , onSelect: function(value, data){
+ window.location = "http://nibiru.tbi.univie.ac.at/cgi-bin/RNApredator/target_search.cgi?id="+data; }, minChars:4 };
   a = $('#query').autocomplete(options);
 });
 

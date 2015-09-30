@@ -12,8 +12,8 @@
 	<tr>
 	  <td rowspan="2" style="width:45%;"><img src="[% banner %]" alt="Banner"></td>
           <td style="width:11%;"><a href="[% staticcontentaddress %]/introduction.html"><img src="[% staticcontentaddress %]/pictures/introduction.png" alt="Introduction"></a></td>
-	  <td style="width:18%;"><a href="[% availablegenomes %]"><img src="[% staticcontentaddress %]/pictures/available_genomes.png" alt="Available Genomes"></a></td>
-          <td><a href="[% serveraddress %]"><img src="[% staticcontentaddress %]/pictures/target_search.png" alt="Target Search"></a></td>
+	  <td style="width:18%;"><a href="[% available_genomes %]"><img src="[% staticcontentaddress %]/pictures/available_genomes.png" alt="Available Genomes"></a></td>
+          <td><a href="[% target_search %]"><img src="[% staticcontentaddress %]/pictures/target_search.png" alt="Target Search"></a></td>
 	  <td><a href="[% staticcontentaddress %]/help.html"><img src="[% staticcontentaddress %]/pictures/help.png" alt="Help"></a></td>
 	</tr>
 	<tr>
