@@ -945,13 +945,13 @@ if($page == 5){
 	    if(-e "$base_dir/$tempdir_progress/done"){$parsing_results="done"; $queueing_status="done"; $result_page_link="<a href=\"$server/target_search.cgi?page=2&tax-id=$tax_id&tempdir=$tempdir_progress\">Link</a>";}
 	    else {$parsing_results= "<span style=\"color:#CCCCCC\"><br>-</span>";}
 	    print"<script type=\"text/javascript\">
-                                 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&tax-id=$tax_id&tempdir_array=$tempdir_array_input\"\', 5000);
+                                 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&tax-id=$tax_id&tempdir_array=$tempdir_array_input\"\', 30000);
                          </script>";
 	}else{
 	    if(-e "$base_dir/$tempdir_progress/done"){ $parsing_results="done"; $queueing_status="done"; $result_page_link=" <a href=\"$server/target_search.cgi?page=2&accession=$accession_number&tempdir=$tempdir_progress\">Link</a>";} 
 	    else {print "<span style=\"color:#CCCCCC\">-</span>";}
 	    print"<script type=\"text/javascript\">
-                         window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&accession=$accession_number&tempdir_array=$tempdir_array_input\"\', 5000);
+                         window.setTimeout (\'window.location = \"$server/target_search.cgi?page=5&accession=$accession_number&tempdir_array=$tempdir_array_input\"\', 30000);
                        </script>";
 	}
 	#RNA, queueing status, sRNA accessiblity, RNAplex Interaction Prediction, Parsing Results, Result Page Link
@@ -1154,11 +1154,11 @@ if($page == 2){
 	print"</table>";
 	if(defined($tax_id)){
 	    print"<script type=\"text/javascript\">
-				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;tax-id=$tax_id&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
+				 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;tax-id=$tax_id&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 30000);
                          </script>";
 	}else{
 	    print"<script type=\"text/javascript\">
-			 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;accession=$accession_number&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 5000);
+			 window.setTimeout (\'window.location = \"$server/target_search.cgi?page=2&amp;accession=$accession_number&amp;sRNA=$sRNA&amp;tempdir=$tempdir\"\', 30000);
                        </script>";
 	}
     }
@@ -1631,7 +1631,7 @@ if($page == 3){
 	print "<p>bookmark following <a href=\"$link\">link</a> and return later.</p>";
 	print "<br>";
 	print"<script type=\"text/javascript\">
-			window.setTimeout (\' window.location = \"$server/target_search.cgi?page=3&amp;tempdir=$tempdir\"\', 5000);
+			window.setTimeout (\' window.location = \"$server/target_search.cgi?page=3&amp;tempdir=$tempdir\"\', 30000);
                     	</script></div></body></html>";
     }	
     if(-e "$base_dir/$tempdir/done2"){
