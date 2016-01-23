@@ -1,4 +1,8 @@
 <tr id="Accession"><td>Accession</td><td>Length</td><td>Taxid</td><td>TaxName</td><td>Replicon</td><td>Create Date<td></tr>
+<tr id="NZ_LGRO01000001"><td>NZ_LGRO01000001</td><td>3195503</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 Scaffold_1_CBAR13, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
+<tr id="NZ_LGRO01000002"><td>NZ_LGRO01000002</td><td>607459</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 Scaffold_2_CBAR13, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
+<tr id="NZ_LGRO01000003"><td>NZ_LGRO01000003</td><td>25061</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 map unlocalized plasmid unnamed Scaffold_3_CBAR13_plasmid, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
+<tr id="NZ_HG326223"><td>NZ_HG326223</td><td>5113802</td><td>273526</td><td>Serratia marcescens subsp. marcescens Db11, complete genome.</td><td>chromosome</td><td>31-JUL-2015<td></tr>
 <tr id="NC_020993"><td>NC_020993</td><td>1109301</td><td>1290428</td><td>Rickettsia prowazekii str. Breinl, complete genome</td><td>chromosome</td><td>11-JUN-2013<td></tr>
 <tr id="NC_017341"><td>NC_017341</td><td>2924344</td><td>546342</td><td>Staphylococcus aureus subsp. aureus str. JKD6008, complete genome</td><td>chromosome</td><td>30-JUL-2015<td></tr>
 <tr id="NC_016810"><td>NC_016810.1</td><td>4878012</td><td>216597</td><td>Salmonella enterica subsp. enterica serovar Typhimurium str. SL1344</td><td>chromosome</td><td>Aug 20 2013<td></tr>
@@ -3394,3 +3398,4 @@
 <tr><td id="668336" >668336: Aggregatibacter actinomycetemcomitans D11S-1,NC_013416,chromosome :NC_013438,plasmid S25</td></tr>
 <tr><td id="335541" >335541: Syntrophomonas wolfei subsp. wolfei str. Goettingen,NC_008346,chromosome</td></tr>
 <tr><td id="357544" >357544: Helicobacter pylori HPAG1,NC_008086,chromosome :NC_008087,plasmid pHPAG1</td></tr>
+<tr><td id="28034" >2803280344: Sulfobacillus thermosulfidooxidans strain CBAR-13,NZ_LGRO01000001,scaffold1 :NZ_LGRO01000002,scaffold2 :NZ_LGRO01000003,plasmid </td></tr>
