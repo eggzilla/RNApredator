@@ -1,4 +1,5 @@
 <tr id="Accession"><td>Accession</td><td>Length</td><td>Taxid</td><td>TaxName</td><td>Replicon</td><td>Create Date<td></tr>
+<tr id="NC_012892"><td>NC_012892</td><td>4558947</td><td>469008</td><td>Escherichia coli BL21(DE3)</td><td>chromosome</td><td>2010-12-9<td></tr>
 <tr id="NZ_LGRO01000001"><td>NZ_LGRO01000001</td><td>3195503</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 Scaffold_1_CBAR13, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
 <tr id="NZ_LGRO01000002"><td>NZ_LGRO01000002</td><td>607459</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 Scaffold_2_CBAR13, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
 <tr id="NZ_LGRO01000003"><td>NZ_LGRO01000003</td><td>25061</td><td>28034</td><td>Sulfobacillus thermosulfidooxidans strain CBAR-13 map unlocalized plasmid unnamed Scaffold_3_CBAR13_plasmid, whole genome shotgun sequence.</td><td>chromosome</td><td>20-SEP-2015<td></tr>
