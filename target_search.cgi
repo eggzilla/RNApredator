@@ -294,6 +294,10 @@ if(defined($accession_number_input)){
     }elsif($accession_number_input =~ /^[A-Z]+\_[A-Z]+\d+/){
 	$accession_number = $accession_number_input;
 	push(@accession_number_array,$accession_number);
+    }elsif($accession_number_input =~ /^[A-Z]+\d+/){
+        $accession_number = $accession_number_input;
+        push(@accession_number_array,$accession_number);
+
     }else{
 	$accession_number = undef;
     }

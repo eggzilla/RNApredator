@@ -163,6 +163,11 @@ foreach my $genome (@genome_array){
 }
 $command_line.="| grep \">\" | tr -d \">\" | sed -r 's#\\[.+##g' ";
 print BUG "commandline:$command_line\n";
+
+print BUG "Genome array\n";
+print BUG Dumper(@genome_array);
+
+
 my @mapping=`$command_line`;
 my $annotation_hash;
 foreach my $mapping_line(@mapping){
@@ -303,3 +308,4 @@ close CSV;
 open (IANUMBER, ">$base_dir/$tempdir/interactionnumber");
 #open (IANUMBER, ">$tempdir/interactionnumber");
 print IANUMBER "$counter";
+close BUG;

@@ -18,7 +18,7 @@
 	</tr>
 	<tr>
 	  <td></td>
-	  <td colspan="2" style="background-color:#dcdcdc;height:75%;"><a href="[% introduction %]#history"> History:</a> Version 1.55 online <br> <font color="red">New:</font> <a href="http://nibiru.tbi.univie.ac.at/rnalien">Construct RNA family for RNA of interest</a></td>
+	  <td colspan="2" style="background-color:#dcdcdc;height:75%;"><a href="[% introduction %]#history"> History:</a> Version 1.55 online <br> <font color="red">New:</font> <a href="http://nibiru.tbi.univie.ac.at/rnalien">Construct RNA family model for RNA of interest</a></td>
 	  <td></td>
 	</tr>
       </table>
