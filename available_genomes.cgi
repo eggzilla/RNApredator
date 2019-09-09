@@ -60,7 +60,9 @@ sub output{
         my $query_output = shift;
         #escape characters for bash
         my $query_output_quoted=quotemeta($query_output);
-        my @match=`grep -ihP $query_output_quoted $source_dir/template/csv_autocomplete`;
+        #my @match=`grep -ihP $query_output_quoted $source_dir/template/csv_autocomplete`;
+	open(FILE,'<',"$source_dir/template/csv_autocomplete") or die "Can't open myfile: $!";
+	my @match=grep /${query_output_quoted}/i, <FILE>;
         my $return_value="";
         my $header="<tr><td style=\"width: 60%\">Designation</td><td style=\"width: 15%\">Accession Number</td><td style=\"width: 20%\">Select for Target Search</td></tr>";
         my $output="";
@@ -83,7 +85,7 @@ sub output{
 #determine the query state by retriving CGI variables
 #$page if =0 then input, if =1 then calculate and if =2 then output
 my $page = $query->param('page') || "0"; #
-my $search_string = $query->param('query') || "";
+my $search_string = $query->escapeHTML( $query->param('query') )|| "";
 
 ######INPUT######################################################
 #Print HTTP-Header for input-page
